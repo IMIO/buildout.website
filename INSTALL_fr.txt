@@ -1,0 +1,80 @@
+On suppose l'installation dans un répertoire /srv/buildout/stdsites32 
+ (qui peut être changé) et sur une distribution ubuntu.
+Le nom de votre utilisateur est remplacé dans nos commandes par "votreuser".
+ Veuillez utiliser le votre à la place. 
+Chaque commande, précisée ci-dessous après le symbole ">", peut être exécutée 
+ (sans taper le symbole >).
+
+
+On passe d'abord en root
+> sudo -s
+
+On installe des librairies nécessaires
+> apt-get install libreadline5-dev
+> apt-get install zlib1g (support zlib)
+> apt-get install libjpeg62-dev
+> apt-get install subversion
+
+On va travailler dans le dossier /srv
+> cd /srv
+
+On se met propriétaire du dossier pour ne plus devoir travailler en root
+> chown -R votreuser:votreuser .
+
+On quitte l'utilisateur root.
+> exit
+
+On crée maintenant une arborescence de dossiers
+> mkdir python
+> mkdir install
+> mkdir buildout
+> cd install
+
+On va installer un python2.4 qui sera utilisé dans notre buildout
+> wget http://www.python.org/ftp/python/2.4.6/Python-2.4.6.tgz
+> tar xvzf Python-2.4.6.tgz
+> cd Python-2.4.6
+> ./configure --prefix=/srv/python/python246
+> make
+> make install
+
+On installe l'utilitaire python easy_install
+> cd /srv/install
+> wget http://peak.telecommunity.com/dist/ez_setup.py
+> /srv/python/python246/bin/python ez_setup.py
+
+On installe l'utilitaire python virtualenv
+> /srv/python/python246/bin/easy_install virtualenv
+
+On télécharge le buildout dans un dossier
+> cd /srv/buildout
+> svn co http://svn.communesplone.org/svn/communesplone/buildout/server.make.standardsites32/ stdsites32
+> cd stdsites32
+
+On modifie le fichier Makefile pour indiquer le chemin réel de virtualenv. 
+Pour cela, on peut ouvrir le fichier avec un éditeur de texte. 
+Il faut remplacer la ligne "virtualenv --no-site-packages ." par
+    "/srv/python/python246/bin/virtualenv --no-site-packages ."
+
+On initialise le buildout
+> make bootstrap
+
+On peut modifier dans le fichier buildout.cfg le port et le user effectif
+ (effective-user) avec lequel l'application sera exécutée. 
+
+On exécute le buildout après chaque modification du fichier buildout.cfg
+> make buildout
+
+On démarre le serveur zope. 
+> bin/instance fg
+ou
+> bin/instance start
+
+On peut se connecter à zope dans un navigateur sur l'adresse http://localhost:8080/manage_main
+
+On peut ajouter un mount point (fichier db séparé à définir dans le fichier zope_add.conf)
+=> choisir dans la liste (en haut à droite de la page du navigateur) "ZODB Mount Point"
+Sélectionner le nom du mount point désiré ("xxx" et cliquer sur "Create selected mount points"). 
+
+Tout ce qui va être ajouté dans le dossier "xxx" sera maintenant localisé dans le fichier db "xxx.fs"
+ plutôt que dans "Data.fs". 

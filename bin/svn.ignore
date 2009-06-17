@@ -1,0 +1,10 @@
+*.py
+python
+zopepy
+buildout
+easy_install
+easy_install-2.4
+activate
+instance
+repozo
+
