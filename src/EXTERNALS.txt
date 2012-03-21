@@ -1,0 +1,8 @@
+#
+# taken into account by: svn propset svn:externals -F ./EXTERNALS.txt .
+#
+acptheme.cpskin3 -r7931 http://svn.communesplone.org/svn/communesplone/acptheme.cpskin3/trunk
+atreal.mailservices -r243063 http://svn.plone.org/svn/collective/atreal.mailservices/trunk
+communesplone.layout http://svn.communesplone.org/svn/communesplone/communesplone.layout/trunk
+Products.Ploneboard -r242628 http://svn.plone.org/svn/collective/Products.Ploneboard/trunk
+Products.PloneboardSubscription http://svn.plone.org/svn/collective/Products.PloneboardSubscription/trunk
