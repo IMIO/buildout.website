@@ -1,4 +1,4 @@
-We assume the installation in the folder /srv/zinstances/site40 
+We assume the installation in the folder /srv/zinstances/site414 
  (that can be changed) and on an ubuntu distribution.
 Your real username must replace in our commands the string "username".
 Each command, specified by the symbol ">", can be executed 
@@ -29,10 +29,10 @@ We create some directories
 > mkdir zinstances
 > cd install
 
-We install python2.4 that will be used to run the buildout and zope instance
-> wget http://www.python.org/ftp/python/2.6.6/Python-2.6.6.tgz
-> tar xvzf Python-2.6.6.tgz
-> cd Python-2.6.6
+We install python2.6 that will be used to run the buildout and zope instance
+> wget http://www.python.org/ftp/python/2.6.8/Python-2.6.8.tgz
+> tar xvzf Python-2.6.8.tgz
+> cd Python-2.6.8
 > ./configure --prefix=/srv/python266
 > make
 > make install
@@ -40,26 +40,26 @@ We install python2.4 that will be used to run the buildout and zope instance
 We install the python utility easy_install
 > cd /srv/install
 > wget http://peak.telecommunity.com/dist/ez_setup.py
-> /srv/python266/bin/python ez_setup.py
+> /srv/python268/bin/python ez_setup.py
 
 We install the python utility virtualenv
-> /srv/python266/bin/easy_install virtualenv
+> /srv/python268/bin/easy_install virtualenv
 
 We can define a cache for buildout
 See http://www.communesplone.org/support/documentation/tutoriels/utilisation-dun-buildout/definition-dun-cache-pour-buildout/
 
 We download the buildout files in our folder
 > cd /srv/zinstances
-> svn co http://svn.communesplone.org/svn/communesplone/buildout/server.sites/tags/make335/ site40
-> cd site40
+> svn co http://svn.communesplone.org/svn/communesplone/buildout/server.sites/tags/make414/ site414
+> cd site414
 
 We modify the Makefile file to indicate the real path of the virtualenv utility. 
 To do that, you can edit the file in a simple text editor. 
-It's necessary to replace the line "virtualenv266 --no-site-packages ." by
+It's necessary to replace the line "virtualenv268 --no-site-packages ." by
     "/srv/python266/bin/virtualenv --no-site-packages ."
 OR
 You can create a link to our virtualenv without modifying Makefile
-    "ln -s /srv/python266/bin/virtualenv /usr/local/bin/virtualenv"
+    "ln -s /srv/python268/bin/virtualenv /usr/local/bin/virtualenv"
 
 we initialize the buildout
 > make bootstrap
