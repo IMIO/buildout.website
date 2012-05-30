@@ -15,8 +15,8 @@ buildout:
 
 .PHONY: run
 run:
-	if ! test -f bin/instance;then make buildout;fi
-	bin/instance fg
+	if ! test -f bin/instance1;then make buildout;fi
+	bin/instance1 fg
 
 .PHONY: cleanall
 cleanall:

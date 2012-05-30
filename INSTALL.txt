@@ -33,7 +33,7 @@ We install python2.6 that will be used to run the buildout and zope instance
 > wget http://www.python.org/ftp/python/2.6.8/Python-2.6.8.tgz
 > tar xvzf Python-2.6.8.tgz
 > cd Python-2.6.8
-> ./configure --prefix=/srv/python266
+> ./configure --prefix=/srv/python268
 > make
 > make install
 
@@ -56,7 +56,7 @@ We download the buildout files in our folder
 We modify the Makefile file to indicate the real path of the virtualenv utility. 
 To do that, you can edit the file in a simple text editor. 
 It's necessary to replace the line "virtualenv268 --no-site-packages ." by
-    "/srv/python266/bin/virtualenv --no-site-packages ."
+    "/srv/python268/bin/virtualenv --no-site-packages ."
 OR
 You can create a link to our virtualenv without modifying Makefile
     "ln -s /srv/python268/bin/virtualenv /usr/local/bin/virtualenv"
@@ -64,10 +64,7 @@ You can create a link to our virtualenv without modifying Makefile
 we initialize the buildout
 > make bootstrap
 
-1) Installation without ZEO (one Zope instance)
-
-We can modify in the file buildout.cfg the port (http-address) and the effective user
- that will run the zope process. 
+1) Use in development (without ZEO, with debug products)
 
 We execute the buildout after each modification in the buildout.cfg file
 > make buildout
@@ -75,9 +72,9 @@ OR
 > bin/buildout -v
 
 We start the zope server. 
-> bin/instance fg
+> bin/instance1 fg
 OR
-> bin/instance start
+> bin/instance1 start
 
 We can connect the zope server in a browser on the following address http://localhost:8080/manage_main
 
@@ -88,22 +85,22 @@ Select a mount point name ("xxx" and click on "Create selected mount points").
 All objects added in the zope folder "xxx" will be stored in the db file "xxx.fs"
  in place of in "Data.fs". 
 
-2) Installation with ZEO (multiple Zope instances for the same database)
+2) Usage in production (multiple Zope instances for the same database, ZEO mode)
 
-We can modify in the file buildout.cfg the port (http-address) and the effective user
- that will run the zope process. 
-We can modify in the file zeo.cfg the port (zeo-address) of the zeo server.
+We can replace in the file buildout.cfg the name dev.cfg by prod.cfg. 
 
 We execute the buildout after each modification in the buildout.cfg file
-> bin/buildout -v -c zeo.cfg
+> make buildout
+OR
+> bin/buildout -v
 
 We start the zeo server.
 > bin/zeoserver start
 
 We start each zope server (following instance name section). 
-> bin/instance fg
+> bin/instance1 fg
 OR
-> bin/instance start
+> bin/instance1 start
 
 We can connect the zope server in a browser on the following address http://localhost:8080/manage_main
 
