@@ -4,7 +4,7 @@ all: run
 
 .PHONY: bootstrap
 bootstrap:
-	virtualenv268 --no-site-packages .
+	virtualenv-2.6 --no-site-packages .
 	./bin/python bootstrap.py
 	./bin/subproducts.sh
 
