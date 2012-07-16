@@ -6,3 +6,4 @@ communesplone.layout http://svn.communesplone.org/svn/communesplone/communesplon
 Products.directory http://svn.communesplone.org/svn/communesplone/Products.directory/trunk
 Products.PloneboardSubscription http://svn.plone.org/svn/collective/Products.PloneboardSubscription/trunk
 collective.superfish https://svn.plone.org/svn/collective/collective.superfish/trunk/
+tecnoteca.googlemap http://svn.plone.org/svn/collective/tecnoteca.googlemap/branches/to_plone4/googlemap/src/tecnoteca.googlemap
