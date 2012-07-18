@@ -2,7 +2,7 @@
 # taken into account by: svn propset svn:externals -F ./EXTERNALS.txt .
 #
 acptheme.cpskin3 http://svn.communesplone.org/svn/communesplone/acptheme.cpskin3/trunk
-communesplone.comarquage http://svn.communesplone.org/svn/communesplone/communesplone.comarquage/trunk
+#communesplone.comarquage http://svn.communesplone.org/svn/communesplone/communesplone.comarquage/trunk
 communesplone.layout http://svn.communesplone.org/svn/communesplone/communesplone.layout/trunk
 Products.directory http://svn.communesplone.org/svn/communesplone/Products.directory/trunk
 Products.PloneboardSubscription http://svn.plone.org/svn/collective/Products.PloneboardSubscription/trunk
