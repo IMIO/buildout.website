@@ -9,9 +9,9 @@ The included external products are listed in cfg file:
     - section [svnproducts] (svn form)
     - subsection eggs
 
-The directory 'parts/omelette/Products' contains (as links) all the used products. 
+The directory 'parts/omelette' contains (as links) all the used products. 
 
-Outside zeo mode (dev.cfg), a "zope_add.conf" extends the generated zope.conf to add mount_points definition. 
+Outside zeo mode (dev.cfg, base.cgf), a "zope_add.conf" extends the generated zope.conf to add mount_points definition. 
 In zeo mode (prod.cfg), a "zope_add_zeo.conf" and "zeo_add.conf" extend the generated zope.conf and zeo.conf to add mount_points definition. 
 
 The install process is described in the file : INSTALL.txt

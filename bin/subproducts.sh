@@ -7,9 +7,9 @@ fi
 
 # Installation of psycopg 2.0.13
 cd $ScriptLocation/../subproducts
-tar -xvzf psycopg2-2.0.13.tar.gz
-cd psycopg2-2.0.13
-$ScriptLocation/python ./setup.py install
-cd ..
-rm -f -R psycopg2-2.0.13
+#tar -xvzf psycopg2-2.0.13.tar.gz
+#cd psycopg2-2.0.13
+#$ScriptLocation/python ./setup.py install
+#cd ..
+#rm -f -R psycopg2-2.0.13
 
