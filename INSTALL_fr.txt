@@ -1,4 +1,4 @@
-On suppose l'installation dans un répertoire /srv/zinstances/site414
+On suppose l'installation dans un répertoire /srv/zinstances/site421
  (qui peut être changé) et sur une distribution ubuntu.
 Le nom de votre utilisateur est remplacé dans nos commandes par "votreuser".
  Veuillez utiliser le votre à la place. 
@@ -30,37 +30,37 @@ On crée maintenant une arborescence de dossiers
 > mkdir zinstances
 > cd install
 
-On va installer un python2.6 qui sera utilisé dans notre buildout
-> wget http://www.python.org/ftp/python/2.6.8/Python-2.6.8.tgz
-> tar xvzf Python-2.6.8.tgz
-> cd Python-2.6.8
-> ./configure --prefix=/srv/python268
+On va installer un python2.7 qui sera utilisé dans notre buildout
+> wget http://www.python.org/ftp/python/2.7.3/Python-2.7.3.tgz
+> tar xvzf Python-2.7.3.tgz
+> cd Python-2.7.3
+> ./configure --prefix=/srv/python273
 > make
 > make install
 
 On installe l'utilitaire python easy_install
 > cd /srv/install
 > wget http://peak.telecommunity.com/dist/ez_setup.py
-> /srv/python268/bin/python ez_setup.py
+> /srv/python273/bin/python ez_setup.py
 
 On installe l'utilitaire python virtualenv
-> /srv/python268/bin/easy_install virtualenv
+> /srv/python273/bin/easy_install virtualenv
 
 On définit un cache pour buildout (si ce n'est déjà fait)
-Voir http://www.communesplone.org/support/documentation/tutoriels/utilisation-dun-buildout/definition-dun-cache-pour-buildout/
+Voir http://www.imio.be/support/documentation/tutoriels/utilisation-dun-buildout/definition-dun-cache-pour-buildout/
 
 On télécharge le buildout dans un dossier
 > cd /srv/zinstances
-> svn co http://svn.communesplone.org/svn/communesplone/buildout/server.sites/tags/make414/ site414
-> cd site414
+> svn co http://svn.communesplone.org/svn/communesplone/buildout/server.sites/tags/make421/ site421
+> cd site421
 
 On modifie le fichier Makefile pour indiquer le chemin réel de virtualenv. 
 Pour cela, on peut ouvrir le fichier avec un éditeur de texte. 
-Il faut remplacer la ligne "virtualenv268 --no-site-packages ." par
-    "/srv/python268/bin/virtualenv --no-site-packages ."
+Il faut remplacer la ligne "virtualenv-2.7 --no-site-packages ." par
+    "/srv/python273/bin/virtualenv --no-site-packages ."
 OU
 On peut créer un lien symbolique vers notre virtualenv sans modifier alors le fichier Makefile
-    "ln -s /srv/python268/bin/virtualenv /usr/local/bin/virtualenv268"
+    "ln -s /srv/python273/bin/virtualenv /usr/local/bin/virtualenv-2.7"
 
 On initialise le buildout
 > make bootstrap

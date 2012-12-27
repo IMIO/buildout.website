@@ -4,9 +4,8 @@ all: run
 
 .PHONY: bootstrap
 bootstrap:
-	virtualenv-2.6 --no-site-packages .
+	virtualenv-2.7 --no-site-packages .
 	./bin/python bootstrap.py
-	./bin/subproducts.sh
 
 .PHONY: buildout
 buildout:
@@ -26,7 +25,3 @@ run:
 .PHONY: cleanall
 cleanall:
 	rm -fr develop-eggs downloads eggs parts .installed.cfg
-
-.PHONY: libraries
-libraries: 
-	./bin/subproducts.sh
