@@ -1,4 +1,4 @@
-On suppose l'installation dans un répertoire /srv/zinstances/site421
+On suppose l'installation dans un répertoire /srv/zinstances/site431
  (qui peut être changé) et sur une distribution ubuntu.
 Le nom de votre utilisateur est remplacé dans nos commandes par "votreuser".
  Veuillez utiliser le votre à la place. 
@@ -10,11 +10,14 @@ On passe d'abord en root
 
 On installe des librairies nécessaires
 > apt-get install build-essential
-> apt-get install libreadline5-dev
+> apt-get install libreadline6-dev
 > apt-get install zlib1g-dev (support zlib)
 > apt-get install libjpeg62-dev
 > apt-get install subversion
+> apt-get install git
 > apt-get install libpq-dev
+> apt-get install libxml2-dev
+> apt-get install libxslt1-dev
 
 On va travailler dans le dossier /srv
 > cd /srv
@@ -51,8 +54,8 @@ Voir http://www.imio.be/support/documentation/tutoriels/utilisation-dun-buildout
 
 On télécharge le buildout dans un dossier
 > cd /srv/zinstances
-> svn co http://svn.communesplone.org/svn/communesplone/buildout/server.sites/tags/make421/ site421
-> cd site421
+> svn co http://svn.communesplone.org/svn/communesplone/buildout/server.sites/tags/make421/ site431
+> cd site431
 
 On modifie le fichier Makefile pour indiquer le chemin réel de virtualenv. 
 Pour cela, on peut ouvrir le fichier avec un éditeur de texte. 
@@ -60,7 +63,7 @@ Il faut remplacer la ligne "virtualenv-2.7 --no-site-packages ." par
     "/srv/python273/bin/virtualenv --no-site-packages ."
 OU
 On peut créer un lien symbolique vers notre virtualenv sans modifier alors le fichier Makefile
-    "ln -s /srv/python273/bin/virtualenv /usr/local/bin/virtualenv-2.7"
+    "sudo ln -s /srv/python273/bin/virtualenv /usr/local/bin/virtualenv-2.7"
 
 On initialise le buildout
 > make bootstrap
