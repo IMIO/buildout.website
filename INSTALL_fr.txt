@@ -12,6 +12,7 @@ On installe des librairies nécessaires
 > apt-get install build-essential
 > apt-get install libreadline6-dev
 > apt-get install zlib1g-dev (support zlib)
+> apt-get install libbz2-dev
 > apt-get install libjpeg62-dev
 > apt-get install subversion
 > apt-get install git
@@ -34,20 +35,20 @@ On crée maintenant une arborescence de dossiers
 > cd install
 
 On va installer un python2.7 qui sera utilisé dans notre buildout
-> wget http://www.python.org/ftp/python/2.7.3/Python-2.7.3.tgz
-> tar xvzf Python-2.7.3.tgz
-> cd Python-2.7.3
-> ./configure --prefix=/srv/python273
+> wget http://www.python.org/ftp/python/2.7.5/Python-2.7.5.tgz
+> tar xvzf Python-2.7.5.tgz
+> cd Python-2.7.5
+> ./configure --prefix=/srv/python275
 > make
 > make install
 
 On installe l'utilitaire python easy_install
 > cd /srv/install
 > wget http://peak.telecommunity.com/dist/ez_setup.py
-> /srv/python273/bin/python ez_setup.py
+> /srv/python275/bin/python ez_setup.py
 
 On installe l'utilitaire python virtualenv
-> /srv/python273/bin/easy_install virtualenv
+> /srv/python275/bin/easy_install virtualenv
 
 On définit un cache pour buildout (si ce n'est déjà fait)
 Voir http://www.imio.be/support/documentation/tutoriels/utilisation-dun-buildout/definition-dun-cache-pour-buildout/
@@ -60,10 +61,10 @@ On télécharge le buildout dans un dossier
 On modifie le fichier Makefile pour indiquer le chemin réel de virtualenv. 
 Pour cela, on peut ouvrir le fichier avec un éditeur de texte. 
 Il faut remplacer la ligne "virtualenv-2.7 --no-site-packages ." par
-    "/srv/python273/bin/virtualenv --no-site-packages ."
+    "/srv/python275/bin/virtualenv --no-site-packages ."
 OU
 On peut créer un lien symbolique vers notre virtualenv sans modifier alors le fichier Makefile
-    "sudo ln -s /srv/python273/bin/virtualenv /usr/local/bin/virtualenv-2.7"
+    "sudo ln -s /srv/python275/bin/virtualenv /usr/local/bin/virtualenv-2.7"
 
 On initialise le buildout
 > make bootstrap
