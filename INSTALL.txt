@@ -1,4 +1,4 @@
-We assume the installation in the folder /srv/zinstances/site431
+We assume the installation in the folder /srv/zinstances/site432
  (that can be changed) and on an ubuntu distribution.
 Your real username must replace in our commands the string "username".
 Each command, specified by the symbol ">", can be executed 
@@ -54,8 +54,8 @@ See http://www.imio.be/support/documentation/tutoriels/utilisation-dun-buildout/
 
 We download the buildout files in our folder
 > cd /srv/zinstances
-> svn co http://svn.communesplone.org/svn/communesplone/buildout/server.sites/tags/make421/ site431
-> cd site431
+> svn co http://svn.communesplone.org/svn/communesplone/buildout/server.sites/tags/make432/ site432
+> cd site432
 
 We modify the Makefile file to indicate the real path of the virtualenv utility. 
 To do that, you can edit the file in a simple text editor. 

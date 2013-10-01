@@ -1,4 +1,4 @@
-On suppose l'installation dans un répertoire /srv/zinstances/site431
+On suppose l'installation dans un répertoire /srv/zinstances/site432
  (qui peut être changé) et sur une distribution ubuntu.
 Le nom de votre utilisateur est remplacé dans nos commandes par "votreuser".
  Veuillez utiliser le votre à la place. 
@@ -55,8 +55,8 @@ Voir http://www.imio.be/support/documentation/tutoriels/utilisation-dun-buildout
 
 On télécharge le buildout dans un dossier
 > cd /srv/zinstances
-> svn co http://svn.communesplone.org/svn/communesplone/buildout/server.sites/tags/make421/ site431
-> cd site431
+> svn co http://svn.communesplone.org/svn/communesplone/buildout/server.sites/tags/make432/ site432
+> cd site432
 
 On modifie le fichier Makefile pour indiquer le chemin réel de virtualenv. 
 Pour cela, on peut ouvrir le fichier avec un éditeur de texte. 
