@@ -5,8 +5,7 @@ all: run
 .PHONY: bootstrap
 bootstrap:
 	virtualenv-2.7 --no-site-packages .
-	bin/easy_install -U "distribute==0.6.49"
-	./bin/python bootstrap.py -v 2.1.1
+	./bin/python bootstrap.py
 
 .PHONY: buildout
 buildout:
@@ -25,4 +24,4 @@ run:
 
 .PHONY: cleanall
 cleanall:
-	rm -fr develop-eggs downloads eggs parts .installed.cfg
+	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin
