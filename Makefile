@@ -5,6 +5,7 @@ all: run
 .PHONY: bootstrap
 bootstrap:
 	virtualenv-2.7 --no-site-packages .
+	ln -s prod.cfg buildout.cfg
 	./bin/python bootstrap.py
 
 .PHONY: buildout
@@ -24,4 +25,4 @@ run:
 
 .PHONY: cleanall
 cleanall:
-	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin
+	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin buildout.cfg
