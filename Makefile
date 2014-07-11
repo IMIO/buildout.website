@@ -1,6 +1,8 @@
 #!/usr/bin/make
 #
 all: run
+VERSION=`cat version.txt`
+BUILD_NUMBER='0'
 
 .PHONY: bootstrap
 bootstrap:
@@ -32,3 +34,9 @@ run:
 .PHONY: cleanall
 cleanall:
 	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin buildout.cfg .mr.developer.cfg
+
+.PHONY: deb
+deb:
+	git-dch -a --ignore-branch
+	dch -v $(VERSION).$(BUILD_NUMBER) release --no-auto-nmu
+	dpkg-buildpackage -b -uc -us
