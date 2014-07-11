@@ -18,5 +18,5 @@ Description: IMIO Plone 4 site
 
 Package: imio-website-instance
 Architecture: any
-Depends: imio-website-core (= ${binary:Version})
+Depends: imio-website-core (= ${binary:Version}), memcached
 Description: IMIO Plone 4 site
