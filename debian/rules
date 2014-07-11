@@ -31,7 +31,6 @@ build:
 	cp -ap ./bootstrap.py $(BUILDDIR)
 	cp -ap ./*.cfg $(BUILDDIR)
 	cd $(BUILDDIR) && virtualenv .
-	rm -rf $(BUILDDIR)/devel
 	rm -f $(BUILDDIR)/buildout.cfg
 	rm -f $(BUILDDIR)/lib/python2.7/site-packages/easy-install.pth
 	rm -rf $(BUILDDIR)/lib/python2.7/site-packages/setuptools*
@@ -63,15 +62,15 @@ install-core:
 	sed -i s%${BUILDDIR}%${INSTALLDIR}%g ${BUILDDIR}/parts/instance1/bin/interpreter
 	sed -i s%${BUILDDIR}%${INSTALLDIR}%g ${BUILDDIR}/parts/instance1/etc/zope.conf
 	cp -ap $(BUILDDIR)/bin $(DEBIANCORE)/${INSTALLDIR}
-	cp -ap $(BUILDDIR)/devel $(DEBIANCORE)/${INSTALLDIR}
 	cp -ap $(BUILDDIR)/eggs $(DEBIANCORE)/${INSTALLDIR}
 	cp -ap $(BUILDDIR)/parts/omelette $(DEBIANCORE)/${INSTALLDIR}/parts
-	cp -ap $(BUILDDIR)/parts/zpsycopg $(DEBIANCORE)/${INSTALLDIR}/parts
-	rm -r $(DEBIANCORE)/${INSTALLDIR}/bin/zeo
+	rm -r $(DEBIANCORE)/${INSTALLDIR}/bin/zeoserver
 	rm -r $(DEBIANCORE)/${INSTALLDIR}/bin/zeopack
 	rm -r $(DEBIANCORE)/${INSTALLDIR}/bin/repozo
 	rm $(DEBIANCORE)/${INSTALLDIR}/bin/instance1
 	rm $(DEBIANCORE)/${INSTALLDIR}/bin/instance2
+	rm $(DEBIANCORE)/${INSTALLDIR}/bin/instance3
+	rm $(DEBIANCORE)/${INSTALLDIR}/bin/instance4
 	for i in $(find $(DEBIANCORE)/${INSTALLDIR}/parts/omelette -type l); do old_link=$(readlink -m $i); new_link=$(echo $old_link | sed  s%${BUILDDIR}/${INSTALLDIR}/); rm $i; ln -f -s $new_link $i; done
 	find $(DEBIANCORE)/${INSTALLDIR} -name "*.pyc" -delete;
 	find $(DEBIANCORE)/${INSTALLDIR} -name "*.pyo" -delete;
@@ -84,23 +83,27 @@ install-zeo:
 	mkdir -p $(DEBIANZEO)/${INSTALLDIR}/var/log
 	mkdir -p $(DEBIANZEO)/${INSTALLDIR}/var/filestorage
 	mkdir -p $(DEBIANZEO)/${INSTALLDIR}/var/blobstorage
-	sed -i s%${BUILDDIR}%${INSTALLDIR}%g ${BUILDDIR}/bin/zeo
+	touch $(DEBIANZEO)/${INSTALLDIR}/zeo_add.conf
+	sed -i s%${BUILDDIR}%${INSTALLDIR}%g ${BUILDDIR}/bin/zeoserver
 	sed -i s%${BUILDDIR}%${INSTALLDIR}%g ${BUILDDIR}/bin/zeopack
 	sed -i s%${BUILDDIR}%${INSTALLDIR}%g ${BUILDDIR}/bin/repozo
-	cp -ap $(BUILDDIR)/bin/zeo $(DEBIANZEO)/${INSTALLDIR}/bin
+	cp -ap $(BUILDDIR)/bin/zeoserver $(DEBIANZEO)/${INSTALLDIR}/bin
 	cp -ap $(BUILDDIR)/bin/zeopack $(DEBIANZEO)/${INSTALLDIR}/bin
 	cp -ap $(BUILDDIR)/bin/repozo $(DEBIANZEO)/${INSTALLDIR}/bin
-	cp -ap $(BUILDDIR)/parts/zeo $(DEBIANZEO)/${INSTALLDIR}/parts
-	sed -i s%${BUILDDIR}%${INSTALLDIR}%g $(DEBIANZEO)/${INSTALLDIR}/parts/zeo/bin/runzeo
-	sed -i s%${BUILDDIR}%${INSTALLDIR}%g $(DEBIANZEO)/${INSTALLDIR}/parts/zeo/bin/zeoctl
-	sed -i s%${BUILDDIR}%${INSTALLDIR}%g $(DEBIANZEO)/${INSTALLDIR}/parts/zeo/etc/zeo.conf
-	sed -i s%${BUILDDIR}%${INSTALLDIR}%g $(DEBIANZEO)/${INSTALLDIR}/parts/zeo/etc/.eggs
+	cp -ap $(BUILDDIR)/parts/zeoserver $(DEBIANZEO)/${INSTALLDIR}/parts
+	sed -i s%${BUILDDIR}%${INSTALLDIR}%g $(DEBIANZEO)/${INSTALLDIR}/parts/zeoserver/bin/runzeo
+	sed -i s%${BUILDDIR}%${INSTALLDIR}%g $(DEBIANZEO)/${INSTALLDIR}/parts/zeoserver/bin/zeoctl
+	sed -i s%${BUILDDIR}%${INSTALLDIR}%g $(DEBIANZEO)/${INSTALLDIR}/parts/zeoserver/etc/zeo.conf
+	sed -i s%${BUILDDIR}%${INSTALLDIR}%g $(DEBIANZEO)/${INSTALLDIR}/parts/zeoserver/etc/.eggs
 
 install-instances:
 	mkdir -p $(DEBIANINSTANCE)/${INSTALLDIR} ; \
 	mkdir -p $(DEBIANINSTANCE)/${INSTALLDIR}/bin ; \
+        touch $(DEBIANINSTANCE)/${INSTALLDIR}/zope_add_zeo.conf \
 	mkdir -p $(DEBIANINSTANCE)/${INSTALLDIR}/parts ; \
 	mkdir -p $(DEBIANINSTANCE)/${INSTALLDIR}/var/instance ; \
+	mkdir -p $(DEBIANINSTANCE)/${INSTALLDIR}/var/blobstorage ; \
+	mkdir -p $(DEBIANINSTANCE)/${INSTALLDIR}/var/log ; \
 	cp -ap $(BUILDDIR)/bin/instance1 $(DEBIANINSTANCE)/${INSTALLDIR}/bin/instance ; \
 	cp -ap $(BUILDDIR)/parts/instance1 $(DEBIANINSTANCE)/${INSTALLDIR}/parts/instance ; \
 	sed -i s/instance1/instance/g $(DEBIANINSTANCE)/${INSTALLDIR}/bin/instance ; \
