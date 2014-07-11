@@ -1,0 +1,22 @@
+Source: imio-website
+Section: web
+Priority: extra
+Maintainer: Jean-François Roche <jfroche@affinitic.be>
+Build-Depends: debhelper (>= 7)
+Standards-Version: 3.8.3
+Homepage: http://www.affinitic.be
+
+Package: imio-website-core
+Architecture: any
+Depends: ${shlibs:Depends}
+Description: IMIO Plone 4 site
+
+Package: imio-website-zeoserver
+Architecture: any
+Depends: imio-website-core (= ${binary:Version})
+Description: IMIO Plone 4 site
+
+Package: imio-website-instance
+Architecture: any
+Depends: imio-website-core (= ${binary:Version})
+Description: IMIO Plone 4 site

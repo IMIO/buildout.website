@@ -1,0 +1,15 @@
+This work was packaged for Debian by:
+
+    Nikolay Kim <nikolay@enfoldsystems.com> on Thu, 09 Sep 2010 15:01:52 -0500
+
+Copyright:
+
+    The Plone® CMS/WCM is © 2000–2010 the Plone Foundation and friends.
+
+License:
+
+    <Put the license of the package here indented by 4 spaces>
+
+The Debian packaging is:
+
+    Copyright (C) 2010 Enfold Systems <info@enfoldsystems.com>
