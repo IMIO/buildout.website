@@ -5,8 +5,7 @@ set -e
 PACKAGE="imio-website"
 PACKAGE_HOME="/home/imio/$PACKAGE"
 
-export CLIENT_HOME="$PACKAGE_HOME/var/instance01"
-$PACKAGE_HOME/bin/imio_db_migration upgrade head
+export CLIENT_HOME="$PACKAGE_HOME/var/instance"
 
 case "$1" in
     configure)
