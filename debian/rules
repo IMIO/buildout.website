@@ -99,7 +99,7 @@ install-zeo:
 install-instances:
 	mkdir -p $(DEBIANINSTANCE)/${INSTALLDIR} ; \
 	mkdir -p $(DEBIANINSTANCE)/${INSTALLDIR}/bin ; \
-        touch $(DEBIANINSTANCE)/${INSTALLDIR}/zope_add_zeo.conf \
+        touch $(DEBIANINSTANCE)/${INSTALLDIR}/zope_add_zeo.conf ; \
 	mkdir -p $(DEBIANINSTANCE)/${INSTALLDIR}/parts ; \
 	mkdir -p $(DEBIANINSTANCE)/${INSTALLDIR}/var/instance ; \
 	mkdir -p $(DEBIANINSTANCE)/${INSTALLDIR}/var/blobstorage ; \
