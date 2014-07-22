@@ -7,9 +7,10 @@ PACKAGE="imio-website-core"
 
 case "$1" in
     remove|deconfigure)
-	find /home/imio/imio-website/eggs /home/imio/imio-website/devel -name "*.pyc" -delete;
-	find /home/imio/imio-website/eggs /home/imio/imio-website/devel -name "*.pyo" -delete;
-	find /home/imio/imio-website/eggs /home/imio/imio-website/devel -name "*.bin" -delete;
+	find /home/imio/imio-website/eggs -name "*.pyc" -delete;
+	find /home/imio/imio-website/eggs -name "*.pyo" -delete;
+	find /home/imio/imio-website/eggs -name "*.bin" -delete;
+	find /home/imio/imio-website/eggs -name "*.mo" -delete;
     ;;
 
     upgrade|failed-upgrade)
