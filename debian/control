@@ -8,7 +8,7 @@ Homepage: http://www.affinitic.be
 
 Package: imio-website-core
 Architecture: any
-Depends: ${shlibs:Depends}
+Depends: ${shlibs:Depends}, python27 (>= 2.7.8-3)
 Description: IMIO Plone 4 site
 
 Package: imio-website-zeoserver
