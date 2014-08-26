@@ -2,9 +2,9 @@ Source: imio-website
 Section: web
 Priority: extra
 Maintainer: Jean-François Roche <jfroche@affinitic.be>
-Build-Depends: debhelper (>= 7)
+Build-Depends: debhelper (>= 7), python27 (>= 2.7.8-3)
 Standards-Version: 3.8.3
-Homepage: http://www.affinitic.be
+Homepage: http://www.imio.be
 
 Package: imio-website-core
 Architecture: any

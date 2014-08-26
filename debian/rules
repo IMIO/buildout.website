@@ -30,7 +30,7 @@ build:
 	mkdir -p $(BUILDDIR)
 	cp -ap ./bootstrap.py $(BUILDDIR)
 	cp -ap ./*.cfg $(BUILDDIR)
-	cd $(BUILDDIR) && virtualenv .
+	cd $(BUILDDIR) && virtualenv -p /opt/python2.7.8/bin/python2.7 .
 	rm -f $(BUILDDIR)/buildout.cfg
 	rm -f $(BUILDDIR)/lib/python2.7/site-packages/easy-install.pth
 	rm -rf $(BUILDDIR)/lib/python2.7/site-packages/setuptools*
