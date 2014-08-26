@@ -13,7 +13,7 @@ bootstrap:
 buildout:
 	if ! test -f bin/buildout;then make bootstrap;fi
 	#if ! test -f var/filestorage/Data.fs;then make standard-config; else bin/buildout -Nt 7;fi
-	bin/buildout -Nvt 7
+	bin/buildout -vt 7
 
 .PHONY: dev-install
 dev-install:
