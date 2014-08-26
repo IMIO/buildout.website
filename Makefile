@@ -2,7 +2,6 @@
 #
 all: run
 VERSION=`cat version.txt`
-BUILD_NUMBER='0'
 
 .PHONY: bootstrap
 bootstrap:
