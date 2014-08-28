@@ -11,7 +11,6 @@ case "$1" in
 	/bin/chown -R imio.imio $PACKAGE_HOME
 	/bin/chmod 0700 $PACKAGE_HOME/var/blobstorage
 	/bin/chmod 0700 $PACKAGE_HOME/var/filestorage
-	/etc/init.d/imio-website-zeoserver restart
     ;;
 
     abort-remove|abort-upgrade|abort-deconfigure)

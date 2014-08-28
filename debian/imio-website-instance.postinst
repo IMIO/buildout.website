@@ -9,7 +9,6 @@ case "$1" in
     configure)
 	# create var
 	/bin/chown -R imio.imio $PACKAGE_HOME
-	/etc/init.d/imio-website-instance restart
     ;;
 
     abort-remove|abort-upgrade|abort-deconfigure)
