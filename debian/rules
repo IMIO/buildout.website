@@ -24,7 +24,7 @@ clean:
 	dh_testroot
 	#rm -rf build
 	#rm -f build-stamp
-	#dh_clean
+	dh_clean
 
 build:
 	mkdir -p $(BUILDDIR)
