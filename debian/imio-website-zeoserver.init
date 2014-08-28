@@ -13,7 +13,7 @@ fi
 case $1 in
   stop)
 
-    su - imio -c \
+    su - imio -m -c \
       "/home/imio/imio-website/bin/zeoserver $*" \
       </dev/null
 
@@ -27,7 +27,7 @@ case $1 in
     ;;
   *)
 
-    su - imio -c \
+    su - imio -m -c \
       "/home/imio/imio-website/bin/zeoserver $*" \
        </dev/null
 
