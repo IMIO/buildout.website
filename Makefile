@@ -39,3 +39,11 @@ deb:
 	git-dch -a --ignore-branch
 	dch -v $(VERSION).$(BUILD_NUMBER) release --no-auto-nmu
 	dpkg-buildpackage -b -uc -us
+
+
+.PHONY: mrbob
+mrbob:
+	./bin/pip install -i http://pypi.imio.be/imio/imio/+simple/ bobtemplates.imio
+	echo "[variables]" > debian.ini
+	echo "debian.name = website" >> debian.ini
+	./bin/mrbob -c debian.ini -O debian bobtemplates:debian

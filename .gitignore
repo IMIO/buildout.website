@@ -9,5 +9,5 @@ src/
 buildout.cfg
 tmp/
 build-stamp
-debian/files
-debian/*.log
+debian/
+debian.ini
