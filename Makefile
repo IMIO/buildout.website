@@ -3,31 +3,32 @@
 all: run
 VERSION=`cat version.txt`
 
-.PHONY: bootstrap
-bootstrap:
-	if ! test -f bin/python; then virtualenv-2.7 --no-site-packages .;fi
-	if ! test -f buildout.cfg;then ln -s prod.cfg buildout.cfg;fi
+bootstrap.py:
+	wget http://downloads.buildout.org/2/bootstrap.py
+
+buildout.cfg:
+	ln -s prod.cfg buildout.cfg
+
+bin/python:
+	virtualenv-2.7 --no-site-packages .
+
+bin/buildout: bin/python buildout.cfg bootstrap.py
 	./bin/python bootstrap.py
 
 .PHONY: buildout
-buildout:
-	if ! test -f bin/buildout;then make bootstrap;fi
-	#if ! test -f var/filestorage/Data.fs;then make standard-config; else bin/buildout -Nt 7;fi
+buildout: bin/buildout
 	bin/buildout -t 7
 
 .PHONY: dev-install
-dev-install:
-	if ! test -f buildout.cfg;then ln -s dev.cfg buildout.cfg;fi
+dev-install: 
 	make buildout
 
 .PHONY: standard-config
-standard-config:
-	if ! test -f bin/buildout;then make bootstrap;fi
+standard-config: bin/buildout
 	bin/buildout -c standard-config.cfg
 
 .PHONY: run
-run:
-	if ! test -f bin/instance1;then make buildout;fi
+run: buildout
 	bin/instance1 fg
 
 .PHONY: cleanall
@@ -42,7 +43,7 @@ deb:
 
 
 .PHONY: mrbob
-mrbob:
+mrbob: bin/python
 	./bin/pip install -i http://pypi.imio.be/imio/imio/+simple/ bobtemplates.imio
 	echo "[variables]" > debian.ini
 	echo "debian.name = website" >> debian.ini
