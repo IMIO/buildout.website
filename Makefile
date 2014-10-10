@@ -44,7 +44,7 @@ deb:
 
 .PHONY: mrbob
 mrbob: bin/python
-	./bin/pip install -i http://pypi.imio.be/imio/imio/+simple/ bobtemplates.imio
+	./bin/easy_install -i http://pypi.imio.be/imio/imio/+simple/ bobtemplates.imio
 	echo "[variables]" > debian.ini
 	echo "debian.name = website" >> debian.ini
 	./bin/mrbob -c debian.ini -O debian bobtemplates:debian
