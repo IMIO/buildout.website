@@ -2,7 +2,7 @@
 #
 all: run
 VERSION=`cat version.txt`
-BUILD_NUMBER := debug1
+#BUILD_NUMBER := debug1
 
 bootstrap.py:
 	wget http://downloads.buildout.org/2/bootstrap.py
