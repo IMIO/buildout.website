@@ -2,6 +2,7 @@
 #
 all: run
 VERSION=`cat version.txt`
+BUILD_NUMBER := debug1
 
 bootstrap.py:
 	wget http://downloads.buildout.org/2/bootstrap.py
@@ -46,5 +47,5 @@ deb:
 mrbob: bin/python
 	./bin/easy_install -i http://pypi.imio.be/imio/imio/+simple/ bobtemplates.imio
 	echo "[variables]" > debian.ini
-	echo "debian.name = website" >> debian.ini
+	echo "debian.name = mutual" >> debian.ini
 	./bin/mrbob -c debian.ini -O debian bobtemplates:debian
