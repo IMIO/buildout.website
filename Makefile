@@ -20,6 +20,10 @@ bin/buildout: bin/python buildout.cfg bootstrap.py
 buildout: bin/buildout
 	bin/buildout -t 7
 
+.PHONY: prod
+prod:
+	make buildout
+
 .PHONY: dev-install
 dev-install: 
 	make buildout
