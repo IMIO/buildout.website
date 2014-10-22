@@ -26,6 +26,7 @@ prod:
 
 .PHONY: dev-install
 dev-install: 
+	ln -s dev.cfg buildout.cfg
 	make buildout
 
 .PHONY: standard-config
