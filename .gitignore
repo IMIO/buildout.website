@@ -11,3 +11,4 @@ tmp/
 build-stamp
 debian/
 debian.ini
+var/
