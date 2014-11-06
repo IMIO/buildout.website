@@ -20,15 +20,6 @@ bin/buildout: bin/python buildout.cfg bootstrap.py
 buildout: bin/buildout
 	bin/buildout -t 7
 
-.PHONY: prod
-prod:
-	make buildout
-
-.PHONY: dev-install
-dev-install: 
-	ln -s dev.cfg buildout.cfg
-	make buildout
-
 .PHONY: standard-config
 standard-config: bin/buildout
 	bin/buildout -c standard-config.cfg

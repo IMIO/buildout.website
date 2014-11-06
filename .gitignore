@@ -12,3 +12,4 @@ build-stamp
 debian/
 debian.ini
 var/
+upgrade.log
