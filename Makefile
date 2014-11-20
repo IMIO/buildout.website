@@ -45,3 +45,9 @@ mrbob: bin/python
 	echo "[variables]" > debian.ini
 	echo "debian.name = mutual" >> debian.ini
 	./bin/mrbob -c debian.ini -O debian bobtemplates:debian
+
+.PHONY: migration
+migration: bootstrap.py bin/python
+	ln -fs migration.cfg buildout.cfg
+	bin/buildout -t 7
+
