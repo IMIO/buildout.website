@@ -50,8 +50,6 @@ mrbob: bin/python
 migration: bootstrap.py bin/python
 	ln -fs migration.cfg buildout.cfg
 	bin/buildout -t 7
-	bin/instance run migration.py
-	ln -fs prod.cfg buildout.cfg
+	bin/instance1 run migration.py
+	ln -fs dev.cfg buildout.cfg
 	make buildout
-	bin/upgrade-portals
-
