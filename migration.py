@@ -6,6 +6,7 @@ from Products.CMFCore.utils import getToolByName
 from AccessControl.SecurityManagement import newSecurityManager
 from zope.component.hooks import setSite
 logger = logging.getLogger('create.plonesite')
+import transaction
 
 
 def main(app):
@@ -23,13 +24,11 @@ def main(app):
     portal = get_plone_site(container)
     setSite(portal)
     portal_setup = getToolByName(portal, 'portal_setup')
-    logger.info('---------- Start cpskin core profile ----------')
-    portal_setup.runAllImportStepsFromProfile('profile-cpskin.core:default')
-    logger.info('---------- Start cpskin MIGRATION profile ----------')
-    portal_setup.runAllImportStepsFromProfile('profile-cpskin.migration:default')
+    logger.info('---------- Start direcotry MIGRATION profile ----------')
     portal_setup.runAllImportStepsFromProfile('profile-collective.directory:migration')
-    portal_migration = getToolByName(portal, 'portal_migration')
-    portal_migration.upgrade()
+    logger.info('---------- Start cpksin MIGRATION profile ----------')
+    portal_setup.runAllImportStepsFromProfile('profile-cpskin.migration:default')
+    transaction.commit()
 
 
 def get_plone_site(container):
