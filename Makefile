@@ -26,18 +26,17 @@ standard-config: bin/buildout
 
 .PHONY: run
 run: buildout
-	bin/instance1 fg
+	bin/instance fg
 
 .PHONY: cleanall
 cleanall:
 	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin buildout.cfg .mr.developer.cfg
 
 .PHONY: deb
-deb:
+deb: 
 	git-dch -a --ignore-branch
 	dch -v $(VERSION).$(BUILD_NUMBER) release --no-auto-nmu
 	dpkg-buildpackage -b -uc -us
-
 
 .PHONY: mrbob
 mrbob: bin/python
@@ -50,6 +49,6 @@ mrbob: bin/python
 migration: bootstrap.py bin/python
 	ln -fs migration.cfg buildout.cfg
 	bin/buildout -t 7
-	bin/instance1 run migration.py
+	bin/instance run migration.py
 	#ln -fs dev.cfg buildout.cfg
 	#make buildout
