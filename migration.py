@@ -28,6 +28,8 @@ def main(app):
     portal_setup.runAllImportStepsFromProfile('profile-collective.directory:migration')
     logger.info('---------- Start cpksin MIGRATION profile ----------')
     portal_setup.runAllImportStepsFromProfile('profile-cpskin.migration:default')
+    logger.info('---------- Detele old Products.directory ----------')
+    portal_setup.runAllImportStepsFromProfile('profile-Products.directory:uninstall')
     transaction.commit()
 
 
