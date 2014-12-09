@@ -8,7 +8,8 @@ bootstrap.py:
 	wget http://downloads.buildout.org/2/bootstrap.py
 
 buildout.cfg:
-	ln -s prod.cfg buildout.cfg
+	#ln -fs dev.cfg buildout.cfg
+	ln -fs prod.cfg buildout.cfg
 
 bin/python:
 	virtualenv-2.7 --no-site-packages .
@@ -49,6 +50,6 @@ mrbob: bin/python
 migration: bootstrap.py bin/python
 	ln -fs migration.cfg buildout.cfg
 	bin/buildout -t 7
-	#bin/instance run migration.py
+	bin/instance run migration.py
 	#ln -fs dev.cfg buildout.cfg
 	#make buildout
