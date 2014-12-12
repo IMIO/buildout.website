@@ -31,7 +31,7 @@ run: buildout
 
 .PHONY: cleanall
 cleanall:
-	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin buildout.cfg .mr.developer.cfg
+	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin .mr.developer.cfg
 
 .PHONY: deb
 deb: 
