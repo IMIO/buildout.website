@@ -8,8 +8,8 @@ bootstrap.py:
 	wget http://downloads.buildout.org/2/bootstrap.py
 
 buildout.cfg:
-	#ln -fs dev.cfg buildout.cfg
-	ln -fs prod.cfg buildout.cfg
+	ln -fs dev.cfg buildout.cfg
+	#ln -fs prod.cfg buildout.cfg
 
 bin/python:
 	virtualenv-2.7 --no-site-packages .
