@@ -5,7 +5,7 @@ from Testing import makerequest
 from Products.CMFCore.utils import getToolByName
 from AccessControl.SecurityManagement import newSecurityManager
 from zope.component.hooks import setSite
-logger = logging.getLogger('create.plonesite')
+logger = logging.getLogger('migrate plonesite')
 import transaction
 
 
@@ -30,6 +30,14 @@ def main(app):
     portal_setup.runAllImportStepsFromProfile('profile-cpskin.migration:default')
     logger.info('---------- Detele old Products.directory ----------')
     portal_setup.runAllImportStepsFromProfile('profile-Products.directory:uninstall')
+
+    # install cputils
+    if not hasattr(app, 'cputils_install'):
+        from Products.ExternalMethod.ExternalMethod import manage_addExternalMethod
+        manage_addExternalMethod(app, 'cputils_install', '', 'CPUtils.utils', 'install')
+        app.cputils_install(app)
+        logger.info("Cpskin installed")
+
     transaction.commit()
 
 
