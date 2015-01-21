@@ -24,12 +24,8 @@ def main(app):
     portal = get_plone_site(container)
     setSite(portal)
     portal_setup = getToolByName(portal, 'portal_setup')
-    logger.info('---------- Start direcotry MIGRATION profile ----------')
-    portal_setup.runAllImportStepsFromProfile('profile-collective.directory:migration')
     logger.info('---------- Start cpksin MIGRATION profile ----------')
     portal_setup.runAllImportStepsFromProfile('profile-cpskin.migration:default')
-    logger.info('---------- Detele old Products.directory ----------')
-    portal_setup.runAllImportStepsFromProfile('profile-Products.directory:uninstall')
 
     # install cputils
     if not hasattr(app, 'cputils_install'):
