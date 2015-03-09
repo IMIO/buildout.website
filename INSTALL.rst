@@ -46,7 +46,7 @@ And go into buildout::
 
 After you can use make for buildout install::
 
-    $ make dev-install
+    $ make run
 
 You can now start the plone site::
 
