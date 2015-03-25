@@ -6,6 +6,8 @@ Known issues with plone.app.multilingual and archetypes.multilingual
 
 The TranslationGroup value for translated archetype object created in a dexterity folder is incorrect.
 
+None: this happens only when memcached daemon is not running
+
 
 2. Dexterity and archetype content types in archetype folderish content types
 -----------------------------------------------------------------------------
@@ -13,6 +15,8 @@ The TranslationGroup value for translated archetype object created in a dexterit
 Translated (dexterity or archetypes objects created in an archetype folder are created in the language root folder.
 
 For archetype object the TranslationGroup value is also incorrect.
+
+None: this happens only when memcached daemon is not running
 
 3. TranslationGroup for archetype content types
 -----------------------------------------------
