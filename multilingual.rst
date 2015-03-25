@@ -18,3 +18,5 @@ For archetype object the TranslationGroup value is also incorrect.
 -----------------------------------------------
 
 The TranslationGroup value for translated archetype objects is sometimes incorrect.
+
+Note: this happens only when memcached daemon is not running
