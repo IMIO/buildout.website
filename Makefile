@@ -34,7 +34,7 @@ cleanall:
 	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin .mr.developer.cfg
 
 .PHONY: deb
-deb: 
+deb:
 	git-dch -a --ignore-branch
 	dch -v $(VERSION).$(BUILD_NUMBER) release --no-auto-nmu
 	dpkg-buildpackage -b -uc -us
@@ -54,3 +54,6 @@ migration: bootstrap.py bin/python
 	bin/rsync-blobstorage
 	bin/instance-migration run migration.py
 	bin/instance fg
+
+docker-image:
+	docker build -t plone-imio:latest .
