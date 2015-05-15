@@ -1,0 +1,11 @@
+plone:
+  image: plone-imio:latest
+  user: imio
+  links:
+   - db
+  ports:
+   - "8100:8100"
+instance:
+  image: plone-imio:latest
+  links:
+   - db
