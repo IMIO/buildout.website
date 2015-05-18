@@ -13,3 +13,4 @@ debian/
 debian.ini
 var/
 upgrade.log
+buildout-cache/
