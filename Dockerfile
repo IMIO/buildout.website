@@ -2,14 +2,16 @@ FROM docker-staging.imio.be/base:latest
 
 RUN apt-get -qy update && apt-get -qy install gcc python27 python27-virtualenv python27-setuptools libxml2-dev libxslt1-dev zlib1g-dev libjpeg-dev
 RUN mkdir /home/imio/website
-COPY . /home/imio/website
+COPY *.cfg /home/imio/website/
+COPY Makefile /home/imio/website/
+COPY *.py /home/imio/website/
 RUN chown imio:imio -R /home/imio/website
 USER imio
 WORKDIR /home/imio/website
 RUN /opt/python2.7.8/bin/python bootstrap.py
-RUN bin/buildout -t 7 -c docker.cfg
+RUN make buildout-docker
 USER root
-RUN apt-get remove -y gcc libxml2-dev libxslt1-dev zlib1g-dev libjpeg-dev
+RUN apt-get remove -y gcc
 RUN apt-get autoremove -y
 USER imio
 ENV HOME /home/imio/website
