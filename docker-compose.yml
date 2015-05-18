@@ -1,11 +1,27 @@
-plone:
+storage:
+  image: docker-prod.imio.be/storage
+  user: imio
+  volumes:
+     - /home/imio/website/var/
+  hostname: storage
+  command: /bin/echo "Storage created!"
+zeo:
   image: plone-imio:latest
   user: imio
-  links:
-   - db
-  ports:
-   - "8100:8100"
+  volumes_from:
+    - storage
+  command: /home/imio/website/bin/zeoserver fg
 instance:
   image: plone-imio:latest
+  user: imio
+  ports:
+    - "8081:8081"
   links:
-   - db
+    - zeo:db
+  environment:
+    - ZEO_HOST=db
+    - ZEO_PORT=8100
+    - HOSTNAME_HOST=localhost
+    - PROJECT_ID=imiotest
+    - MEMCACHE_SERVER=127.0.0.1
+  command: /home/imio/website/bin/instance console
