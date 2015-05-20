@@ -34,7 +34,7 @@ cleanall:
 	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin .mr.developer.cfg
 
 .PHONY: deb
-deb: 
+deb:
 	git-dch -a --ignore-branch
 	dch -v $(VERSION).$(BUILD_NUMBER) release --no-auto-nmu
 	dpkg-buildpackage -b -uc -us
@@ -54,3 +54,21 @@ migration: bootstrap.py bin/python
 	bin/rsync-blobstorage
 	bin/instance-migration run migration.py
 	bin/instance fg
+
+docker-image:
+	docker build -t plone-imio:latest .
+
+buildout-cache:
+	mkdir buildout-cache
+	./bin/buildout -c docker.cfg buildout:eggs-directory=buildout-cache/eggs buildout:download-cache=buildout-cache/downloads
+	./bin/python update_packages.py .
+	rsync -rP packages/buildout-cache.tar.bz2 root@frontend1.imio.be:/var/www/static/
+
+buildout-docker:
+	rm -rf buildout-cache
+	wget http://files.imio.be/buildout-cache.tar.bz2
+	tar jxvf buildout-cache.tar.bz2 1>/dev/null
+	rm buildout-cache.tar.bz2
+	#mkdir -p buildout-cache/downloads
+	#bin/buildout -N -c prod.cfg install download
+	bin/buildout -N -c docker.cfg
