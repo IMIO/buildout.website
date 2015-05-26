@@ -7,6 +7,7 @@ RUN chown imio:imio -R /home/imio/imio-website/
 WORKDIR /home/imio/imio-website
 RUN \
     apt-get -qy update && apt-get -qy install gcc python27 python27-virtualenv python27-setuptools libxml2-dev libxslt1-dev zlib1g-dev libjpeg-dev &&\
+    sudo -u imio bash -c 'make buildout-cache/downloads' &&\
     sudo -u imio bash -c '/opt/python2.7.8/bin/python bootstrap.py -c docker.cfg' &&\
     sudo -u imio bash -c 'make buildout-docker' &&\
     apt-get remove -y gcc gcc-4.8 cpp-4.8 zsh-common libruby1.9.1 &&\
