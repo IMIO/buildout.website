@@ -62,7 +62,6 @@ buildout-cache:
 	mkdir buildout-cache
 	./bin/buildout -c docker.cfg buildout:eggs-directory=buildout-cache/eggs buildout:download-cache=buildout-cache/downloads
 	./bin/python update_packages.py .
-	rsync -rP packages/buildout-cache.tar.bz2 root@frontend1.imio.be:/var/www/static/
 
 buildout-cache/downloads:
 	rm -rf buildout-cache
