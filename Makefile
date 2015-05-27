@@ -66,7 +66,7 @@ buildout-cache: bootstrap.py bin/python
 
 buildout-cache/downloads:
 	rm -rf buildout-cache
-	wget http://files.imio.be/buildout-cache.tar.bz2
+	wget -O buildout-cache.tar.bz2 http://files.imio.be/website-buildout-cache.tar.bz2
 	tar jxvf buildout-cache.tar.bz2 1>/dev/null
 	rm buildout-cache.tar.bz2
 
