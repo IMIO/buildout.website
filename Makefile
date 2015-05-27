@@ -58,8 +58,9 @@ migration: bootstrap.py bin/python
 docker-image:
 	docker build -t plone-imio:latest .
 
-buildout-cache:
-	mkdir buildout-cache
+buildout-cache: bootstrap.py bin/python
+	mkdir -p buildout-cache/downloads
+	./bin/python bootstrap.py -c docker.cfg
 	./bin/buildout -c docker.cfg buildout:eggs-directory=buildout-cache/eggs buildout:download-cache=buildout-cache/downloads
 	./bin/python update_packages.py .
 
