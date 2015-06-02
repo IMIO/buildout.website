@@ -1,12 +1,12 @@
 <filestorage source>
   path var/filestorage/Data.fs
-  blob-dir var/blobstorage
+  blob-dir var/blobstorage.bushy
 </filestorage>
  
 <relstorage destination>
   shared-blob-dir false
   # ZODB Cache Dir
-  # blob-dir ./var/blobstorage
+  blob-dir var/blobstorage
   blob-cache-size 10mb
   <postgresql>
     dsn dbname='zodbuser' user='zodbuser' host='devel.interne.imio.be' password='zeeGeer7'
