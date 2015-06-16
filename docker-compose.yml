@@ -8,12 +8,14 @@ storage:
 zeo:
   image: plone-imio:latest
   user: imio
+  mem_limit: 2024m
   volumes_from:
     - storage
   command: /home/imio/imio-website/bin/zeoserver fg
 instance:
   image: plone-imio:latest
   user: imio
+  mem_limit: 2024m
   ports:
     - "8081:8081"
   links:
