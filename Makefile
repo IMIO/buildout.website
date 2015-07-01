@@ -61,8 +61,9 @@ docker-image:
 buildout-cache: bootstrap.py bin/python
 	mkdir -p buildout-cache/downloads
 	./bin/python bootstrap.py -c docker.cfg
-	./bin/buildout -c docker.cfg buildout:eggs-directory=buildout-cache/eggs buildout:download-cache=buildout-cache/downloads
-	./bin/python update_packages.py .
+	./bin/buildout -c docker.cfg install makebuildoutcache
+	./bin/makebuildoutcache
+	rm -rf buildout-cache
 
 buildout-cache/downloads:
 	rm -rf buildout-cache
