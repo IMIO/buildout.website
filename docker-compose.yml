@@ -1,16 +1,10 @@
-storage:
-  image: docker-prod.imio.be/storage
-  user: imio
-  volumes:
-    - /home/imio/imio-website/var
-  hostname: storage
-  command: /bin/echo "Storage created!"
 zeo:
   image: plone-imio:latest
   user: imio
   mem_limit: 2024m
-  volumes_from:
-    - storage
+  volumes:
+      - var/blobstorage:/home/imio/imio-website/var/blobstorage
+      - var/filestorage:/home/imio/imio-website/var/filestorage
   command: /home/imio/imio-website/bin/zeoserver fg
 instance:
   image: plone-imio:latest
