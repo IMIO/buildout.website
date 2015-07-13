@@ -1,5 +1,5 @@
 zeo:
-  image: plone-imio:latest
+  build: .
   user: imio
   mem_limit: 2024m
   volumes:
@@ -7,13 +7,16 @@ zeo:
       - var/filestorage:/home/imio/imio-website/var/filestorage
   command: /home/imio/imio-website/bin/zeoserver fg
 instance:
-  image: plone-imio:latest
+  build: .
   user: imio
   mem_limit: 2024m
+  # memswap_limit: 0m # integrate in docker-compose >= 1.4
   ports:
     - "8081:8081"
   links:
     - zeo:db
+  volumes:
+    - .:/home/imio/imio-website/
   environment:
     - ZEO_HOST=db
     - ZEO_PORT=8100
