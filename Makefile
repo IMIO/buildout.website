@@ -61,7 +61,7 @@ docker-image:
 buildout-cache: bootstrap.py bin/python
 	mkdir -p buildout-cache/downloads
 	./bin/python bootstrap.py -c docker.cfg
-	./bin/buildout -c docker.cfg install makebuildoutcache
+	./bin/buildout -t 15 -c docker.cfg install makebuildoutcache
 	./bin/makebuildoutcache
 	rm -rf buildout-cache
 
