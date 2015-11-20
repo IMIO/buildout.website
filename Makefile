@@ -75,4 +75,4 @@ buildout-docker: buildout-cache/downloads
 	# check if buildout-cache/download folder exists, if not, make get-buildout-cache
 	#mkdir -p buildout-cache/downloads
 	#bin/buildout -N -c prod.cfg install download
-	bin/buildout -Nt 10 -c docker.cfg
+	bin/buildout -t 10 -c docker.cfg
