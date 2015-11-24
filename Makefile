@@ -71,8 +71,8 @@ buildout-cache/downloads:
 	tar jxvf buildout-cache.tar.bz2 1>/dev/null
 	rm buildout-cache.tar.bz2
 
-buildout-docker: buildout-cache/downloads 
+buildout-docker: buildout-cache/downloads
 	# check if buildout-cache/download folder exists, if not, make get-buildout-cache
 	#mkdir -p buildout-cache/downloads
 	#bin/buildout -N -c prod.cfg install download
-	bin/buildout -N -c docker.cfg
+	bin/buildout -c docker.cfg
