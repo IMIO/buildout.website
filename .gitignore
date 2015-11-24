@@ -15,3 +15,4 @@ var/
 upgrade.log
 buildout-cache/
 Extensions/*
+share/
