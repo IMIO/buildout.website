@@ -64,6 +64,7 @@ buildout-cache: bootstrap.py bin/python
 	./bin/buildout -t 15 -c docker.cfg install makebuildoutcache
 	mkdir -p tmp/buildout-cache/downloads/dist/
 	wget http://pypi.imio.be/root/pypi/+f/e2d/6e9ea7d8845bf/plone.app.multilingual-2.0.1.zip -O tmp/buildout-cache/downloads/dist/plone.app.multilingual-2.0.1.zip
+	wget http://pypi.imio.be/root/pypi/+f/b73/445dc0069550b/geopy-1.11.0.tar.gz -O tmp/buildout-cache/downloads/dist/geopy-1.11.0.tar.gz
 	./bin/makebuildoutcache
 	rm -rf buildout-cache
 
