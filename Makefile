@@ -63,7 +63,7 @@ buildout-cache: bootstrap.py bin/python
 	./bin/python bootstrap.py -c docker.cfg
 	./bin/buildout -t 15 -c docker.cfg install makebuildoutcache
 	mkdir -p tmp/buildout-cache/downloads/dist/
-	wget http://pypi.imio.be/root/pypi/+f/e2d/6e9ea7d8845bf/plone.app.multilingual-2.0.1.zip -O tmp/buildout-cache/downloads/dist/plone.app.multilingual.zip
+	wget http://pypi.imio.be/root/pypi/+f/e2d/6e9ea7d8845bf/plone.app.multilingual-2.0.1.zip -O tmp/buildout-cache/downloads/dist/plone.app.multilingual-2.0.1.zip
 	./bin/makebuildoutcache
 	rm -rf buildout-cache
 
