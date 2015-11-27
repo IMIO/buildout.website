@@ -15,7 +15,7 @@ bin/python:
 	virtualenv-2.7 --no-site-packages .
 
 bin/buildout: bin/python buildout.cfg bootstrap.py
-	./bin/python bootstrap.py
+	./bin/python bootstrap.py -v 2.4.7
 
 .PHONY: buildout
 buildout: bin/buildout
