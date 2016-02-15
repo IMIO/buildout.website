@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
-import logging
-from zope.globalrequest import setRequest
-from Testing import makerequest
-from Products.CMFCore.utils import getToolByName
 from AccessControl.SecurityManagement import newSecurityManager
+from Products.CMFCore.utils import getToolByName
+from Testing import makerequest
 from zope.component.hooks import setSite
-logger = logging.getLogger('migrate plonesite')
+from zope.globalrequest import setRequest
+import logging
 import transaction
+
+logger = logging.getLogger('migrate plonesite')
 
 
 def main(app):
@@ -25,15 +26,7 @@ def main(app):
     setSite(portal)
     portal_setup = getToolByName(portal, 'portal_setup')
     logger.info('---------- Start cpksin MIGRATION profile ----------')
-    portal_setup.runAllImportStepsFromProfile('profile-cpskin.migration:default')
-
-    # install cputils
-    if not hasattr(app, 'cputils_install'):
-        from Products.ExternalMethod.ExternalMethod import manage_addExternalMethod
-        manage_addExternalMethod(app, 'cputils_install', '', 'CPUtils.utils', 'install')
-        app.cputils_install(app)
-        logger.info("Cpskin installed")
-
+    portal_setup.runAllImportStepsFromProfile('profile-cpskin.migration:migratetodx')
     transaction.commit()
 
 
@@ -48,7 +41,6 @@ def get_plone_site(container):
             if obj.meta_type == "Plone Site" and not result:
                 result = obj
     return result
-
 
 if __name__ == '__main__':
     main(app)
