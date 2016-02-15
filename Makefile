@@ -58,6 +58,9 @@ migration: bootstrap.py bin/python
 docker-image:
 	docker build -t plone-imio:latest .
 
+docker-migration-image:
+	docker build -f Dockerfile.migration -t website-migration:latest .
+
 buildout-cache: bootstrap.py bin/python
 	mkdir -p buildout-cache/downloads
 	./bin/python bootstrap.py -c docker.cfg
@@ -79,3 +82,6 @@ buildout-docker: buildout-cache/downloads
 	#mkdir -p buildout-cache/downloads
 	#bin/buildout -N -c prod.cfg install download
 	bin/buildout -t 22 -c docker.cfg
+
+buildout-migration-docker: buildout-cache/downloads
+	bin/buildout -t 22 -c migration2dx.cfg
