@@ -24,10 +24,16 @@ def main(app):
     container = app.unrestrictedTraverse('/')
     portal = get_plone_site(container)
     setSite(portal)
-    portal_setup = getToolByName(portal, 'portal_setup')
-    logger.info('---------- Start cpksin MIGRATION profile ----------')
-    portal_setup.runAllImportStepsFromProfile('profile-cpskin.migration:migratetodx')
-    transaction.commit()
+    # XXX check if plone.app.contenttypes is not already installed
+    portal_quickinstaller = getToolByName(portal, 'portal_quickinstaller')
+    installed = [p['id'] for p in portal_quickinstaller.listInstalledProducts()]
+    if 'plone.app.contenttypes' not in installed:
+        portal_setup = getToolByName(portal, 'portal_setup')
+        logger.info('---------- Start cpksin MIGRATION profile ----------')
+        portal_setup.runAllImportStepsFromProfile('profile-cpskin.migration:migratetodx')
+        transaction.commit()
+    else:
+        logger.info('This site is alerady in Dexterity')
 
 
 def get_plone_site(container):
