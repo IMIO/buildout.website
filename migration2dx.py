@@ -24,6 +24,14 @@ def main(app):
     container = app.unrestrictedTraverse('/')
     portal = get_plone_site(container)
     setSite(portal)
+    # desactivate login
+    plugins = portal.acl_users.plugins
+    from Products.PluggableAuthService.interfaces.plugins import IAuthenticationPlugin
+    authentication_plugins = plugins.getAllPlugins(plugin_type='IAuthenticationPlugin')
+    for active in authentication_plugins['active']:
+        plugins.deactivatePlugin(IAuthenticationPlugin, active)
+    transaction.commit()
+
     # XXX check if plone.app.contenttypes is not already installed
     portal_quickinstaller = getToolByName(portal, 'portal_quickinstaller')
     installed = [p['id'] for p in portal_quickinstaller.listInstalledProducts()]
@@ -34,6 +42,12 @@ def main(app):
         transaction.commit()
     else:
         logger.info('This site is alerady in Dexterity')
+
+    # reactive login
+    authentication_plugins = plugins.getAllPlugins(plugin_type='IAuthenticationPlugin')
+    for active in authentication_plugins['available']:
+        plugins.activatePlugin(IAuthenticationPlugin, active)
+    transaction.commit()
 
 
 def get_plone_site(container):
