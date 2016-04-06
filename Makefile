@@ -67,7 +67,6 @@ buildout-cache: bootstrap.py bin/python
 	./bin/buildout -t 25 -c docker.cfg install makebuildoutcache
 	mkdir -p tmp/buildout-cache/downloads/dist/
 	wget http://devpi.imio.be/root/pypi/+f/b73/445dc0069550b/geopy-1.11.0.tar.gz -O tmp/buildout-cache/downloads/dist/geopy-1.11.0.tar.gz
-	wget http://files.imio.be/threadframe-0.2.tar.gz -O tmp/buildout-cache/downloads/dist/threadframe-0.2.tar.gz
 	./bin/makebuildoutcache
 	rm -rf buildout-cache
 
