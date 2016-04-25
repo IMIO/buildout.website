@@ -8,6 +8,7 @@ import logging
 import transaction
 
 logger = logging.getLogger('migrate plonesite')
+logger.setLevel(logging.INFO)
 
 
 def main(app):
