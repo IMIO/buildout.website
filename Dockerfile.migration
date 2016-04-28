@@ -6,7 +6,7 @@ COPY *.py /home/imio/imio-website/
 RUN chown imio:imio -R /home/imio/imio-website/
 WORKDIR /home/imio/imio-website
 RUN \
-    apt-get -qy update && apt-get -qy install rsync gcc python27 python27-virtualenv python27-setuptools libxml2-dev libxslt1-dev zlib1g-dev libjpeg-dev git &&\
+    apt-get -qy update && apt-get -qy install rsync gcc python27 python27-virtualenv python27-setuptools libxml2-dev libxslt1-dev zlib1g-dev libjpeg-dev git lynx &&\
     sudo -u imio bash -c 'make buildout-cache/downloads' &&\
     sudo -u imio bash -c '/opt/python2.7.8/bin/python bootstrap.py -c docker.cfg' &&\
     sudo -u imio bash -c 'make buildout-migration-docker' &&\
