@@ -35,7 +35,17 @@ Example : var/instance/minisites/ms.ini
     [/liege/fr/loisirs/culture/musees/la-boverie]
     minisite_url=http://127.0.0.2:8000
     portal_url=http://127.0.0.1:8000
-    
+
     [/liege/en/leisure/culture/museums/la-boverie]
     minisite_url=http://127.0.0.3:8000
     portal_url=http://127.0.0.1:8000
+
+6. Start proxy
+::
+    ./bin/proxy
+
+7. Start instance
+::
+    ./bin/instance fg
+
+You can now go to `http://127.0.0.1:8000` to see one minisite
