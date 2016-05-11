@@ -82,5 +82,15 @@ buildout-docker: buildout-cache/downloads
 	#bin/buildout -N -c prod.cfg install download
 	bin/buildout -t 22 -c docker.cfg
 
+buildout-docker-dev:
+	bin/buildout -c docker.cfg buildout:eggs-directory=~/.buildout/eggs buildout:download-cache=~/.buildout/download-cache
+
+zeoserver-docker-start:
+	echo "bushy" > var/blobstorage/.layout
+	bin/zeoserver start
+
+instance-docker-fg: zeoserver-docker-start
+	HOSTNAME_HOST=localhost ZEO_HOST=localhost ZEO_PORT=8100 PROJECT_ID=dev ./bin/instance fg instance:shared-blob=on
+
 buildout-migration-docker: buildout-cache/downloads
 	bin/buildout -t 22 -c migration2dx.cfg
