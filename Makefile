@@ -56,7 +56,7 @@ migration: bootstrap.py bin/python
 	bin/instance fg
 
 docker-image:
-	docker build -t plone-imio:latest .
+	docker build -t plone-imio-website:latest .
 
 docker-migration-image:
 	docker build -f Dockerfile.migration -t website-migration:latest .
