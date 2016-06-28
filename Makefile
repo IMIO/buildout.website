@@ -61,6 +61,9 @@ docker-image:
 docker-migration-image:
 	docker build -f Dockerfile.migration -t website-migration:latest .
 
+docker-transmo-image:
+	docker build -f Dockerfile.transmo -t website-transmo:latest .
+
 buildout-cache: bootstrap.py bin/python bin/buildout
 	mkdir -p buildout-cache/downloadst
 	./bin/buildout -t 25 -c docker.cfg install makebuildoutcache
@@ -93,3 +96,6 @@ instance-docker-fg: zeoserver-docker-start
 
 buildout-migration-docker: buildout-cache/downloads
 	bin/buildout -t 22 -c migration2dx.cfg
+
+buildout-transmo-docker: buildout-cache/downloads
+	bin/buildout -t 22 -c transmo-prod.cfg
