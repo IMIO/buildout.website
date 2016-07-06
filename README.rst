@@ -26,7 +26,7 @@ For using minisite for development you have to :
 
 4. Start buildout
 ::
-    ./bin/buildout.cfg
+    ./bin/buildout
 
 5. Create minisite config file in var/instanace/minisites folder
 
