@@ -18,7 +18,7 @@ For using minisite for development you have to :
 ::
     ln -fs dev.cfg buildout.cfg
 
-2. Uncomment parts nginx and proxy
+2. Uncomment parts nginx and proxy and update path of minisite
 
 3. Install libpcre3 libpcre3-dev
 ::
@@ -28,7 +28,7 @@ For using minisite for development you have to :
 ::
     ./bin/buildout
 
-5. Create minisite config file in var/instanace/minisites folder
+5. Create minisite config file in var/instance/minisites folder
 
 Example : var/instance/minisites/ms.ini
 ::
@@ -42,7 +42,7 @@ Example : var/instance/minisites/ms.ini
 
 6. Start proxy
 ::
-    ./bin/proxy
+    ./bin/proxy start
 
 7. Start instance
 ::
