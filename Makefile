@@ -61,6 +61,13 @@ docker-image:
 docker-migration-image:
 	docker build -f Dockerfile.migration -t website-migration:latest .
 
+docker-cleanup-image:
+	docker build -f Dockerfile.cleanup -t website-cleanup:latest .
+
+docker-migration-image:
+	docker build -f Dockerfile.migration -t website-migration:latest .
+
+
 docker-transmo-image:
 	docker build -f Dockerfile.transmo -t website-transmo:latest .
 
@@ -99,3 +106,7 @@ buildout-migration-docker: buildout-cache/downloads
 
 buildout-transmo-docker: buildout-cache/downloads
 	bin/buildout -t 22 -c transmo-prod.cfg
+
+buildout-cleanup-docker: buildout-cache/downloads
+	bin/buildout -t 22 -c migration.cfg
+
