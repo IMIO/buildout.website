@@ -1,8 +1,6 @@
 Dependencies
 ============
 
-We assume the installation in the folder /srv/zinstances/site433
- (that can be changed) and on an ubuntu distribution.
 Your real username must replace in our commands the string "username".
 Each command, specified by the symbol "$" or "#", can be executed 
  (without the symbol).
@@ -46,7 +44,7 @@ And go into buildout::
 
 After you can use make for buildout install::
 
-    $ make run
+    $ make buildout
 
 You can now start the plone site::
 
