@@ -25,6 +25,10 @@ buildout: bin/buildout
 standard-config: bin/buildout
 	bin/buildout -c standard-config.cfg
 
+.PHONY: robot-server
+robot-server:
+	bin/robot-server -v cpskin.policy.testing.CPSKIN_POLICY_ROBOT_TESTING
+
 .PHONY: run
 run: buildout
 	bin/instance fg
@@ -109,4 +113,3 @@ buildout-transmo-docker: buildout-cache/downloads
 
 buildout-cleanup-docker: buildout-cache/downloads
 	bin/buildout -t 22 -c migration.cfg
-
