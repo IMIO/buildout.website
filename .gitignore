@@ -17,3 +17,4 @@ upgrade.log
 buildout-cache/
 Extensions/*
 share/
+.tags
