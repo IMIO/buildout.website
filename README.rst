@@ -51,3 +51,11 @@ Example : var/instance/minisites/ms.ini
     ./bin/instance fg
 
 You can now go to `http://127.0.0.1:8000` to see one minisite
+
+
+Monitoring
+----------
+telnet 127.0.0.1 8888
+stats
+
+echo 'uptime' | nc -i 1 localhost 8888
