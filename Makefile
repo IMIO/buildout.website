@@ -59,6 +59,14 @@ migration: bootstrap.py bin/python
 	bin/instance-migration run migration.py
 	bin/instance fg
 
+.PHONY: migration-dev
+migration: bootstrap.py bin/python
+	ln -fs migration2dx-dev.cfg buildout.cfg
+	bin/buildout -t 7
+	bin/rsync-datafs
+	bin/rsync-blobstorage
+	bin/instance-migration fg
+
 docker-image:
 	docker build -t plone-imio-website:latest .
 
