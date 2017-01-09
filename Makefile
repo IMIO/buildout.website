@@ -76,12 +76,11 @@ docker-migration-image:
 docker-cleanup-image:
 	docker build -f Dockerfile.cleanup -t website-cleanup:latest .
 
-docker-migration-image:
-	docker build -f Dockerfile.migration -t website-migration:latest .
-
-
 docker-transmo-image:
 	docker build -f Dockerfile.transmo -t website-transmo:latest .
+
+docker-migration-transmo-image:
+	docker build -f Dockerfile.migrationtransmo -t website-migration-transmo:latest .
 
 buildout-cache: bootstrap.py bin/python bin/buildout
 	mkdir -p buildout-cache/downloadst
@@ -118,6 +117,9 @@ buildout-migration-docker: buildout-cache/downloads
 
 buildout-transmo-docker: buildout-cache/downloads
 	bin/buildout -t 22 -c transmo-prod.cfg
+
+buildout-migration-transmo-docker: buildout-cache/downloads
+	bin/buildout -t 22 -c transmo.cfg eggs-directory=buildout-cache/eggs download-cache=buildout-cache/downloads
 
 buildout-cleanup-docker: buildout-cache/downloads
 	bin/buildout -t 22 -c migration.cfg
