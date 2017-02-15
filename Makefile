@@ -15,7 +15,7 @@ bin/python:
 	virtualenv-2.7 --no-site-packages .
 
 bin/buildout: bin/python buildout.cfg bootstrap.py
-	./bin/pip install zc.buildout
+	./bin/python bootstrap.py
 
 .PHONY: buildout
 buildout: bin/buildout
@@ -85,8 +85,8 @@ docker-migration-transmo-image:
 buildout-cache: bootstrap.py bin/python bin/buildout
 	mkdir -p buildout-cache/downloads
 	./bin/buildout -t 25 -c docker.cfg install makebuildoutcache
-	mkdir -p tmp/buildout-cache/downloads/dist/
-	wget http://devpi.imio.be/root/pypi/+f/b73/445dc0069550b/geopy-1.11.0.tar.gz -O tmp/buildout-cache/downloads/dist/geopy-1.11.0.tar.gz
+	#mkdir -p tmp/buildout-cache/downloads/dist/
+	#wget http://devpi.imio.be/root/pypi/+f/b73/445dc0069550b/geopy-1.11.0.tar.gz -O tmp/buildout-cache/downloads/dist/geopy-1.11.0.tar.gz
 	./bin/makebuildoutcache
 	rm -rf buildout-cache
 
