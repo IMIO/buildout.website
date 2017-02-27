@@ -48,7 +48,14 @@ For using minisite for development you have to :
 
 2. In dev.cfg: uncomment parts nginx and proxy, update path of minisite(s) (in 'proxy' section)
 ::
-
+    parts =
+        ...
+        nginx
+        proxy
+    
+    [proxy]
+    ...
+    
 3. Install libpcre3 libpcre3-dev
 ::
     sudo apt-get install libpcre3 libpcre3-dev
