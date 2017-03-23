@@ -14,8 +14,9 @@ buildout.cfg:
 bin/python:
 	virtualenv-2.7 --no-site-packages .
 
-bin/buildout: bin/python buildout.cfg bootstrap.py
-	./bin/python bootstrap.py
+bin/buildout: bin/python buildout.cfg
+	./bin/pip install setuptools==33.1.0
+	./bin/pip install zc.buildout==2.9.2
 
 .PHONY: buildout
 buildout: bin/buildout
@@ -36,12 +37,6 @@ run: buildout
 .PHONY: cleanall
 cleanall:
 	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin .mr.developer.cfg
-
-.PHONY: deb
-deb:
-	git-dch -a --ignore-branch
-	dch -v $(VERSION).$(BUILD_NUMBER) release --no-auto-nmu
-	dpkg-buildpackage -b -uc -us
 
 .PHONY: migration
 migration: bootstrap.py bin/python
@@ -75,7 +70,7 @@ docker-transmo-image:
 docker-migration-transmo-image:
 	docker build -f Dockerfile.migrationtransmo -t website-migration-transmo:latest .
 
-buildout-cache: bootstrap.py bin/python bin/buildout
+buildout-cache: bin/python bin/buildout
 	mkdir -p buildout-cache/downloads
 	./bin/buildout -t 25 -c docker.cfg install makebuildoutcache
 	#mkdir -p tmp/buildout-cache/downloads/dist/
