@@ -43,13 +43,6 @@ deb:
 	dch -v $(VERSION).$(BUILD_NUMBER) release --no-auto-nmu
 	dpkg-buildpackage -b -uc -us
 
-.PHONY: mrbob
-mrbob: bin/python
-	./bin/easy_install -i http://pypi.imio.be/imio/imio/+simple/ bobtemplates.imio
-	echo "[variables]" > debian.ini
-	echo "debian.name = mutual" >> debian.ini
-	./bin/mrbob -c debian.ini -O debian bobtemplates:debian
-
 .PHONY: migration
 migration: bootstrap.py bin/python
 	ln -fs migration.cfg buildout.cfg
