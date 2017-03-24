@@ -4,9 +4,6 @@ all: run
 VERSION=`cat version.txt`
 #BUILD_NUMBER := debug1
 
-bootstrap.py:
-	wget http://downloads.buildout.org/2/bootstrap.py
-
 buildout.cfg:
 	ln -fs dev.cfg buildout.cfg
 	#ln -fs prod.cfg buildout.cfg
