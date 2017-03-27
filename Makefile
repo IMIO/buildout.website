@@ -12,7 +12,7 @@ bin/python:
 	virtualenv-2.7 --no-site-packages .
 
 bin/buildout: bin/python buildout.cfg
-	./bin/pip install setuptools==33.1.0
+	./bin/pip install setuptools==33.1.1
 	./bin/pip install zc.buildout==2.9.2
 
 .PHONY: buildout
