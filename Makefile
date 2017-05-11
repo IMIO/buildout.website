@@ -13,7 +13,7 @@ bin/python:
 
 bin/buildout: bin/python buildout.cfg
 	./bin/pip install setuptools==33.1.1
-	./bin/pip install zc.buildout==2.9.2
+	./bin/pip install zc.buildout==2.9.3
 
 .PHONY: buildout
 buildout: bin/buildout
