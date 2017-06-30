@@ -18,3 +18,4 @@ buildout-cache/
 Extensions/*
 share/
 .tags
+pip-selfcheck.json
