@@ -19,3 +19,4 @@ Extensions/*
 share/
 .tags
 pip-selfcheck.json
+local/
