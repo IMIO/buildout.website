@@ -3,6 +3,7 @@ RUN mkdir /home/imio/imio-website
 COPY *.cfg /home/imio/imio-website/
 COPY Makefile /home/imio/imio-website/
 COPY *.py /home/imio/imio-website/
+COPY scripts /home/imio/imio-website/scripts
 RUN chown imio:imio -R /home/imio/imio-website/
 WORKDIR /home/imio/imio-website
 RUN \
