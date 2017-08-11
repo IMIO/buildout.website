@@ -7,7 +7,7 @@ COPY scripts /home/imio/imio-website/scripts
 RUN chown imio:imio -R /home/imio/imio-website/
 WORKDIR /home/imio/imio-website
 RUN \
-    apt-get -qy update && apt-get -qy install build-essential rsync gcc python27 python27-virtualenv python27-setuptools libxml2-dev libxslt1-dev zlib1g-dev libjpeg-dev lynx &&\
+    apt-get -qy update && apt-get -qy install build-essential rsync gcc python27 python27-virtualenv python27-setuptools libxml2-dev libxslt1-dev zlib1g-dev libjpeg-dev lynx wv poppler-utils &&\
     sudo -u imio bash -c 'make buildout-cache/downloads' &&\
     sudo -u imio bash -c '/opt/python2.7.8/bin/python bootstrap.py -c docker.cfg' &&\
     sudo -u imio bash -c 'make buildout-docker' &&\
