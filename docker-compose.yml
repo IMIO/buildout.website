@@ -23,6 +23,9 @@ services:
       - type: bind
         source: ./src/
         target: /home/imio/imio-website/src
+      - type: bind
+        source: ./parts/instance/var/
+        target: /home/imio/imio-website/parts/instance/var/
     environment:
       - MEMCACHE_SERVER=127.0.0.1
       - MEMCACHE_DEFAULT_AGE=10800
