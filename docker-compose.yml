@@ -1,26 +1,36 @@
-zeo:
-  build: .
-  user: imio
-  mem_limit: 2024m
-  volumes:
-      - var/blobstorage:/home/imio/imio-website/var/blobstorage
-      - var/filestorage:/home/imio/imio-website/var/filestorage
-  command: /home/imio/imio-website/bin/zeoserver fg
-instance:
-  build: .
-  user: imio
-  mem_limit: 2024m
-  # memswap_limit: 0m # integrate in docker-compose >= 1.4
-  ports:
-    - "8081:8081"
-  links:
-    - zeo:db
-  volumes:
-    - .:/home/imio/imio-website/
-  environment:
-    - ZEO_HOST=db
-    - ZEO_PORT=8100
-    - HOSTNAME_HOST=local
-    - PROJECT_ID=imiotest
-    - MEMCACHE_SERVER=127.0.0.1
-  command: /home/imio/imio-website/bin/instance console
+version: '3.3'
+services:
+  zeo:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    user: imio
+    volumes:
+      - type: bind
+        source: ./var/
+        target: /home/imio/imio-website/var/
+    command: /home/imio/imio-website/bin/zeoserver fg
+  instance:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    user: imio
+    ports:
+      - "8081:8081"
+    links:
+      - zeo:db
+    volumes:
+      - type: bind
+        source: ./src/
+        target: /home/imio/imio-website/src
+    environment:
+      - MEMCACHE_SERVER=127.0.0.1
+      - MEMCACHE_DEFAULT_AGE=10800
+      - ENV=dev
+      - CACHING_SERVERS=http://frontend1.interne.imio.be:5000 http://frontend2.lan.imio.be:5000 http://frontend3.lan.imio.be:5000
+      - DOMAINS=localhost
+    command: /home/imio/imio-website/bin/instance fg
+
+# volumes:
+#   var/filestorage:/home/imio/imio-website/var/filestorage:nocopy:
+#   var/blobstorage:/home/imio/imio-website/var/blobstorage:nocopy:
