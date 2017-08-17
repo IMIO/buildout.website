@@ -13,7 +13,7 @@ bin/python:
 
 bin/buildout: bin/python buildout.cfg
 	./bin/pip install setuptools==33.1.1
-	./bin/pip install zc.buildout==2.9.3
+	./bin/pip install zc.buildout==2.9.4
 
 .PHONY: buildout
 buildout: bin/buildout
@@ -87,8 +87,8 @@ buildout-docker: buildout-cache/downloads
 	#bin/buildout -N -c prod.cfg install download
 	bin/buildout -t 22 -c docker.cfg
 
-buildout-docker-dev:
-	bin/buildout -c docker.cfg buildout:eggs-directory=~/.buildout/eggs buildout:download-cache=~/.buildout/download-cache
+buildout-docker-dev: buildout-cache/downloads
+	bin/buildout -c docker-dev.cfg # buildout:eggs-directory=~/.buildout/eggs buildout:download-cache=~/.buildout/download-cache
 
 zeoserver-docker-start:
 	echo "bushy" > var/blobstorage/.layout
@@ -108,3 +108,11 @@ buildout-migration-transmo-docker: buildout-cache/downloads
 
 buildout-cleanup-docker: buildout-cache/downloads
 	bin/buildout -t 22 -c migration.cfg
+
+can-docker-use-data:
+	sudo addgroup --gid 209 imio
+	sudo adduser $(whoami) imio
+	chmod 664 var/filestorage/*
+	find var/blobstorage -type f -name "*.blob" -exec chmod 440 {} \;
+	chown bsuttor:imio -R var/filestorage
+	chown bsuttor:imio -R var/blobstorage
