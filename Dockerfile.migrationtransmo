@@ -8,7 +8,7 @@ WORKDIR /home/imio/imio-website
 RUN \
     apt-get -qy update && apt-get -qy install build-essential gcc python27 python27-virtualenv python27-setuptools libxml2-dev libxslt1-dev zlib1g-dev libjpeg-dev git lynx rsync &&\
     sudo -u imio bash -c 'make buildout-cache/downloads' &&\
-    sudo -u imio bash -c '/opt/python2.7.8/bin/python bootstrap.py -c transmo.cfg' &&\
+    sudo -u imio bash -c '/opt/python2.7.8/bin/python bootstrap.py -c transmo-migrate-to-dx.cfg' &&\
     sudo -u imio bash -c 'make buildout-migration-transmo-docker' &&\
     apt-get remove -y gcc gcc-4.8 cpp-4.8 libruby1.9.1 &&\
     apt-get autoremove -y &&\
