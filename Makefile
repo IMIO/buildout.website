@@ -65,7 +65,9 @@ docker-transmo-image:
 	docker build -f Dockerfile.transmo -t website-transmo:latest .
 
 docker-migration-transmo-image:
-	docker build -f Dockerfile.migrationtransmo -t website-migration-transmo:latest .
+	docker build --no-cache -f Dockerfile.migrationtransmo -t website-migration-transmo:latest .
+	docker tag website-migration-transmo:latest docker-staging.imio.be/website-migration-transmo:latest
+	docker push docker-staging.imio.be/website-migration-transmo:latest
 
 buildout-cache: bin/python bin/buildout
 	mkdir -p buildout-cache/downloads
@@ -104,7 +106,7 @@ buildout-transmo-docker: buildout-cache/downloads
 	bin/buildout -t 22 -c transmo-prod.cfg
 
 buildout-migration-transmo-docker: buildout-cache/downloads
-	bin/buildout -t 22 -c transmo.cfg eggs-directory=buildout-cache/eggs download-cache=buildout-cache/downloads
+	bin/buildout -t 22 -c transmo-migrate-to-dx.cfg eggs-directory=buildout-cache/eggs download-cache=buildout-cache/downloads
 
 buildout-cleanup-docker: buildout-cache/downloads
 	bin/buildout -t 22 -c migration.cfg
