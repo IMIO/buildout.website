@@ -6,12 +6,11 @@ from Testing import makerequest
 from zope.component.hooks import setSite
 from zope.globalrequest import setRequest
 
-import json
 import logging
 import os
+import requests
 import sys
 import transaction
-import urllib2
 
 
 logger = logging.getLogger('cpskin-import-subscribers')
@@ -37,7 +36,7 @@ def get_site(zopeapp=None):
         if IPloneSiteRoot.providedBy(obj):
             portal = obj
     if not portal:
-        raise('Do not find poratl')
+        raise('Do not find portal')
     setSite(portal)
     return portal
 
@@ -46,21 +45,9 @@ def get_subscribers():
     remote_url = os.environ['REMOTE_TRANSMO_URL']
     remote_username = os.environ['REMOTE_TRANSMO_USERNAME']
     remote_password = os.environ['REMOTE_TRANSMO_PASSWORD']
-    auth_handler = urllib2.HTTPBasicAuthHandler()
-    auth_handler.add_password(realm='Zope',
-                              uri=remote_url,
-                              user=remote_username,
-                              passwd=remote_password)
-    opener = urllib2.build_opener(auth_handler)
-    urllib2.install_opener(opener)
     url = '{0}/transmo-export'.format(remote_url)
-    req = urllib2.Request(url)
-    try:
-        f = urllib2.urlopen(req)
-        resp = f.read()
-    except urllib2.URLError:
-        raise
-    results = json.loads(resp)
+    req = requests.get(url,  auth=(remote_username, remote_password))
+    results = req.json()
     return results.get('newsletters', {})
 
 
@@ -98,21 +85,9 @@ def add_subscribers(portal, src_subscribers):
         remote_url = os.environ['REMOTE_TRANSMO_URL']
         remote_username = os.environ['REMOTE_TRANSMO_USERNAME']
         remote_password = os.environ['REMOTE_TRANSMO_PASSWORD']
-        auth_handler = urllib2.HTTPBasicAuthHandler()
-        auth_handler.add_password(realm='Zope',
-                                  uri=remote_url,
-                                  user=remote_username,
-                                  passwd=remote_password)
-        opener = urllib2.build_opener(auth_handler)
-        urllib2.install_opener(opener)
         url = '{0}{1}/get_item'.format(remote_url, path)
-        req = urllib2.Request(url)
-        try:
-            f = urllib2.urlopen(req)
-            resp = f.read()
-        except urllib2.URLError:
-            raise
-        results = json.loads(resp)
+        req = requests.get(url,  auth=(remote_username, remote_password))
+        results = req.json()
         newsletterttheme.title = results.get('title', newsletterttheme.id)
         newsletterttheme.reindexObject()
     transaction.commit()

@@ -30,7 +30,7 @@ def get_site(zopeapp=None):
         if IPloneSiteRoot.providedBy(obj):
             portal = obj
     if not portal:
-        raise('Do not find poratl')
+        raise('Do not find portal')
     setSite(portal)
     return portal
 
