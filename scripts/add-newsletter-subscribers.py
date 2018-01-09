@@ -54,8 +54,15 @@ def get_subscribers():
 def add_subscribers(portal, src_subscribers):
     for path, subscribers in src_subscribers.items():
         portal_path = '/'.join(portal.getPhysicalPath())
-        newsletterttheme_path = path.replace(portal_path, '')
-        newsletterttheme = api.content.get(newsletterttheme_path)
+        newslettertheme_path = path.replace(portal_path, '')
+        newslettertheme = api.content.get(newslettertheme_path)
+        abonnes_folder = [x for x in newslettertheme.objectIds() if 'abonnes' in x]
+        for abonnes_folder_id in abonnes_folder:
+            abonne_folder = getattr(newslettertheme, abonnes_folder_id)
+            if abonne_folder.portal_type == 'NewsletterBTree':
+                newslettertheme.subscriber_folder_id = abonne_folder
+                logger.info(
+                    'Set subscriber_folder_id to {0}'.format(abonne_folder.id))
         tot = len(subscribers)
         i = 0
         for subscriber in subscribers:
@@ -64,9 +71,9 @@ def add_subscribers(portal, src_subscribers):
             active = subscriber.get('active')
             fullname = subscriber.get('fullname')
             form = subscriber.get('format')
-            if not newsletterttheme.alreadySubscriber(email):
-                newId = newsletterttheme._getRandomIdForSubscriber()
-                newsubscriber = newsletterttheme.createSubscriberObject(newId)
+            if not newslettertheme.alreadySubscriber(email):
+                newId = newslettertheme._getRandomIdForSubscriber()
+                newsubscriber = newslettertheme.createSubscriberObject(newId)
                 newsubscriber.fullname = fullname
                 newsubscriber.edit(
                     format=form,
@@ -88,9 +95,93 @@ def add_subscribers(portal, src_subscribers):
         url = '{0}{1}/get_item'.format(remote_url, path)
         req = requests.get(url,  auth=(remote_username, remote_password))
         results = req.json()
-        newsletterttheme.title = results.get('title', newsletterttheme.id)
-        newsletterttheme.reindexObject()
+        newslettertheme.title = results.get('title', newslettertheme.id)
+        newslettertheme.reindexObject()
+
+        children = get_children('{0}{1}'.format(remote_url, path))
+
+        for child in children:
+            logger.info('{0}/{1}'.format(path, child))
+            children_item = get_item('{0}{1}/{2}'.format(remote_url, path, child))
+            classname = children_item.get('_classname')
+            # if classname == 'NewsletterBTree':
+            #     btreeid = children_item.get('_id')
+            #     if btreeid not in newslettertheme.objectIds():
+            #         newslettertheme.invokeFactory('NewsletterBTree', btreeid)
+            #         newslettertheme.subscriber_folder_id = newslettertheme[btreeid]
+            #     btree_children = get_children('{0}{1}/{2}'.format(remote_url, path, child))
+            #     i = 0
+            #     tot = len(btree_children)
+            #     for btree_child in btree_children:
+            #         btree_child_item = get_item('{0}{1}/{2}/{3}'.format(remote_url, path, child, btree_child))
+            #         classname = btree_child_item.get('_classname')
+            #         if classname == 'Subscriber':
+            #             i += 1
+            #             import pdb; pdb.set_trace()
+            #             add_subscriber(newslettertheme, btree_child_item)
+            #             logger.info('{0}/{1} {2} added in {3}'.format(
+            #                 i, tot, btree_child_item.get('email'), path)
+            #             )
+            # if classname == 'Subscriber':
+            #     add_subscriber(newslettertheme, children_item)
+            if classname == 'Newsletter':
+                newsletterid = children_item.get('_id')
+                if newsletterid not in newslettertheme.objectIds():
+                    newslettertheme.invokeFactory('Newsletter', newsletterid)
+                newsletter = newslettertheme[newsletterid]
+                newsletter.text = children_item.get('text')
+                newsletter.title = children_item.get('title')
+                nl_children = get_children('{0}{1}/{2}'.format(remote_url, path, child))
+                for nl_child in nl_children:
+                    nl_child_item = get_item('{0}{1}/{2}/{3}'.format(remote_url, path, child, nl_child))
+                    if nl_child_item.get('_classname') in ('NewsletterBTree', 'NewsletterReference'):
+                        nl_child_id = nl_child_item.get('_id')
+                        if nl_child_id not in newsletter.objectIds():
+                            newsletter.invokeFactory(nl_child_item.get('_classname'), nl_child_id)
+                            if nl_child.get('text'):
+                                newsletter[nl_child_id].text = nl_child.get('text')
+
     transaction.commit()
+
+
+def add_subscriber(newslettertheme, subscriber_item):
+    email = subscriber_item.get('email')
+    active = subscriber_item.get('active')
+    fullname = subscriber_item.get('fullname')
+    form = subscriber_item.get('format')
+    if not newslettertheme.alreadySubscriber(email):
+        newId = newslettertheme._getRandomIdForSubscriber()
+        newsubscriber = newslettertheme.createSubscriberObject(newId)
+        newsubscriber.fullname = fullname
+        newsubscriber.edit(
+            format=form,
+            active=active,
+            email=email
+        )
+
+
+def get_item(obj_url):
+    remote_username = os.environ['REMOTE_TRANSMO_USERNAME']
+    remote_password = os.environ['REMOTE_TRANSMO_PASSWORD']
+    url = '{0}/get_item'.format(obj_url)
+    req = requests.get(url,  auth=(remote_username, remote_password))
+    try:
+        results = req.json()
+    except:
+        results = {}
+    return results
+
+
+def get_children(obj_url):
+    remote_username = os.environ['REMOTE_TRANSMO_USERNAME']
+    remote_password = os.environ['REMOTE_TRANSMO_PASSWORD']
+    url = '{0}/get_children'.format(obj_url)
+    req = requests.get(url,  auth=(remote_username, remote_password))
+    try:
+        results = req.json()
+    except:
+        results = {}
+    return results
 
 
 if __name__ == '__main__':
