@@ -19,9 +19,6 @@ bin/buildout: bin/python buildout.cfg
 buildout: bin/buildout
 	bin/buildout -t 7
 
-.PHONY: standard-config
-standard-config: bin/buildout
-	bin/buildout -c standard-config.cfg
 
 .PHONY: robot-server
 robot-server:
@@ -35,34 +32,8 @@ run: buildout
 cleanall:
 	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin .mr.developer.cfg
 
-.PHONY: migration
-migration: bootstrap.py bin/python
-	ln -fs migration.cfg buildout.cfg
-	bin/buildout -t 7
-	bin/rsync-datafs
-	bin/rsync-blobstorage
-	bin/instance-migration run migration.py
-	bin/instance fg
-
-.PHONY: migration-dev
-migration-dev: bootstrap.py bin/python
-	ln -fs migration2dx-dev.cfg buildout.cfg
-	bin/buildout -t 7
-	bin/rsync-datafs
-	bin/rsync-blobstorage
-	bin/instance-migration fg
-
 docker-image:
 	docker build -t plone-imio-website:latest .
-
-docker-migration-image:
-	docker build -f Dockerfile.migration -t website-migration:latest .
-
-docker-cleanup-image:
-	docker build -f Dockerfile.cleanup -t website-cleanup:latest .
-
-docker-transmo-image:
-	docker build -f Dockerfile.transmo -t website-transmo:latest .
 
 docker-migration-transmo-image:
 	docker build --no-cache -f Dockerfile.migrationtransmo -t website-migration-transmo:latest .
@@ -99,22 +70,5 @@ zeoserver-docker-start:
 instance-docker-fg: zeoserver-docker-start
 	HOSTNAME_HOST=localhost ZEO_HOST=localhost ZEO_PORT=8100 PROJECT_ID=dev ./bin/instance fg instance:shared-blob=on
 
-buildout-migration-docker: buildout-cache/downloads
-	bin/buildout -t 22 -c migration2dx.cfg
-
-buildout-transmo-docker: buildout-cache/downloads
-	bin/buildout -t 22 -c transmo-prod.cfg
-
 buildout-migration-transmo-docker: buildout-cache/downloads
 	bin/buildout -t 22 -c transmo-migrate-to-dx.cfg eggs-directory=buildout-cache/eggs download-cache=buildout-cache/downloads
-
-buildout-cleanup-docker: buildout-cache/downloads
-	bin/buildout -t 22 -c migration.cfg
-
-can-docker-use-data:
-	sudo addgroup --gid 209 imio
-	sudo adduser $(whoami) imio
-	chmod 664 var/filestorage/*
-	find var/blobstorage -type f -name "*.blob" -exec chmod 440 {} \;
-	chown bsuttor:imio -R var/filestorage
-	chown bsuttor:imio -R var/blobstorage
