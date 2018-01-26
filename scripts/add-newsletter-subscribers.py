@@ -96,6 +96,27 @@ def add_subscribers(portal, src_subscribers):
         req = requests.get(url,  auth=(remote_username, remote_password))
         results = req.json()
         newslettertheme.title = results.get('title', newslettertheme.id)
+        ntfields = [
+            'title',
+            'description',
+            'testEmail',
+            'authorEmail',
+            'replyto',
+            'activationMailSubject',
+            'activationMailTemplate',
+            'newsletterHeader',
+            'newsletterFooter',
+            'newsletterStyle',
+            'notify',
+            'renderTemplate',
+            'extraRecipients',
+            'subscriber_folder_id',
+            'alternative_portal_url',
+        ]
+        for ntfield in ntfields:
+            if not getattr(newslettertheme, ntfield, None):
+                setattr(newslettertheme, ntfield, results.get(ntfield))
+
         newslettertheme.reindexObject()
 
         children = get_children('{0}{1}'.format(remote_url, path))
@@ -104,33 +125,24 @@ def add_subscribers(portal, src_subscribers):
             logger.info('{0}/{1}'.format(path, child))
             children_item = get_item('{0}{1}/{2}'.format(remote_url, path, child))
             classname = children_item.get('_classname')
-            # if classname == 'NewsletterBTree':
-            #     btreeid = children_item.get('_id')
-            #     if btreeid not in newslettertheme.objectIds():
-            #         newslettertheme.invokeFactory('NewsletterBTree', btreeid)
-            #         newslettertheme.subscriber_folder_id = newslettertheme[btreeid]
-            #     btree_children = get_children('{0}{1}/{2}'.format(remote_url, path, child))
-            #     i = 0
-            #     tot = len(btree_children)
-            #     for btree_child in btree_children:
-            #         btree_child_item = get_item('{0}{1}/{2}/{3}'.format(remote_url, path, child, btree_child))
-            #         classname = btree_child_item.get('_classname')
-            #         if classname == 'Subscriber':
-            #             i += 1
-            #             import pdb; pdb.set_trace()
-            #             add_subscriber(newslettertheme, btree_child_item)
-            #             logger.info('{0}/{1} {2} added in {3}'.format(
-            #                 i, tot, btree_child_item.get('email'), path)
-            #             )
-            # if classname == 'Subscriber':
-            #     add_subscriber(newslettertheme, children_item)
             if classname == 'Newsletter':
                 newsletterid = children_item.get('_id')
                 if newsletterid not in newslettertheme.objectIds():
                     newslettertheme.invokeFactory('Newsletter', newsletterid)
                 newsletter = newslettertheme[newsletterid]
-                newsletter.text = children_item.get('text')
-                newsletter.title = children_item.get('title')
+                # newsletter.text = children_item.get('text')
+                # newsletter.title = children_item.get('title')
+                newletterfields = [
+                    'text',
+                    'title',
+                    'description',
+                    'setFormat',
+                    'dateEmitted'
+                ]
+                for newletterfield in newletterfields:
+                    if not getattr(newsletter, newletterfield, None):
+                        setattr(newsletter, newletterfield, children_item.get(newletterfield))
+                newsletter.reindexObject()
                 nl_children = get_children('{0}{1}/{2}'.format(remote_url, path, child))
                 for nl_child in nl_children:
                     nl_child_item = get_item('{0}{1}/{2}/{3}'.format(remote_url, path, child, nl_child))
