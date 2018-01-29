@@ -53,8 +53,8 @@ def get_subscribers():
 
 def add_subscribers(portal, src_subscribers):
     for path, subscribers in src_subscribers.items():
-        portal_path = '/'.join(portal.getPhysicalPath())
-        newslettertheme_path = path.replace(portal_path, '')
+        spliter = len(os.environ['REMOTE_TRANSMO_URL'].split('/')) - 3
+        newslettertheme_path = '/{0}'.format('/'.join(path.split('/')[spliter+1:]))  # noqa
         newslettertheme = api.content.get(newslettertheme_path)
         abonnes_folder = [x for x in newslettertheme.objectIds() if 'abonnes' in x]
         for abonnes_folder_id in abonnes_folder:
@@ -83,9 +83,6 @@ def add_subscribers(portal, src_subscribers):
                 logger.info('{0}/{1} {2} added in {3}'.format(
                     i, tot, email, path)
                 )
-                if i % 25 == 0:
-                    logger.info('Commit transaction')
-                    transaction.commit()
             else:
                 logger.info('{0} already in {1}'.format(email, path))
 
@@ -153,6 +150,7 @@ def add_subscribers(portal, src_subscribers):
                             if nl_child.get('text'):
                                 newsletter[nl_child_id].text = nl_child.get('text')
 
+    logger.info('Commit transaction')
     transaction.commit()
 
 
