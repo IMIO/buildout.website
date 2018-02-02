@@ -6,12 +6,25 @@ COPY *.py /home/imio/imio-website/
 COPY scripts /home/imio/imio-website/scripts
 RUN chown imio:imio -R /home/imio/imio-website/
 WORKDIR /home/imio/imio-website
-RUN \
-    apt-get -qy update && apt-get -qy install build-essential rsync gcc libxml2-dev libxslt1-dev zlib1g-dev libjpeg-dev lynx wv poppler-utils &&\
-    sudo -u imio bash -c 'make buildout-cache/downloads' &&\
-    sudo -u imio bash -c '/usr/bin/python bootstrap.py -c docker.cfg' &&\
-    sudo -u imio bash -c 'make buildout-docker' &&\
-    apt-get remove -y gcc gcc-4.8 cpp-4.8 zsh-common libruby1.9.1 &&\
+RUN apt-get -qy update && apt-get -qy install \
+    build-essential \
+    gcc libxml2-dev \
+    libjpeg-dev \
+    libxslt1-dev \
+    lynx \
+    poppler-utils \
+    python \
+    python-dev \
+    rsync \
+    wget \
+    wv \
+    zlib1g-dev
+USER imio
+RUN make buildout-cache/downloads &&\
+    /usr/bin/python bootstrap.py -c docker.cfg &&\
+    make buildout-docker
+USER root
+RUN apt-get remove -y gcc python-dev &&\
     apt-get autoremove -y &&\
     apt-get clean
 USER imio
