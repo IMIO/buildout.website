@@ -8,14 +8,14 @@ RUN chown imio:imio -R /home/imio/imio-website/
 WORKDIR /home/imio/imio-website
 RUN apt-get -qy update && apt-get -qy install \
     build-essential \
-    gcc libxml2-dev \
+    gcc \
     libjpeg-dev \
+    libxml2-dev \
     libxslt1-dev \
     lynx \
     poppler-utils \
     python \
     python-dev \
-    rsync \
     wget \
     wv \
     zlib1g-dev
