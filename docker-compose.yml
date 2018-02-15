@@ -1,39 +1,32 @@
-version: '3.3'
+version: '3.4'
 services:
   zeo:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    user: imio
+    image: docker-staging.imio.be/cpskin.test:${uid}
+    user: plone
     volumes:
-      - type: bind
-        source: ./var/
-        target: /home/imio/imio-website/var/
-    command: /home/imio/imio-website/bin/zeoserver fg
+        - .:/home/plone/website
+    working_dir: /home/plone/website
+    command: /home/plone/website/bin/zeoserver fg
   instance:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    user: imio
+    image: docker-staging.imio.be/cpskin.test:${uid}
+    user: plone
     ports:
       - "8081:8081"
     links:
       - zeo:db
     volumes:
-      - type: bind
-        source: ./src/
-        target: /home/imio/imio-website/src
-      - type: bind
-        source: ./parts/instance/var/
-        target: /home/imio/imio-website/parts/instance/var/
+      - .:/home/plone/website
+    working_dir: /home/plone/website
     environment:
       - MEMCACHE_SERVER=127.0.0.1
       - MEMCACHE_DEFAULT_AGE=10800
       - ENV=dev
       - CACHING_SERVERS=http://frontend1.interne.imio.be:5000 http://frontend2.lan.imio.be:5000 http://frontend3.lan.imio.be:5000
       - DOMAINS=localhost
-    command: /home/imio/imio-website/bin/instance fg
-
-# volumes:
-#   var/filestorage:/home/imio/imio-website/var/filestorage:nocopy:
-#   var/blobstorage:/home/imio/imio-website/var/blobstorage:nocopy:
+      - ZEO_HOST=db
+      - ZEO_PORT=8100
+    command: /home/plone/website/bin/instance fg
+  nginx:
+    image: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
