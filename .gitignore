@@ -20,3 +20,5 @@ share/
 .tags
 pip-selfcheck.json
 local/
+.env
+nginx.conf
