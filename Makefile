@@ -3,7 +3,8 @@
 all: run
 VERSION=`cat version.txt`
 #BUILD_NUMBER := debug1
-
+UID := $(shell id -u)
+PROJECTID := $(shell basename "${PWD}")
 buildout.cfg:
 	ln -fs dev.cfg buildout.cfg
 	#ln -fs prod.cfg buildout.cfg
@@ -30,7 +31,7 @@ run: buildout
 
 .PHONY: cleanall
 cleanall:
-	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin .mr.developer.cfg
+	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin .mr.developer.cfg .env nginx.conf
 
 docker-image:
 	docker build -t plone-imio-website:latest .
@@ -60,15 +61,23 @@ buildout-docker: buildout-cache/downloads
 	#bin/buildout -N -c prod.cfg install download
 	bin/buildout -t 22 -c docker.cfg
 
-buildout-docker-dev: buildout-cache/downloads
-	bin/buildout -c docker-dev.cfg # buildout:eggs-directory=~/.buildout/eggs buildout:download-cache=~/.buildout/download-cache
-
-zeoserver-docker-start:
-	echo "bushy" > var/blobstorage/.layout
-	bin/zeoserver start
-
-instance-docker-fg: zeoserver-docker-start
-	HOSTNAME_HOST=localhost ZEO_HOST=localhost ZEO_PORT=8100 PROJECT_ID=dev ./bin/instance fg instance:shared-blob=on
-
 buildout-migration-transmo-docker: buildout-cache/downloads
 	bin/buildout -t 22 -c transmo-migrate-to-dx.cfg eggs-directory=buildout-cache/eggs download-cache=buildout-cache/downloads
+
+var/instance/minisites:
+	mkdir -p var/instance/minisites
+
+minisites-conf:
+	scripts/minisites-conf.py --projectid ${PROJECTID}
+
+.env:
+	echo uid=${UID} > .env
+	echo projectid=${PROJECTID} >> .env
+
+build:
+	docker-compose pull
+	docker-compose run zeo /usr/bin/python bootstrap.py -c docker-dev.cfg --buildout-version 2.7.0
+	docker-compose run zeo bin/buildout -c docker-dev.cfg
+
+up: .env var/instance/minisites
+	docker-compose up
