@@ -21,7 +21,7 @@ pipeline {
         stage('Deploy to staging') {
             when {
                 expression {
-                    currentBuildResult == null || currentBuildResult == 'SUCCESS'
+                    currentBuild.result == null || currentBuild.result == 'SUCCESS'
                 }
             }
             steps {
