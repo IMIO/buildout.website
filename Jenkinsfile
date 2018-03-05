@@ -11,27 +11,41 @@ pipeline {
             }
         }
         stage('Push image to registry') {
-            pushImageToRegistry {
-                buildId = "${env.BUILD_ID}"
-                imageName = "iasmartweb/mutual"
+            steps {
+                pushImageToRegistry {
+                    buildId = "${env.BUILD_ID}"
+                    imageName = "iasmartweb/mutual"
+                }
             }
         }
         stage('Deploy to staging') {
-            deployToStaging {
-                currentBuildResult = "${currentBuild.result}"
-                buildId = "${env.BUILD_ID}"
-                imageName = "iasmartweb/mutual"
-                role = 'role::docker::sites$'
-                updateScript = '/srv/docker_scripts/website-update-all-images.sh'
+            when {
+                expression {
+                    currentBuildResult == null || currentBuildResult == 'SUCCESS'
+                }
+            }
+            steps {
+                deployToStaging {
+                    currentBuildResult = "${currentBuild.result}"
+                    buildId = "${env.BUILD_ID}"
+                    imageName = "iasmartweb/mutual"
+                    role = 'role::docker::sites$'
+                    updateScript = '/srv/docker_scripts/website-update-all-images.sh'
+                }
             }
         }
         stage('Deploy to Prod') {
-            deployToProd {
-                buildId = "${env.BUILD_ID}"
-                imageName = "iasmartweb/mutual"
-                role = 'role::docker::sites$'
-                updateScript = '/srv/docker_scripts/website-update-all-images.sh'
+            input {
+                message "Should we deploy to prod ?"
             }
+            steps {
+                deployToProd {
+                    buildId = "${env.BUILD_ID}"
+                    imageName = "iasmartweb/mutual"
+                    role = 'role::docker::sites$'
+                    updateScript = '/srv/docker_scripts/website-update-all-images.sh'
+                }
+
         }
     }
 }
