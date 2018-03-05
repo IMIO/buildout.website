@@ -25,10 +25,7 @@ pipeline {
               }
             }
             steps {
-                sh '''
-                  mco shell run 'docker pull docker-staging.imio.be/iasmartweb/mutual:${env.BUILD_ID}' -C '/role::docker::sites$/' -I '/staging.imio.be/'
-                  mco shell run 'bash -c "PATH=/usr/local/bin:/opt/puppetlabs/bin:$PATH /srv/docker_scripts/website-update-all-images.sh"' -t 1200 --tail -C "/role::docker::sites$/" -I "/staging.imio.be/"
-               '''
+                deploy.staging 'iasmartweb/mutual' "${env.BUILD_ID}" 'role::docker::sites' '/srv/docker_scripts/website-update-all-images.sh'
             }
         }
         stage('Deploy to Prod') {
