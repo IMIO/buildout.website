@@ -12,10 +12,10 @@ pipeline {
         }
         stage('Push image to registry') {
             steps {
-                pushImageToRegistry {
-                    buildId = "${env.BUILD_ID}"
-                    imageName = "iasmartweb/mutual"
-                }
+                pushImageToRegistry (
+                    buildId: "${env.BUILD_ID}",
+                    imageName: "iasmartweb/mutual"
+                )
             }
         }
         stage('Deploy to staging') {
@@ -25,13 +25,13 @@ pipeline {
                 }
             }
             steps {
-                deployToStaging {
-                    currentBuildResult = "${currentBuild.result}"
-                    buildId = "${env.BUILD_ID}"
-                    imageName = "iasmartweb/mutual"
-                    role = 'role::docker::sites$'
-                    updateScript = '/srv/docker_scripts/website-update-all-images.sh'
-                }
+                deployToStaging (
+                    currentBuildResult: "${currentBuild.result}",
+                    buildId: "${env.BUILD_ID}",
+                    imageName: "iasmartweb/mutual",
+                    role: 'role::docker::sites$',
+                    updateScript: '/srv/docker_scripts/website-update-all-images.sh'
+                )
             }
         }
         stage('Deploy to Prod') {
@@ -39,12 +39,12 @@ pipeline {
                 message "Should we deploy to prod ?"
             }
             steps {
-                deployToProd {
-                    buildId = "${env.BUILD_ID}"
-                    imageName = "iasmartweb/mutual"
-                    role = 'role::docker::sites$'
-                    updateScript = '/srv/docker_scripts/website-update-all-images.sh'
-                }
+                deployToProd (
+                    buildId: "${env.BUILD_ID}",
+                    imageName: "iasmartweb/mutual",
+                    role: 'role::docker::sites$',
+                    updateScript: '/srv/docker_scripts/website-update-all-images.sh'
+                )
             }
         }
     }
