@@ -5,7 +5,7 @@ pipeline {
         pollSCM('*/3 * * * *')
     }
     environment {
-        yyyymmdd = environ.yyyymmdd
+
     }
     stages {
         stage('Build') {
@@ -16,7 +16,7 @@ pipeline {
         stage('Push image to registry') {
             steps {
                 sh '''
-                  docker tag docker-staging.imio.be/iasmartweb/mutual:latest  docker-staging.imio.be/iasmartweb/mutual:$yyyymmdd-${env.BUILD_ID}
+                  docker tag docker-staging.imio.be/iasmartweb/mutual:latest docker-staging.imio.be/iasmartweb/mutual:${env.BUILD_ID}
                   docker push docker-staging.imio.be/iasmartweb/mutual
                   docker rmi $(docker images -q docker-staging.imio.be/iasmartweb/mutual)
                 '''
@@ -30,7 +30,7 @@ pipeline {
             }
             steps {
                 sh '''
-                  mco shell run "docker pull docker-staging.imio.be/iasmartweb/mutual:$yyyymmdd-${env.BUILD_ID}" -C "/role::docker::sites$/" -I /staging.imio.be/
+                  mco shell run "docker pull docker-staging.imio.be/iasmartweb/mutual:${env.BUILD_ID}" -C "/role::docker::sites$/" -I /staging.imio.be/
                   mco shell run -t 1200 -C "/role::docker::sites$/" -I "/staging.imio.be/" --tail 'bash -c "PATH=/usr/local/bin:/opt/puppetlabs/bin:$PATH /srv/docker_scripts/website-update-all-images.sh"'
                 '''
             }
