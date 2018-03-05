@@ -4,9 +4,6 @@ pipeline {
     triggers {
         pollSCM('*/3 * * * *')
     }
-    environment {
-
-    }
     stages {
         stage('Build') {
             steps {
