@@ -5,7 +5,7 @@ pipeline {
         pollSCM('*/3 * * * *')
     }
     environment {
-        yyyymmdd = Generic.tagtime()
+        yyyymmdd = environ.yyyymmdd
     }
     stages {
         stage('Build') {
