@@ -45,7 +45,7 @@ pipeline {
                     role = 'role::docker::sites$'
                     updateScript = '/srv/docker_scripts/website-update-all-images.sh'
                 }
-
+            }
         }
     }
 }
