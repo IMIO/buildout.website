@@ -13,8 +13,8 @@ pipeline {
         stage('Push image to registry') {
             steps {
                 pushImageToRegistry (
-                    buildId: "${env.BUILD_ID}",
-                    imageName: "iasmartweb/mutual"
+                    "${env.BUILD_ID}",
+                    "iasmartweb/mutual"
                 )
             }
         }
@@ -26,11 +26,11 @@ pipeline {
             }
             steps {
                 deployToStaging (
-                    currentBuildResult: "${currentBuild.result}",
-                    buildId: "${env.BUILD_ID}",
-                    imageName: "iasmartweb/mutual",
-                    role: 'role::docker::sites$',
-                    updateScript: '/srv/docker_scripts/website-update-all-images.sh'
+                    "${currentBuild.result}",
+                    "${env.BUILD_ID}",
+                    "iasmartweb/mutual",
+                    'role::docker::sites$',
+                    '/srv/docker_scripts/website-update-all-images.sh'
                 )
             }
         }
@@ -40,10 +40,10 @@ pipeline {
             }
             steps {
                 deployToProd (
-                    buildId: "${env.BUILD_ID}",
-                    imageName: "iasmartweb/mutual",
-                    role: 'role::docker::sites$',
-                    updateScript: '/srv/docker_scripts/website-update-all-images.sh'
+                    "${env.BUILD_ID}",
+                    "iasmartweb/mutual",
+                    'role::docker::sites$',
+                    '/srv/docker_scripts/website-update-all-images.sh'
                 )
             }
         }
