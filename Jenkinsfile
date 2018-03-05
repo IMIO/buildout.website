@@ -14,6 +14,7 @@ pipeline {
             steps {
                 sh "docker tag docker-staging.imio.be/iasmartweb/mutual:latest docker-staging.imio.be/iasmartweb/mutual:${env.BUILD_ID}"
                 sh "docker push docker-staging.imio.be/iasmartweb/mutual"
+                sh "docker rmi docker-staging.imio.be/iasmartweb/mutual"
                 sh "docker rmi -f \$(docker images -q docker-staging.imio.be/iasmartweb/mutual)"
             }
         }
