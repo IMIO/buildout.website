@@ -4,7 +4,7 @@ pipeline {
         pollSCM('*/3 * * * *')
     }
     environment {
-        yyyymmdd = $(date +%Y%m%d)
+        yyyymmdd = `$(date +%Y%m%d)`
         image_name =
     }
     stages {
