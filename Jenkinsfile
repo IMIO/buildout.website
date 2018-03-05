@@ -5,7 +5,6 @@ pipeline {
     }
     environment {
         yyyymmdd = `$(date +%Y%m%d)`
-        image_name =
     }
     stages {
         stage('Build') {
