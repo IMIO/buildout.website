@@ -25,7 +25,9 @@ pipeline {
               }
             }
             steps {
-                deploy.staging 'iasmartweb/mutual'
+                script {
+                    deploy.staging 'iasmartweb/mutual'
+                }
             }
         }
         stage('Deploy to Prod') {
