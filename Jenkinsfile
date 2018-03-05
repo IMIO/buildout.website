@@ -24,8 +24,10 @@ pipeline {
               }
             }
             steps {
-                sh "mco shell run \'docker pull docker-staging.imio.be/iasmartweb/mutual:${env.BUILD_ID}\' -C '/role::docker::sites$/' -I '/staging.imio.be/'"
-                sh 'mco shell run -t 1200 -C "/role::docker::sites$/" -I "/staging.imio.be/" --tail \'bash -c "PATH=/usr/local/bin:/opt/puppetlabs/bin:$PATH /srv/docker_scripts/website-update-all-images.sh"\''
+                sh '''
+                  mco shell run 'docker pull docker-staging.imio.be/iasmartweb/mutual:${env.BUILD_ID}' -C '/role::docker::sites$/' -I '/staging.imio.be/'
+                  mco shell run -t 1200 -C "/role::docker::sites$/" -I "/staging.imio.be/" --tail \'bash -c "PATH=/usr/local/bin:/opt/puppetlabs/bin:$PATH /srv/docker_scripts/website-update-all-images.sh"
+               '''
             }
         }
         stage('Deploy to Prod') {
