@@ -1,22 +1,22 @@
 version: '3.4'
 services:
   zeo:
-    image: docker-staging.imio.be/cpskin.test:${uid}
-    user: plone
+    image: docker-staging.imio.be/iasmartweb/test:${uid}
+    user: imio
     volumes:
-        - .:/home/plone/website
-    working_dir: /home/plone/website
-    command: /home/plone/website/bin/zeoserver fg
+        - .:/home/imio/imio-website
+    working_dir: /home/imio/imio-website
+    command: /home/imio/imio-website/bin/zeoserver fg
   instance:
-    image: docker-staging.imio.be/cpskin.test:${uid}
-    user: plone
+    image: docker-staging.imio.be/iasmartweb/test:${uid}
+    user: imio
     ports:
       - "8081:8081"
     links:
       - zeo:db
     volumes:
-      - .:/home/plone/website
-    working_dir: /home/plone/website
+      - .:/home/imio/imio-website
+    working_dir: /home/imio/imio-website
     environment:
       - MEMCACHE_SERVER=127.0.0.1
       - MEMCACHE_DEFAULT_AGE=10800
@@ -25,7 +25,7 @@ services:
       - DOMAINS=localhost
       - ZEO_HOST=db
       - ZEO_PORT=8100
-    command: /home/plone/website/bin/instance fg
+    command: /home/imio/imio-website/bin/instance fg
   nginx:
     image: nginx
     volumes:
