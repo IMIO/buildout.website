@@ -38,31 +38,16 @@ pipeline {
         stage('Deploy to Prod') {
             input {
                 message "Should we deploy to prod ?"
-                ok "Yes, we should."
-                submitter "bsuttor"
             }
             steps {
                 sh '''
-                  /usr/local/bin/copy_latest_docker_images_to_prod.py
-                  eval $(/usr/local/bin/copy_latest_docker_images_to_prod.py -e)
-                  mco shell run "docker pull docker-prod.imio.be/mutual-website:$latest_tag_id_mutual_website" -C "/role::docker::sites$/" -I /site-prod/
-                  mco shell run 'at -f /srv/docker_scripts/website-update-all-images.sh -t `date -d "tomorrow" +%Y%m%d`0500' -C "/role::docker::sites$/" -I /site-prod/
+                  mco ping
+                  # /usr/local/bin/copy_latest_docker_images_to_prod.py
+                  # eval $(/usr/local/bin/copy_latest_docker_images_to_prod.py -e)
+                  # mco shell run "docker pull docker-prod.imio.be/mutual-website:$latest_tag_id_mutual_website" -C "/role::docker::sites$/" -I /site-prod/
+                  # mco shell run 'at -f /srv/docker_scripts/website-update-all-images.sh -t `date -d "tomorrow" +%Y%m%d`0500' -C "/role::docker::sites$/" -I /site-prod/
                 '''
             }
         }
     }
-    // post {
-    //     success {
-    //         sh '''
-    //             docker push docker-staging.imio.be/iasmartweb/test
-    //             docker rmi $(docker images -q docker-staging.imio.be/iasmartweb/test)
-    //         '''
-    //     }
-    // }
-    stage 'deployment'
-        input 'Do you approve deployment?'
-        node{
-            //deploy the things
-        }
-    input 'Pipeline has paused and needs your input before proceeding'
 }
