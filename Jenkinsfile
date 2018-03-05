@@ -5,7 +5,7 @@ pipeline {
         pollSCM('*/3 * * * *')
     }
     environment {
-        yyyymmdd = Generic.tagtime
+        yyyymmdd = Generic.tagtime()
     }
     stages {
         stage('Build') {
@@ -37,9 +37,9 @@ pipeline {
         }
         stage('Deploy to Prod') {
             input {
-                message 'Should we deploy to prod ?'
-                ok 'Yes, we should.'
-                submitter 'bsuttor'
+                message "Should we deploy to prod ?"
+                ok "Yes, we should."
+                submitter "bsuttor"
             }
             steps {
                 sh '''
