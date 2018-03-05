@@ -25,7 +25,7 @@ pipeline {
               }
             }
             steps {
-                deploy.staging 'iasmartweb/mutual' "${env.BUILD_ID}" 'role::docker::sites' '/srv/docker_scripts/website-update-all-images.sh'
+                deploy.staging 'iasmartweb/mutual'
             }
         }
         stage('Deploy to Prod') {
