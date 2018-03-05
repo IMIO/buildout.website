@@ -1,10 +1,11 @@
+@Library('jenkins-pipeline-scripts') _
 pipeline {
     agent any
     triggers {
         pollSCM('*/3 * * * *')
     }
     environment {
-        yyyymmdd = `$(date +%Y%m%d)`
+        yyyymmdd = Generic.tagtime
     }
     stages {
         stage('Build') {
