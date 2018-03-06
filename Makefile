@@ -46,7 +46,7 @@ minisites-conf:
 	echo uid=${UID} > .env
 	echo projectid=${PROJECTID} >> .env
 
-build:
+build: .env
 	docker-compose pull
 	docker-compose run zeo /usr/bin/python bootstrap.py -c docker-dev.cfg --buildout-version 2.7.0
 	docker-compose run zeo bin/buildout -c docker-dev.cfg
