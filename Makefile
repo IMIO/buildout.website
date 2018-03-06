@@ -27,7 +27,8 @@ run: build
 
 .PHONY: cleanall
 cleanall:
-	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin .mr.developer.cfg .env nginx.conf
+	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin .mr.developer.cfg .env nginx.conf rsync.sh
+	docker-compose down
 
 docker-image:
 	docker build -t docker-staging.imio.be/iasmartweb/mutual:latest .
@@ -48,12 +49,17 @@ minisites-conf:
 
 build: .env
 	docker-compose pull
-	docker-compose run zeo /usr/bin/python bootstrap.py -c docker-dev.cfg --buildout-version 2.7.0
+	docker-compose run zeo /usr/bin/python bootstrap.py -c docker-dev.cfg
 	docker-compose run zeo bin/buildout -c docker-dev.cfg
 
 up: .env var/instance/minisites
 	docker-compose up
 
-
 install-docker-compose:
 	sudo curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+
+rsync.sh:
+	echo "#!/bin/bash" > rsync.sh
+	echo "rsync -P imio@`curl -s -H 'Content-Type: application/json' http://infra-api.imio.be/application/${PROJECTID}/website/production | python -c "import sys, json; print json.load(sys.stdin)[0]['server_name']")`:/srv/instances/${PROJECTID}/filestorage/Data.fs var/filestorage/Data.fs" >> rsync.sh
+	echo "rsync -r --info=progress2 `curl -s -H 'Content-Type: application/json' http://infra-api.imio.be/application/${PROJECTID}/website/production | python -c "import sys, json; print json.load(sys.stdin)[0]['server_name']")`:/srv/instances/${PROJECTID}/blobstorage/ var/blobstorage/" >> rsync.sh
+	chmod +x rsync.sh
