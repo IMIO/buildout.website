@@ -58,8 +58,9 @@ up: .env var/instance/minisites
 install-docker-compose:
 	sudo curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 
-rsync.sh:
+rsync.shq:
 	echo "#!/bin/bash" > rsync.sh
 	echo "rsync -P imio@`curl -s -H 'Content-Type: application/json' http://infra-api.imio.be/application/${PROJECTID}/website/production | python -c "import sys, json; print json.load(sys.stdin)[0]['server_name']")`:/srv/instances/${PROJECTID}/filestorage/Data.fs var/filestorage/Data.fs" >> rsync.sh
-	echo "rsync -r --info=progress2 `curl -s -H 'Content-Type: application/json' http://infra-api.imio.be/application/${PROJECTID}/website/production | python -c "import sys, json; print json.load(sys.stdin)[0]['server_name']")`:/srv/instances/${PROJECTID}/blobstorage/ var/blobstorage/" >> rsync.sh
+	echo "rsync -r --info=progress2 imio@`curl -s -H 'Content-Type: application/json' http://infra-api.imio.be/application/${PROJECTID}/website/production | python -c "import sys, json; print json.load(sys.stdin)[0]['server_name']")`:/srv/instances/${PROJECTID}/blobstorage/ var/blobstorage/" >> rsync.sh
 	chmod +x rsync.sh
+	touch rsync.sh
