@@ -53,7 +53,11 @@ build: .env
 	docker-compose run zeo bin/buildout -c docker-dev.cfg
 
 up: .env var/instance/minisites
-	docker-compose up
+	docker-compose run --rm --service-ports instance
+
+
+bash: .env var/instance/minisites
+	docker-compose run --rm --service-ports instance bash
 
 install-docker-compose:
 	sudo curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
@@ -68,5 +72,5 @@ rsync.sh:
 dev:
 	ln -fs dev.cfg buildout.cfg
 	virtualenv-2.7 .
-	./bin/pip install -r requirements.text
+	./bin/pip install -r requirements.txt
 	./bin/buildout
