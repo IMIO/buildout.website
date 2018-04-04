@@ -31,7 +31,7 @@ cleanall:
 	docker-compose down
 
 docker-image:
-	docker build -t docker-staging.imio.be/iasmartweb/mutual:latest .
+	docker build --pull -t docker-staging.imio.be/iasmartweb/mutual:latest .
 
 buildout-prod: bin/buildout
     # used in docker build
@@ -53,21 +53,14 @@ build: .env
 	docker-compose run zeo bin/buildout -c docker-dev.cfg
 
 up: .env var/instance/minisites
+	make rsync
 	docker-compose run --rm --service-ports instance
-
 
 bash: .env var/instance/minisites
 	docker-compose run --rm --service-ports instance bash
 
 install-docker-compose:
 	sudo curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-
-#rsync.sh:
-#	echo "#!/bin/bash" > rsync.sh
-#	echo "rsync -P imio@`curl -s -H 'Content-Type: application/json' http://infra-api.imio.be/application/${PROJECTID}/website/production | python -c "import sys, json; print json.load(sys.stdin)[0]['server_name']")`:/srv/instances/${PROJECTID}/filestorage/Data.fs var/filestorage/Data.fs" >> rsync.sh
-#	echo "rsync -r --info=progress2 imio@`curl -s -H 'Content-Type: application/json' http://infra-api.imio.be/application/${PROJECTID}/website/production | python -c "import sys, json; print json.load(sys.stdin)[0]['server_name']")`:/srv/instances/${PROJECTID}/blobstorage/ var/blobstorage/" >> rsync.sh
-#	chmod +x rsync.sh
-#	touch rsync.sh
 
 dev:
 	ln -fs dev.cfg buildout.cfg
@@ -76,11 +69,4 @@ dev:
 	./bin/buildout
 
 rsync:
-	SERVERNAME=$(shell curl -s -H 'Content-Type: application/json' http://infra-api.imio.be/application/${PROJECTID}/website/production | jq '.[0] .server_name')
-	@echo $(SERVERNAME)
-	# @echo $$SERVERNAME
-	echo "#!/bin/bash" > rsync.sh
-	echo "rsync -P imio@@echo $(SERVERNAME):/srv/instances/${PROJECTID}/filestorage/Data.fs var/filestorage/Data.fs" >> rsync.sh
-	# echo "rsync -r --info=progress2 imio@`curl -s -H 'Content-Type: application/json' http://infra-api.imio.be/application/${PROJECTID}/website/production | python -c "import sys, json; print json.load(sys.stdin)[0]['server_name']")`:/srv/instances/${PROJECTID}/blobstorage/ var/blobstorage/" >> rsync.sh
-	# chmod +x rsync.sh
-	# touch rsync.sh
+	python scripts/rsync.py
