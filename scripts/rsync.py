@@ -27,7 +27,7 @@ def get_bool(prompt, default='y'):
         elif value in ['n', 'no', 'non']:
             return False
         else:
-            print 'Invalid input please enter yes or no !'
+            print 'Invalid input please enter y or n !'
 
 
 def manage_args():
