@@ -11,7 +11,7 @@ buildout.cfg:
 	#ln -fs prod.cfg buildout.cfg
 
 bin/buildout: buildout.cfg
-	python bootstrap.py
+	python bootstrap.py --buildout-version=2.11.3 --setuptools-version=38.7.0
 
 .PHONY: buildout
 buildout:
