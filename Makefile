@@ -35,7 +35,8 @@ docker-image:
 
 buildout-prod: bin/buildout
     # used in docker build
-	bin/buildout -t 22 -c prod.cfg
+	pip install --user -r requirements.txt
+	~/.local/bin/buildout -t 22 -c prod.cfg
 
 var/instance/minisites:
 	mkdir -p var/instance/minisites
