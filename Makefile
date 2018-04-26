@@ -50,8 +50,8 @@ minisites-conf:
 
 build: .env
 	docker-compose pull
-	docker-compose run zeo /usr/bin/python bootstrap.py -c docker-dev.cfg
-	docker-compose run zeo bin/buildout -c docker-dev.cfg
+	docker-compose run zeo pip install -r requirements.txt
+	docker-compose run zeo buildout -c docker-dev.cfg
 
 up: .env var/instance/minisites
 	make rsync
