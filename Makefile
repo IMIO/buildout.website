@@ -49,12 +49,13 @@ minisites-conf:
 	echo projectid=${PROJECTID} >> .env
 
 build: .env
-	docker-compose pull
-	docker-compose run zeo pip install -r requirements.txt
-	docker-compose run zeo buildout -c docker-dev.cfg
+	docker-compose build --pull zeo # <--no-cache
+	docker-compose run --rm instance ./bootstrap.sh -c docker-dev.cfg
+
+upgrade: .env var/instance/minisites
+	docker-compose run --rm --service-ports instance bin/upgrade-portals
 
 up: .env var/instance/minisites
-	make rsync
 	docker-compose run --rm --service-ports instance
 
 bash: .env var/instance/minisites

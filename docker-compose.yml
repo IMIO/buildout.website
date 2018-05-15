@@ -1,14 +1,17 @@
 version: '3.4'
 services:
   zeo:
-    image: docker-staging.imio.be/iasmartweb/test:${uid}
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    image: iasmartweb-dev
     user: imio
     volumes:
         - .:/home/imio/imio-website
     working_dir: /home/imio/imio-website
     command: /home/imio/imio-website/bin/zeoserver fg
   instance:
-    image: docker-staging.imio.be/iasmartweb/test:${uid}
+    image: iasmartweb-dev
     user: imio
     ports:
       - "8081:8081"
