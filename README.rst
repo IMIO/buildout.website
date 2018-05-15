@@ -52,10 +52,10 @@ For using minisite for development you have to :
         ...
         nginx
         proxy
-    
+
     [proxy]
     ...
-    
+
 3. Install libpcre3 libpcre3-dev
 ::
     sudo apt-get install libpcre3 libpcre3-dev
@@ -94,3 +94,13 @@ telnet 127.0.0.1 8888
 stats
 
 echo 'uptime' | nc -i 1 localhost 8888
+
+
+Dev with docker
+---------------
+First you have to install docker and docker-compose
+
+After that, you have to build local image and up container::
+
+    $ make build
+    $ make up
