@@ -2,13 +2,13 @@ FROM docker-staging.imio.be/iasmartweb/test:1000
 RUN mkdir /home/imio/imio-website/
 COPY *.cfg /home/imio/imio-website/
 COPY *.txt /home/imio/imio-website/
-COPY bootstrap.sh /home/imio/imio-website/bootstrap.sh
 RUN chown imio:imio -R /home/imio/imio-website/
-RUN chmod +x /home/imio/imio-website/bootstrap.sh
 COPY docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 RUN chown imio:imio /docker-entrypoint.sh
 WORKDIR /home/imio/imio-website
 USER imio
-RUN ./bootstrap.sh buildout:auto-checkout=
+RUN virtualenv .
+RUN bin/pip install -r requirements.txt
+RUN bin/buildout buildout:auto-checkout=
 ENTRYPOINT ["/docker-entrypoint.sh"]

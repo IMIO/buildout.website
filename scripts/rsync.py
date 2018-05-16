@@ -37,7 +37,7 @@ def manage_args():
                         help='Id of municipailit (liege, namur, ..)')
 
     parse_args = parser.parse_args()
-
+    # TODO getting from .env
     municipality_id = parse_args.municipality_id
     if not municipality_id:
         municipality_id = os.path.basename(os.getcwd())

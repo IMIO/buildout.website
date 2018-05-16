@@ -27,7 +27,7 @@ run: build
 
 .PHONY: cleanall
 cleanall:
-	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin .mr.developer.cfg .env nginx.conf rsync.sh
+	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin .mr.developer.cfg .env nginx.conf rsync.sh local/
 	docker-compose down
 
 docker-image:
@@ -50,7 +50,7 @@ minisites-conf:
 
 build: .env
 	docker-compose build --pull zeo # <--no-cache
-	docker-compose run --rm instance ./bootstrap.sh -c docker-dev.cfg
+	docker-compose run --rm instance bash -c "virtualenv . && bin/pip install -r requirements.txt && bin/buildout -c docker-dev.cfg"
 
 upgrade: .env var/instance/minisites
 	docker-compose run --rm --service-ports instance bin/upgrade-portals
