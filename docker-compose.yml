@@ -12,13 +12,12 @@ services:
     command: /home/imio/imio-website/bin/zeoserver fg
   instance:
     image: iasmartweb-dev
+    hostname: liege
     user: imio
     ports:
       - "8081:8081"
     links:
       - zeo:db
-    depends_on:
-      - reverseproxy
     volumes:
       - .:/home/imio/imio-website
     working_dir: /home/imio/imio-website
@@ -31,12 +30,14 @@ services:
       - ZEO_HOST=db
       - ZEO_PORT=8100
     command: /home/imio/imio-website/bin/instance fg
-  # reverseproxy:
-  #   image: traefik # The official Traefik docker image
-  #   command: --api --docker # Enables the web UI and tells Træfik to listen to docker
-  #   ports:
-  #     - "80:80"     # The HTTP port
-  #     - "8080:8080" # The Web UI (enabled by --api)
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
-  #     - $PWD/traefik.toml:/etc/traefik/traefik.toml
+    depends_on:
+      - reverseproxy
+  reverseproxy:
+    image: traefik # The official Traefik docker image
+    command: --api --docker # Enables the web UI and tells Træfik to listen to docker
+    ports:
+      - "80:80"     # The HTTP port
+      - "8080:8080" # The Web UI (enabled by --api)
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
+      - $PWD/traefik.toml:/etc/traefik/traefik.toml

@@ -37,57 +37,6 @@ Update version of your package
 Go to buildout-website (https://github.com/IMIO/buildout.website) and in versions-base.cfg file, change version of package you just release.
 
 
-Use minisite localy / dev
--------------------------
-
-For using minisite for development you have to :
-
-1. Make symlink between dev.cfg and buildout.cfg
-::
-    ln -fs dev.cfg buildout.cfg
-
-2. In dev.cfg: uncomment parts nginx and proxy, update path of minisite(s) (in 'proxy' section)
-::
-    parts =
-        ...
-        nginx
-        proxy
-
-    [proxy]
-    ...
-
-3. Install libpcre3 libpcre3-dev
-::
-    sudo apt-get install libpcre3 libpcre3-dev
-
-4. Start buildout
-::
-    ./bin/buildout
-
-5. Create minisite config file in var/instance/minisites folder
-::
-
-Example : var/instance/minisites/ms.ini
-::
-    [/liege/fr/loisirs/culture/musees/la-boverie]
-    minisite_url=http://127.0.0.2:8000
-    portal_url=http://127.0.0.1:8000
-
-    [/liege/en/leisure/culture/museums/la-boverie]
-    minisite_url=http://127.0.0.3:8000
-    portal_url=http://127.0.0.1:8000
-
-6. Start proxy
-::
-    ./bin/proxy start
-
-7. Start instance
-::
-    ./bin/instance fg
-
-You can now go to `http://127.0.0.1:8000` to see one minisite
-
-
 Monitoring
 ----------
 telnet 127.0.0.1 8888
@@ -95,6 +44,12 @@ stats
 
 echo 'uptime' | nc -i 1 localhost 8888
 
+Get Data
+--------
+
+make rsync will data. You can add blobs or data args (b for blobstorage, d for Data.fs)
+
+    make rsync d
 
 Dev with docker
 ---------------
@@ -104,3 +59,28 @@ After that, you have to build local image and up container::
 
     $ make build
     $ make up
+
+Complete .env file
+------------------
+.env file is used to get some information about project you are working on
+
+list of keys :
+    - uid
+    - projectid
+    - servername
+    - minisites
+
+example ::
+
+    uid=1000
+    projectid=liege
+    servername=staging.lan.imio.be
+    minisites=['/fr/decouvrir/culture/musees/la-boverie']
+
+You can generate .env file with `make env` command
+
+Minisites
+---------
+`make minisites` command create minisites ini files (in var/instance/minisites folder) and generate traefik.toml file
+
+http://portal.localhost/minisites_panel

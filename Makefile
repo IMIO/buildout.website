@@ -1,10 +1,18 @@
 #!/usr/bin/make
-#
-all: run
+ifeq (rsync,$(firstword $(MAKECMDGOALS)))
+  # use the rest as arguments for "rsync"
+  RSYNC_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+  # ...and turn them into do-nothing targets
+  $(eval $(RSYNC_ARGS):;@:)
+endif
+
 VERSION=`cat version.txt`
 #BUILD_NUMBER := debug1
 UID := $(shell id -u)
 PROJECTID := $(shell basename "${PWD}")
+RSYNC_ARGS :=  $(if $(RSYNC_ARGS),$(RSYNC_ARGS),"a")
+
+all: run
 
 buildout.cfg:
 	ln -fs dev.cfg buildout.cfg
@@ -27,7 +35,7 @@ run: build
 
 .PHONY: cleanall
 cleanall:
-	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin .mr.developer.cfg .env nginx.conf rsync.sh local/
+	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin .mr.developer.cfg .env traefik.toml local/ var/instance/minisites/*
 	docker-compose down
 
 docker-image:
@@ -41,12 +49,11 @@ buildout-prod: bin/buildout
 var/instance/minisites:
 	mkdir -p var/instance/minisites
 
-minisites-conf:
-	scripts/minisites-conf.py --projectid ${PROJECTID}
-
 .env:
 	echo uid=${UID} > .env
-	echo projectid=${PROJECTID} >> .env
+	python scripts/config.py --serverinfos
+
+env: .env
 
 build: .env
 	docker-compose build --pull zeo # <--no-cache
@@ -56,7 +63,7 @@ upgrade: .env var/instance/minisites
 	docker-compose run --rm --service-ports instance bin/upgrade-portals
 
 up: .env var/instance/minisites
-	docker-compose run --rm --service-ports instance
+	docker-compose run --rm --service-ports --name instance instance
 
 bash: .env var/instance/minisites
 	docker-compose run --rm --service-ports instance bash
@@ -70,5 +77,8 @@ dev:
 	./bin/pip install -r requirements.txt
 	./bin/buildout
 
-rsync:
-	python scripts/rsync.py
+rsync: .env
+	python scripts/config.py --rsync $(RSYNC_ARGS)
+
+minisites: .env var/instance/minisites
+	python scripts/config.py --minisitesfiles
