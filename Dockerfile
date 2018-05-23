@@ -1,21 +1,38 @@
-FROM docker-staging.imio.be/iasmartweb/cache:latest
-RUN mkdir /home/imio/imio-website
-COPY *.cfg /home/imio/imio-website/
-COPY Makefile /home/imio/imio-website/
-COPY *.py /home/imio/imio-website/
-COPY *.txt /home/imio/imio-website/
-COPY scripts /home/imio/imio-website/scripts
-RUN chown imio:imio -R /home/imio/imio-website/
-WORKDIR /home/imio/imio-website
+FROM docker-staging.imio.be/base:latest
+MAINTAINER Benoît Suttor <benoit.suttor@imio.be>
+ARG repo=buildout.website
+ARG cmd="make buildout"
+# Pillow lib : libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk
+RUN apt-get -qy update && apt-get -qy install \
+    build-essential \
+    gcc \
+    git \
+    libbz2-dev \
+    libffi-dev \
+    libjpeg62-dev \
+    libreadline-dev \
+    libssl-dev \
+    libxml2-dev \
+    libxslt1-dev \
+    lynx \
+    poppler-utils \
+    python-dev \
+    python-pip \
+    python-virtualenv \
+    wv \
+    zlib1g-dev
+
 USER imio
-RUN /usr/bin/python bootstrap.py -c prod.cfg &&\
-    make buildout-prod
+WORKDIR /home/imio
+ENV HOME /home/imio
+RUN mkdir .buildout && git clone https://github.com/IMIO/${repo}.git
+COPY default.cfg .buildout/default.cfg
+RUN cd /home/imio/${repo} \
+ && ${cmd} \
+ && cd .. \
+ && rm -rf ${repo}
+
 USER root
-RUN apt-get remove -y gcc python-dev &&\
-    apt-get autoremove -y &&\
-    apt-get clean
-USER imio
-ENV ZEO_HOST db
-ENV ZEO_PORT 8100
-ENV HOSTNAME_HOST local
-ENV PROJECT_ID imio
+RUN apt-get clean autoclean \
+    && apt-get autoremove -y \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /home/imio/.cache /home/imio/.local
