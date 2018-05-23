@@ -6,17 +6,8 @@ pipeline {
     }
     stages {
         stage('Build images') {
-            parallel {
-                stage('Build iasmartweb cache image') {
-                    steps {
-                        sh 'make iasmartweb-build-cache'
-                    }
-                }
-                stage('Build intranet cache image') {
-                    steps {
-                        sh 'make intranet-build-cache'
-                    }
-                }
+            steps {
+                sh 'make iasmartweb-build-cache'
             }
         }
     }
