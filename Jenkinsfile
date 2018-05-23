@@ -5,7 +5,7 @@ pipeline {
         cron('0 2 * * 0')
     }
     stages {
-        stage('Build images') {
+        stage('Build image') {
             steps {
                 sh 'make iasmartweb-build-cache'
             }
