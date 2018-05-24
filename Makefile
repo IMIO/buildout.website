@@ -55,7 +55,7 @@ var/instance/minisites:
 
 env: .env
 
-build: .env buildout.cfg
+build: .env buildout.cfg minisites
 	rm -rf local/
 	docker-compose build --pull zeo # <--no-cache
 	docker-compose run --rm instance bash -c "virtualenv . && bin/pip install -r requirements.txt && bin/buildout -c docker-dev.cfg"
