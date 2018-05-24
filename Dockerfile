@@ -27,11 +27,7 @@ WORKDIR /home/imio
 ENV HOME /home/imio
 RUN mkdir .buildout && git clone https://github.com/IMIO/${repo}.git
 COPY default.cfg .buildout/default.cfg
-RUN cd /home/imio/${repo} \
- && ${cmd} \
- && cd .. \
- && rm -rf ${repo}
-
+RUN cd /home/imio/${repo} && ${cmd} && cd /home/imio/ && rm -rf ${repo}
 USER root
 RUN apt-get clean autoclean \
     && apt-get autoremove -y \
