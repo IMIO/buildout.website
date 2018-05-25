@@ -16,8 +16,6 @@ pipeline {
             sh '''
                 docker push docker-staging.imio.be/iasmartweb/cache
                 docker rmi $(docker images -q docker-staging.imio.be/iasmartweb/cache)
-                docker push docker-staging.imio.be/intranet/cache
-                docker rmi $(docker images -q docker-staging.imio.be/intranet/cache)
             '''
         }
     }
