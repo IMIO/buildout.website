@@ -77,7 +77,7 @@ class Environment:
                 self.env['projectid']
             )
             result = json.load(urllib.urlopen(url))
-            if len(result) < 0:
+            if len(result) < 0 or result['status'] == 'error':
                 print 'Error in {0}'.format(url)
                 return 0
             num = 0
@@ -130,6 +130,10 @@ class Environment:
                     rsync_server_path))
 
     def set_minisites_files(self):
+        if 'minisites' not in self.env.keys():
+            self.get_server_infos()
+            if 'minisites' not in self.env.keys():
+                return
         # var/instance/minisites files
         i = 1
         minisites = ast.literal_eval(self.env['minisites'])
