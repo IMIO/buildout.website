@@ -63,7 +63,10 @@ build: .env buildout.cfg minisites
 upgrade: .env var/instance/minisites
 	docker-compose run --rm --service-ports instance bin/upgrade-portals
 
-up: .env var/instance/minisites
+bin/instance:
+	make build
+
+up: .env var/instance/minisites bin/instance
 	docker-compose run --rm --service-ports --name instance instance
 
 bash: .env var/instance/minisites

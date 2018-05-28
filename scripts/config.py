@@ -77,7 +77,7 @@ class Environment:
                 self.env['projectid']
             )
             result = json.load(urllib.urlopen(url))
-            if len(result) < 0 or result['status'] == 'error':
+            if len(result) < 0 or isinstance(result, dict):
                 print 'Error in {0}'.format(url)
                 return 0
             num = 0
