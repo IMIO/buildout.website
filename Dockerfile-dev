@@ -1,5 +1,6 @@
 FROM docker-staging.imio.be/iasmartweb/test:1000
 RUN mkdir /home/imio/imio-website/
+ENV PATH="/home/imio/.local/bin:${PATH}"
 COPY *.cfg /home/imio/imio-website/
 COPY *.txt /home/imio/imio-website/
 RUN chown imio:imio -R /home/imio/imio-website/
@@ -8,5 +9,5 @@ RUN chmod +x /docker-entrypoint.sh
 RUN chown imio:imio /docker-entrypoint.sh
 WORKDIR /home/imio/imio-website
 USER imio
-RUN virtualenv -p python2.7 . && bin/pip install -r requirements.txt && bin/buildout
+RUN rm -rf /home/imio/.local &&  rm -rf /home/imio/.cache && pip install --user -r requirements.txt && buildout -c docker-dev.cfg
 ENTRYPOINT ["/docker-entrypoint.sh"]

@@ -7,7 +7,8 @@ services:
     image: iasmartweb-dev
     user: imio
     volumes:
-      - .:/home/imio/imio-website
+      - ./var/blobstorage:/home/imio/imio-website/var/blobstorage
+      - ./var/filestorage:/home/imio/imio-website/var/filestorage
     working_dir: /home/imio/imio-website
     command: /home/imio/imio-website/bin/zeoserver fg
   instance:
@@ -19,7 +20,7 @@ services:
     links:
       - zeo:db
     volumes:
-      - .:/home/imio/imio-website
+      - ./src:/home/imio/imio-website/src
     working_dir: /home/imio/imio-website
     environment:
       - MEMCACHE_SERVER=127.0.0.1

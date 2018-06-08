@@ -21,13 +21,14 @@ buildout.cfg:
 bin/buildout: buildout.cfg
 	python bootstrap.py --buildout-version=2.11.3 --setuptools-version=38.7.0
 
-.PHONY: buildout
-buildout:
-	make build
-
 .PHONY: robot-server
 robot-server:
 	bin/robot-server -v cpskin.policy.testing.CPSKIN_POLICY_ROBOT_TESTING
+
+stop-old:
+	docker rm -f $$(docker ps -a | grep "_zeo_" | awk '{print $$1}')
+	docker rm -f $$(docker ps -a | grep "_instance_" | awk '{print $$1}')
+	docker rm -f $$(docker ps -a | grep "_reverseproxy_" | awk '{print $$1}')
 
 .PHONY: run
 run: build
@@ -56,17 +57,21 @@ var/instance/minisites:
 env: .env
 
 build: .env buildout.cfg minisites
-	rm -rf local/ bin/
+	# rm -rf local/ bin/
 	docker-compose build --pull zeo # <--no-cache
+	make buildout
+
+buildout:
+	# docker-compose run --rm zeo bin/develop checkout .
 	docker-compose run --rm instance bash -c "virtualenv . && bin/pip install -I -r requirements.txt && bin/buildout -c docker-dev.cfg"
 
 upgrade: .env var/instance/minisites
 	docker-compose run --rm --service-ports instance bin/upgrade-portals
 
-bin/instance:
-	make build
+# bin/instance:
+	# make build
 
-up: .env var/instance/minisites bin/instance
+up: .env var/instance/minisites
 	docker-compose run --rm --service-ports --name instance instance
 
 bash: .env var/instance/minisites
