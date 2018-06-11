@@ -1,7 +1,7 @@
 # @Author: bsuttor
 # @Date:   2018-06-11T16:29:42+02:00
 # @Last modified by:   bsuttor
-# @Last modified time: 2018-06-11T16:33:31+02:00
+# @Last modified time: 2018-06-11T16:49:39+02:00
 
 
 
@@ -72,7 +72,7 @@ var/filestorage:
 src:
 	mkdir src
 
-build: .env buildout.cfg minisites var/blobstorage var/blobstorage src
+build: .env buildout.cfg minisites var/blobstorage var/filestorage src
 	# rm -rf local/ bin/
 	docker-compose build --pull zeo # <--no-cache
 	make buildout
@@ -88,7 +88,8 @@ upgrade: .env var/instance/minisites
 	# make build
 
 up: .env var/instance/minisites
-	docker-compose run --rm --service-ports --name instance instance
+	# docker-compose up -d --rm --service-ports --name instance instance
+	docker-compose up
 
 bash: .env var/instance/minisites
 	docker-compose run --rm --service-ports instance bash
