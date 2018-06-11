@@ -1,3 +1,10 @@
+# @Author: bsuttor
+# @Date:   2018-06-11T16:29:42+02:00
+# @Last modified by:   bsuttor
+# @Last modified time: 2018-06-11T16:33:31+02:00
+
+
+
 #!/usr/bin/make
 ifeq (rsync,$(firstword $(MAKECMDGOALS)))
   # use the rest as arguments for "rsync"
@@ -56,7 +63,16 @@ var/instance/minisites:
 
 env: .env
 
-build: .env buildout.cfg minisites
+var/blobstorage:
+	mkdir -p var/blobstorage
+
+var/filestorage:
+	mkdir -p var/filestorage
+
+src:
+	mkdir src
+
+build: .env buildout.cfg minisites var/blobstorage var/blobstorage src
 	# rm -rf local/ bin/
 	docker-compose build --pull zeo # <--no-cache
 	make buildout
