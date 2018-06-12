@@ -103,7 +103,7 @@ dev:
 	./bin/pip install -r requirements.txt
 	./bin/buildout
 
-rsync: .env
+rsync: .env var/blobstorage var/filestorage
 	python scripts/config.py --rsync $(RSYNC_ARGS)
 
 minisites: .env var/instance/minisites
