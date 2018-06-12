@@ -108,3 +108,6 @@ rsync: .env
 
 minisites: .env var/instance/minisites
 	python scripts/config.py --minisitesfiles
+
+develop-up:
+	docker-compose run --rm  instance bin/develop up
