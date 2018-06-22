@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Build image') {
             steps {
-                sh 'make iasmartweb-build-cache'
+                sh 'make docker-build-cache'
             }
         }
     }
