@@ -92,14 +92,14 @@ up: .env var/instance/minisites
 	docker-compose up
 
 bash: .env var/instance/minisites
-	docker-compose run --rm --service-ports instance bash
+	docker-compose run --rm -p 8081:8081 --name instance instance bash
 
 install-docker-compose:
 	sudo curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 
 dev:
 	ln -fs dev.cfg buildout.cfg
-	virtualenv-2.7 .
+	if [ -f /usr/bin/virtualenv-2.7 ] ; then virtualenv-2.7 .;else virtualenv -p python2.7 .;fi
 	./bin/pip install -r requirements.txt
 	./bin/buildout
 
@@ -110,4 +110,4 @@ minisites: .env var/instance/minisites
 	python scripts/config.py --minisitesfiles
 
 develop-up:
-	docker-compose run --rm  instance bin/develop up
+	docker-compose run --rm instance bin/develop up
