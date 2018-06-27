@@ -24,3 +24,4 @@ local/
 nginx.conf
 rsync.sh
 traefik.toml
+.pytest_cache/
