@@ -138,7 +138,8 @@ class Environment:
         i = 1
         minisites = ast.literal_eval(self.env['minisites'])
         for minisite in minisites:
-            fname = '{0}/var/instance/minisites/ms_{1}.ini'.format(os.getcwd(), i)
+            fname = '{0}/var/instance/minisites/ms_{1}.ini'.format(
+                os.getcwd(), i)
             if os.path.isfile(fname):
                 f = open(fname, 'w')
             else:
