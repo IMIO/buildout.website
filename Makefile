@@ -116,7 +116,7 @@ p3:
 	virtualenv -p python3 p3
 
 p3/bin/pytest: p3
-	p3/bin/pip install pytest docker docker-compose
+	p3/bin/pip install -r tests/requirements.txt
 
 test-start: p3/bin/pytest
-	./p3/bin/pytest -s test_start.py
+	./p3/bin/pytest -s tests
