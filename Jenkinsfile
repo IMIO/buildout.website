@@ -30,7 +30,7 @@ pipeline {
             agent any
             steps {
                 pushImageToRegistry (
-                    $BUILD_ID,
+                    env.BUILD_ID,
                     "iasmartweb/mutual"
                 )
             }
@@ -69,7 +69,7 @@ pipeline {
             agent any
             steps {
                 deployToProd (
-                    $BUILD_ID,
+                    env.BUILD_ID,
                     'iasmartweb/mutual',
                     '/role::docker::sites$/',
                     '/srv/docker_scripts/website-update-all-images.sh',
