@@ -70,8 +70,8 @@ pipeline {
             steps {
                 deployToProd (
                     $BUILD_ID,
-                    "iasmartweb/mutual",
-                    "C /role::docker::sites$/",
+                    'iasmartweb/mutual',
+                    '/role::docker::sites$/',
                     '/srv/docker_scripts/website-update-all-images.sh',
                 )
             }
