@@ -25,6 +25,7 @@ options = {
     '--tail': 'all',
     '--always-recreate-deps': False,
     '--scale': ['instance=1', 'zeo=1'],
+    '-p': '../',
 }
 
 
