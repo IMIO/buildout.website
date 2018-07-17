@@ -21,6 +21,7 @@ services:
       - zeo:db
     volumes:
       - ./src:/home/imio/imio-website/src
+      - $PWD/var/instance/minisites:/home/imio/imio-website/var/instance/minisites
     working_dir: /home/imio/imio-website
     environment:
       - MEMCACHE_SERVER=127.0.0.1
