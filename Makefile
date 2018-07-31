@@ -49,7 +49,7 @@ cleanall:
 docker-image:
 	docker build --pull -t docker-staging.imio.be/iasmartweb/mutual:latest .
 
-buildout-prod: bin/buildout
+buildout-prod:
     # used in docker build
 	pip install --user -I -r requirements.txt
 	~/.local/bin/buildout -t 22 -c prod.cfg
@@ -84,18 +84,15 @@ buildout:
 upgrade: .env var/instance/minisites
 	docker-compose run --rm --service-ports instance bin/upgrade-portals
 
-# bin/instance:
-	# make build
-
 up: .env var/instance/minisites
-	# docker-compose up -d --rm --service-ports --name instance instance
+	# docker-compose run --rm --service-ports instance
 	docker-compose up
 
 bash: .env var/instance/minisites
 	docker-compose run --rm -p 8081:8081 --name instance instance bash
 
-install-docker-compose:
-	sudo curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+restart-instance-only:
+	docker-compose up -d --force-recreate --no-deps instance
 
 dev:
 	ln -fs dev.cfg buildout.cfg
