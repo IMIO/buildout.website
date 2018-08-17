@@ -43,7 +43,7 @@ run: build
 
 .PHONY: cleanall
 cleanall:
-	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin .mr.developer.cfg .env traefik.toml local/ var/instance/minisites/*
+	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin .mr.developer.cfg .env traefik.toml local/ var/instance/minisites/* __pycache__
 	docker-compose down
 
 docker-image:
@@ -82,7 +82,7 @@ buildout:
 	docker-compose run --rm instance bash -c "virtualenv . && bin/pip install -I -r requirements.txt && bin/buildout -c docker-dev.cfg"
 
 upgrade: .env var/instance/minisites
-	docker-compose run --rm --service-ports instance bin/upgrade-portals
+	docker-compose run --rm instance bin/upgrade-portals
 
 up: .env var/instance/minisites
 	# docker-compose run --rm --service-ports instance
