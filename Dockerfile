@@ -15,6 +15,7 @@ RUN chown imio:imio -R /home/imio/imio-website/ \
   && rm -rf /var/lib/apt/lists/* \
   && apt-get clean
 USER imio
+WORKDIR /home/imio/imio-website
 ENV ZEO_HOST=db \
  ZEO_PORT=8100 \
  HOSTNAME_HOST=local \
