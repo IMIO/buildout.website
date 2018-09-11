@@ -62,7 +62,7 @@ html:
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
 .PHONY: html_and_deploy
-html_and_deploy:
+html_and_deploy: html
 	@echo
 	rsync -rv ./$(BUILDDIR)/html/* $(DEPLOYDEST)
 	@echo "Deploy finished on $(DEPLOYDEST)."
