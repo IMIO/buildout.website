@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# iA.Urban documentation build configuration file, created by
+# iA.Web documentation build configuration file, created by
 # sphinx-quickstart on Tue Mar  6 11:32:14 2018.
 #
 # This file is execfile()d with the current directory set to its
@@ -49,7 +49,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'iA.Urban'
+project = u'iA.Web'
 copyright = u'2018, IMIO'
 author = u'jja'
 
