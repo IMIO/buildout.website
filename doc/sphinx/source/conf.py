@@ -35,7 +35,7 @@ extensions = [
 ]
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ['_teqfjplates']
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
@@ -54,14 +54,14 @@ copyright = u'2018, IMIO'
 author = u'jja'
 
 # Variable rst2pdf, impossible à compiler sous python 3 avec RTD
-# pdf_documents = [(master_doc, u'iaurban', u'iA.Urban doc', u'Imio'),]
+# pdf_documents = [(master_doc, u'iaweb', u'iA.Web doc', u'Imio'),]
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
 # The short X.Y version.
-version = u'2.2'
+version = u'4.0'
 # The full version, including alpha/beta/rc tags.
 release = u'1'
 
@@ -300,7 +300,7 @@ epub_copyright = copyright
 
 # The basename for the epub file. It defaults to the project name.
 #epub_basename = project
-epub_basename = 'iaurban'
+epub_basename = 'iaweb'
 
 # The HTML theme for the epub output. Since the default themes are not
 # optimized for small screen space, using the same theme for HTML and epub
