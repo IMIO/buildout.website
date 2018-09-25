@@ -98,7 +98,7 @@ dev:
 	ln -fs dev.cfg buildout.cfg
 	if [ -f /usr/bin/virtualenv-2.7 ] ; then virtualenv-2.7 .;else virtualenv -p python2.7 .;fi
 	./bin/pip install -r requirements.txt
-	./bin/buildout
+	./bin/buildout -t 20
 
 rsync: .env var/blobstorage var/filestorage
 	python scripts/config.py --rsync $(RSYNC_ARGS)
