@@ -100,12 +100,14 @@ class Environment:
         test_cmd = [
             'ssh',
             '-oBatchMode=yes',
+            '-oStrictHostKeyChecking=no',
             'imio@{0}'.format(self.env['servername']), 'ls -l'
         ]
         try:
             subprocess.check_output(test_cmd)
         except subprocess.CalledProcessError:
-            print 'You have no right to rsync on {0}, copy this line and give it to an admin:'.format(rsync_server)  # noqa
+            print ' '.join(test_cmd)
+            print 'You have no right to rsync on {0}, copy this line and give it to an admin:'.format( self.env['servername'])  # noqa
             id_rsa_pub_cmd = [
                 'cat',
                 '{0}/.ssh/id_rsa.pub'.format(os.environ.get('HOME'))
