@@ -7,7 +7,7 @@ from pyquery import PyQuery
 import random
 
 
-class BrowseDocumentation(TaskSet):
+class BrowseCpskinMenu(TaskSet):
     def on_start(self):
         # assume all users arrive at the index page
         self.index_page()
@@ -40,7 +40,7 @@ class BrowseDocumentation(TaskSet):
 
 
 class AwesomeUser(HttpLocust):
-    task_set = BrowseDocumentation
+    task_set = BrowseCpskinMenu
     host = 'http://portal.localhost'
     min_wait = 2000
     max_wait = 10000
