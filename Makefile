@@ -33,9 +33,8 @@ robot-server:
 	bin/robot-server -v cpskin.policy.testing.CPSKIN_POLICY_ROBOT_TESTING
 
 stop-old:
-	docker rm -f $$(docker ps -a | grep "_zeo_" | awk '{print $$1}')
-	docker rm -f $$(docker ps -a | grep "_instance_" | awk '{print $$1}')
-	docker rm -f $$(docker ps -a | grep "_reverseproxy_" | awk '{print $$1}')
+	docker stop $$(docker ps -q)
+	docker rm $$(docker ps -a -q)
 
 .PHONY: run
 run: build
