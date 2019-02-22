@@ -15,8 +15,8 @@ pipeline {
         success {
             sh '''
                 docker push docker-staging.imio.be/iasmartweb/cache
-		docker system prune -f
-                docker rmi $(docker images -q docker-staging.imio.be/iasmartweb/cache)
+                docker system prune -f
+                # docker rmi $(docker images -q docker-staging.imio.be/iasmartweb/cache)
             '''
         }
     }
