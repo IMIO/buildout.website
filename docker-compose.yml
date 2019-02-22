@@ -10,18 +10,22 @@ services:
       - ./var/blobstorage:/home/imio/imio-website/var/blobstorage
       - ./var/filestorage:/home/imio/imio-website/var/filestorage
     working_dir: /home/imio/imio-website
+    healthcheck:
+      test: ['CMD', 'nc', '-z', '-w5', '127.0.0.1', '8100']
     command: /home/imio/imio-website/bin/zeoserver fg
   instance:
     image: iasmartweb-dev
-    hostname: liege
     user: imio
     ports:
       - "8081:8081"
     links:
       - zeo:db
+    depends_on:
+      - reverseproxy
     volumes:
       - ./src:/home/imio/imio-website/src
-      - $PWD/var/instance/minisites:/home/imio/imio-website/var/instance/minisites
+      - ./dev.cfg:/home/imio/imio-website/dev.cfg
+      - ./var/instance/minisites:/home/imio/imio-website/var/instance/minisites
     working_dir: /home/imio/imio-website
     environment:
       - MEMCACHE_SERVER=127.0.0.1
@@ -32,14 +36,12 @@ services:
       - ZEO_HOST=db
       - ZEO_PORT=8100
     command: /home/imio/imio-website/bin/instance fg
-    depends_on:
-      - reverseproxy
   reverseproxy:
     image: traefik # The official Traefik docker image
     command: --api --docker # Enables the web UI and tells Træfik to listen to docker
     ports:
       - "80:80"     # The HTTP port
-      - "8080:8080" # The Web UI (enabled by --api)
+      - "8000:8080" # The Web UI (enabled by --api)
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
       - $PWD/traefik.toml:/etc/traefik/traefik.toml
