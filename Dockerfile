@@ -8,6 +8,7 @@ COPY default.cfg /home/imio/.buildout/default.cfg
 RUN buildDeps="python-pip build-essential libpq-dev libreadline-dev wget git gcc libc6-dev libpcre3-dev libssl-dev libxml2-dev libxslt1-dev libbz2-dev libffi-dev libjpeg62-dev libopenjp2-7-dev zlib1g-dev python-dev" \
   && cd /home/imio/ \
   && apt-get update \
+  && apt-get upgrade -y \
   && apt-get install -y --no-install-recommends $buildDeps \
   && pip install pip==$PIP \
   && git clone https://github.com/IMIO/${repo}.git ${repo} \
