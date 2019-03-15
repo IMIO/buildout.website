@@ -46,7 +46,7 @@ cleanall:
 	docker-compose down
 
 docker-image:
-	docker build --pull -t docker-staging.imio.be/iasmartweb/mutual:latest .
+	docker build --pull -t iasmartweb/mutual:latest .
 
 buildout-prod:
     # used in docker build
