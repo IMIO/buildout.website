@@ -28,7 +28,7 @@ services:
       - ./var/instance/minisites:/home/imio/imio-website/var/instance/minisites
     working_dir: /home/imio/imio-website
     environment:
-      - MEMCACHE_SERVER=127.0.0.1
+      - MEMCACHE_SERVER=172.17.0.1
       - MEMCACHE_DEFAULT_AGE=10800
       - ENV=dev
       - CACHING_SERVERS=http://frontend1.interne.imio.be:5000 http://frontend2.lan.imio.be:5000 http://frontend3.lan.imio.be:5000
