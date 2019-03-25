@@ -11,7 +11,7 @@ import logging
 import sys
 
 
-logger = logging.getLogger('export_plone_users.py')
+logger = logging.getLogger('autopublish.py')
 logger.setLevel(logging.INFO)
 ch = logging.StreamHandler(sys.stdout)
 ch.setLevel(logging.INFO)
