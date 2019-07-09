@@ -116,3 +116,9 @@ p3/bin/pytest: p3
 
 test-starting: p3/bin/pytest
 	./p3/bin/pytest -s tests
+
+update-to-4.3.18:
+	git stash
+	git pull
+	git checkout -b 4.3.18.x origin/4.3.18.x
+	git stash apply
