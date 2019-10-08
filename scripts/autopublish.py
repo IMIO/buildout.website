@@ -9,6 +9,7 @@ from plone import api
 import argparse
 import logging
 import sys
+import transaction
 
 
 logger = logging.getLogger('autopublish.py')
@@ -27,6 +28,7 @@ parser.add_argument('-c')  # use to bin/instance run script.py
 def publish():
     portal = api.portal.get()
     result = portal.restrictedTraverse('@@tick_hourly')()
+    transaction.commit()
     logger.info(result)
 
 
