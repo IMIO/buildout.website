@@ -9,7 +9,7 @@ pipeline {
         stage('Build') {
             agent any
             steps {
-                sh 'make docker-image'
+                sh 'docker build --pull -t iasmartweb/mutual:alpine .'
             }
         }
         stage('Build dependencies') {
