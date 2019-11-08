@@ -23,6 +23,7 @@ services:
     depends_on:
       - reverseproxy
     volumes:
+      - ./var/blobstorage:/home/imio/imio-website/var/blobstorage
       - ./src:/home/imio/imio-website/src
       - ./dev.cfg:/home/imio/imio-website/dev.cfg
       - ./var/instance/minisites:/home/imio/imio-website/var/instance/minisites
