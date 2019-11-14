@@ -2,20 +2,11 @@
 # -*- coding: utf-8 -*-
 import argparse
 import ast
+import getpass
 import json
 import os
-# import signal
 import subprocess
-# import sys
 import urllib
-
-
-# def sigint_handler(signum, frame):
-#     print 'Stop pressing the CTRL+C!'
-#     sys.exit(0)
-#
-#
-# signal.signal(signal.SIGINT, sigint_handler)
 
 
 class Environment:
@@ -97,28 +88,24 @@ class Environment:
     def rsync(self):
         if 'servername' not in self.env.keys():
             self.get_server_infos()
+        user = getpass.getuser()
+        answer = raw_input('Which user script could use to make rsync command? If you leave empty, script will use {0} '.format(user))
+        if answer:
+            user = answer
         test_cmd = [
             'ssh',
             '-oBatchMode=yes',
             '-oStrictHostKeyChecking=no',
-            'imio@{0}'.format(self.env['servername']), 'ls -l'
+            '{0}@{1}'.format(user, self.env['servername']), 'ls -l'
         ]
         try:
             subprocess.check_output(test_cmd)
         except subprocess.CalledProcessError:
             print ' '.join(test_cmd)
-            print 'You have no right to rsync on {0}, copy this line and give it to an admin:'.format( self.env['servername'])  # noqa
-            id_rsa_pub_cmd = [
-                'cat',
-                '{0}/.ssh/id_rsa.pub'.format(os.environ.get('HOME'))
-            ]
-            id_rsa = subprocess.check_output(id_rsa_pub_cmd)
-            print 'echo "{1}" | ssh imio@{0} "cat >> .ssh/authorized_keys"'.format(
-               self.env['servername'],
-               id_rsa.rstrip('\r\n')
-            )
+            print 'You have no right to rsync on {0}, ask sysadmin to add your user to imio group.'.format( self.env['servername'])  # noqa
             return 0
-        rsync_server_path = 'imio@{0}:/srv/instances/{1}'.format(
+        rsync_server_path = '{0}@{1}:/srv/instances/{2}'.format(
+            user,
             self.env['servername'],
             self.env['projectid']
         )
