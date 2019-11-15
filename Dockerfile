@@ -24,20 +24,11 @@ RUN apk add --update --no-cache --virtual .build-deps \
   zlib-dev \
   && pip install pip==$PIP setuptools==$SETUPTOOLS zc.buildout==$ZC_BUILDOUT wheel==$WHEEL
 WORKDIR /plone
-# COPY eggs /plone/eggs/
-COPY *.cfg /plone/
-COPY scripts /plone/scripts
-
-RUN chown imio:imio -R /plone \
-  && su -c "wget -q -O Plone.tgz https://launchpad.net/plone/$PLONE_MAJOR/$PLONE_VERSION/+download/Plone-$PLONE_VERSION-UnifiedInstaller.tgz" -s /bin/sh imio \
-  && su -c "tar -zxf Plone.tgz" -s /bin/sh imio \
-  && rm /plone/Plone.tgz \
-  && su -c "tar -xjf Plone-$PLONE_VERSION-UnifiedInstaller/packages/buildout-cache.tar.bz2" -s /bin/sh imio \
-  && rm -rf /plone/Plone-$PLONE_VERSION-UnifiedInstaller \
-  && su -c "cp -R buildout-cache/eggs /plone/" -s /bin/sh imio \
-  && su -c "cp -R buildout-cache/downloads /plone/" -s /bin/sh imio \
-  && rm -rf /plone/buildout-cache \
-  && su -c "buildout -c prod.cfg" -s /bin/sh imio
+RUN chown imio:imio -R /plone && mkdir /data && chown imio:imio -R /data
+COPY --chown=imio eggs /plone/eggs/
+COPY --chown=imio *.cfg /plone/
+COPY --chown=imio scripts /plone/scripts
+RUN su -c "buildout -c prod.cfg" -s /bin/sh imio
 
 
 FROM docker-staging.imio.be/base:alpine
@@ -58,8 +49,7 @@ RUN apk add --no-cache --virtual .run-deps \
   libxml2 \
   libxslt \
   libpng \
-  libjpeg-turbo \
-  tzdata
+  libjpeg-turbo
 
 LABEL plone=$PLONE_VERSION \
   os="alpine" \
@@ -71,11 +61,11 @@ LABEL plone=$PLONE_VERSION \
 COPY --from=builder /usr/local/lib/python2.7/site-packages /usr/local/lib/python2.7/site-packages
 COPY --chown=imio --from=builder /plone .
 
-COPY docker-initialize.py docker-entrypoint.sh /
+COPY --chown=imio docker-initialize.py docker-entrypoint.sh /
 USER imio
-EXPOSE 8080
-HEALTHCHECK --interval=1m --timeout=5s --start-period=1m \
-  CMD nc -z -w5 127.0.0.1 8080 || exit 1
+EXPOSE 8081
+HEALTHCHECK --interval=1m --timeout=5s --start-period=45s \
+  CMD nc -z -w5 127.0.0.1 8081 || exit 1
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["start"]
@@ -85,4 +75,5 @@ CMD ["start"]
 ENV ZEO_HOST=db \
  ZEO_PORT=8100 \
  HOSTNAME_HOST=local \
- PROJECT_ID=imio
+ PROJECT_ID=imio \
+ SMTP_QUEUE_DIRECTORY=/data/queue
