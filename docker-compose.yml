@@ -3,46 +3,42 @@ services:
   zeo:
     build:
       context: .
-      dockerfile: Dockerfile-dev
-    image: iasmartweb-dev
-    user: imio
+      dockerfile: Dockerfile
+    image: iasmartweb/mutual:alpine
     volumes:
-      - ./var/blobstorage:/home/imio/imio-website/var/blobstorage
-      - ./var/filestorage:/home/imio/imio-website/var/filestorage
-    working_dir: /home/imio/imio-website
+     - ./data:/data
     healthcheck:
       test: ['CMD', 'nc', '-z', '-w5', '127.0.0.1', '8100']
-    command: /home/imio/imio-website/bin/zeoserver fg
+    command: zeoserver fg
   instance:
-    image: iasmartweb-dev
-    user: imio
-    ports:
-      - "8081:8081"
+    image: iasmartweb/mutual:alpine
     links:
       - zeo:db
-    depends_on:
-      - reverseproxy
     volumes:
-      - ./var/blobstorage:/home/imio/imio-website/var/blobstorage
-      - ./src:/home/imio/imio-website/src
-      - ./dev.cfg:/home/imio/imio-website/dev.cfg
-      - ./var/instance/minisites:/home/imio/imio-website/var/instance/minisites
-    working_dir: /home/imio/imio-website
+      - ./data:/data
     environment:
       - MEMCACHE_SERVER=172.17.0.1
       - MEMCACHE_DEFAULT_AGE=10800
       - ENV=dev
-      - CACHING_SERVERS=http://frontend1.interne.imio.be:5000 http://frontend2.lan.imio.be:5000 http://frontend3.lan.imio.be:5000
+      - CACHING_SERVERS=http://frontend2.lan.imio.be:5000 http://frontend3.lan.imio.be:5000
       - DOMAINS=localhost
       - ZEO_HOST=db
       - ZEO_PORT=8100
-    command: /home/imio/imio-website/bin/instance fg
+    command: fg
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.instance.rule=Host(`portal.localhost`)"
+      - "traefik.http.routers.instance.entrypoints=web"
+      - "traefik.http.services.instance.loadbalancer.server.port=8081"
   reverseproxy:
-    image: traefik # The official Traefik docker image
-    command: --api --docker # Enables the web UI and tells Træfik to listen to docker
+    image: traefik:2.0 # The official Traefik docker image
+          #- "--log.level=DEBUG"
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--entryPoints.web.address=:80"
     ports:
       - "80:80"     # The HTTP port
       - "8000:8080" # The Web UI (enabled by --api)
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
-      - $PWD/traefik.toml:/etc/traefik/traefik.toml
