@@ -84,9 +84,9 @@ class Environment:
                 pass
             if "servername" not in self.env.keys():
                 server = result[num].get("host")
-                if "lan" not in server:
-                    server = server.replace("imio.be", "lan.imio.be")
-                    self.set_env_to_file("servername", server)
+            #    if "lan" not in server:
+            #        server = server.replace("imio.be", "lan.imio.be")
+                self.set_env_to_file("servername", server)
             if "minisites" not in self.env.keys():
                 ms = result[num].get("minisites")
                 minisites = [val["path"] for val in ms.values()]
