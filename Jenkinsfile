@@ -9,6 +9,7 @@ pipeline {
         stage('Build') {
             agent any
             steps {
+                sh 'make eggs'
                 sh 'docker build --pull -t iasmartweb/mutual:alpine .'
             }
         }

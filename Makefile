@@ -18,7 +18,7 @@ VERSION=`cat version.txt`
 UID := $(shell id -u)
 PROJECTID := $(shell basename "${PWD}")
 RSYNC_ARGS :=  $(if $(RSYNC_ARGS),$(RSYNC_ARGS),"a")
-IMAGE_NAME="iasmartweb/mutual:alpine"
+IMAGE_NAME="docker-staging.imio.be/iasmartweb/mutual:alpine"
 
 all: run
 
