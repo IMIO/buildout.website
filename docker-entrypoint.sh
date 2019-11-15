@@ -1,5 +1,5 @@
 #!/bin/bash
-set -xe
+set -e
 COMMANDS="debug help logtail show stop adduser fg kill quit run wait console foreground logreopen reload shell status"
 START="start restart zeoserver"
 CMD="bin/instance"
