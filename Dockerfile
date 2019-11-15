@@ -40,7 +40,8 @@ ENV PIP=9.0.3 \
   PLONE_VERSION=4.3.18 \
   TZ=Europe/Brussel
 
-VOLUME /data
+VOLUME /data/blobstorage
+VOLUME /data/filestorage
 WORKDIR /plone
 
 RUN apk add --no-cache --virtual .run-deps \
