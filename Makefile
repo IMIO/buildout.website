@@ -18,6 +18,7 @@ VERSION=`cat version.txt`
 UID := $(shell id -u)
 PROJECTID := $(shell basename "${PWD}")
 RSYNC_ARGS :=  $(if $(RSYNC_ARGS),$(RSYNC_ARGS),"a")
+IMAGE_NAME="iasmartweb/mutual:alpine"
 
 all: run
 
@@ -49,7 +50,6 @@ docker-image:
 	docker build --pull -t iasmartweb/mutual:latest .
 
 buildout-prod:
-    # used in docker build
 	pip install --user -I -r requirements.txt
 	~/.local/bin/buildout -t 30 -c prod.cfg
 
@@ -116,3 +116,7 @@ p3/bin/pytest: p3
 
 test-starting: p3/bin/pytest
 	./p3/bin/pytest -s tests
+
+eggs:  ## Copy eggs from docker image to speed up docker build
+	-docker run --entrypoint='' $(IMAGE_NAME) tar -c -C /plone eggs | tar x
+	mkdir -p eggs
