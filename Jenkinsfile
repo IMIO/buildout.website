@@ -13,24 +13,13 @@ pipeline {
                 sh 'docker build --pull -t iasmartweb/mutual:alpine .'
             }
         }
-        stage('Build dependencies') {
-            agent any
-            steps {
-                parallel (
-                    "ideabox": {
-                        echo "starting ideabox build"
-                        build job: '/IMIO-github-Jenkinsfile/buildout.ideabox/master', wait: false
-                    }
-                )
-            }
-        }
         stage('Push image to registry') {
             agent any
             steps {
-                pushImageToRegistry (
-                    env.BUILD_ID,
-                    "iasmartweb/mutual"
-                )
+                sh "docker tag iasmartweb/mutual:alpine docker-staging.imio.be/iasmartweb/mutual:alpine"
+                sh "docker tag iasmartweb/mutual:alpine docker-staging.imio.be/iasmartweb/mutual:alpine-$BUILD_ID"
+                sh "docker push docker-staging.imio.be/iasmartweb/mutual:alpine"
+                sh "docker push docker-staging.imio.be/iasmartweb/mutual:alpine-$BUILD_ID"
             }
         }
         stage('Deploy to staging') {
@@ -41,8 +30,8 @@ pipeline {
                 }
             }
             steps {
-                sh "mco shell run 'docker pull docker-staging.imio.be/iasmartweb/mutual:$BUILD_ID' -I /^staging.imio.be/"
-                sh "mco shell run '/srv/docker_scripts/website-update-all-images.sh' -t 1200 --tail -I /^staging.imio.be/"
+                sh "mco shell run 'docker pull docker-staging.imio.be/iasmartweb/mutual:alpine-$BUILD_ID' -I /^staging.imio.be/"
+                echo "mco shell run '/srv/docker_scripts/website-update-all-images.sh' -t 1200 --tail -I /^staging.imio.be/"
             }
         }
         stage('Deploy to prod ?') {
