@@ -6,23 +6,22 @@ services:
       dockerfile: Dockerfile
     image: iasmartweb/mutual:alpine
     volumes:
-     - ./data:/data
+      - ./data/blobstorage:/data/blobstorage
+      - ./data/filestorage:/data/filestorage
     healthcheck:
       test: ['CMD', 'nc', '-z', '-w5', '127.0.0.1', '8100']
     command: zeoserver fg
   instance:
     image: iasmartweb/mutual:alpine
-    links:
-      - zeo:db
     volumes:
-      - ./data:/data
+      - ./data/blobstorage:/data/blobstorage
     environment:
       - MEMCACHE_SERVER=172.17.0.1
       - MEMCACHE_DEFAULT_AGE=10800
       - ENV=dev
       - CACHING_SERVERS=http://frontend2.lan.imio.be:5000 http://frontend3.lan.imio.be:5000
       - DOMAINS=localhost
-      - ZEO_HOST=db
+      - ZEO_HOST=zeo
       - ZEO_PORT=8100
     command: fg
     labels:
