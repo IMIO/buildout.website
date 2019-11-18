@@ -95,14 +95,15 @@ class Environment:
     def rsync(self):
         if "servername" not in self.env.keys():
             self.get_server_infos()
-        user = getpass.getuser()
-        answer = raw_input(
-            "Which user script could use to make rsync command? If you leave empty, script will use {0} ".format(
-                user
-            )
-        )
-        if answer:
-            user = answer
+        # user = getpass.getuser()
+        user = "imio"
+        # answer = raw_input(
+        #     "Which user script could use to make rsync command? If you leave empty, script will use {0} ".format(
+        #         user
+        #     )
+        # )
+        # if answer:
+        #     user = answer
         test_cmd = [
             "ssh",
             "-oBatchMode=yes",
