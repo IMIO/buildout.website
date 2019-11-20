@@ -1,9 +1,6 @@
 @Library('jenkins-pipeline-scripts') _
 pipeline {
     agent none
-    triggers {
-        pollSCM('*/3 * * * *')
-    }
     options {
         // Keep the 50 most recent builds
         buildDiscarder(logRotator(numToKeepStr:'50'))
@@ -71,7 +68,7 @@ pipeline {
                 deployToProd (
                     env.BUILD_ID,
                     'iasmartweb/mutual',
-                    '/role::docker::sites$/',
+                    'role::docker::sites$',
                     '/srv/docker_scripts/website-update-all-images.sh',
                 )
             }
