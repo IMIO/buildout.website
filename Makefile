@@ -100,10 +100,10 @@ dev:
 	./bin/buildout -t 30
 
 rsync: .env var/blobstorage var/filestorage
-	python scripts/config.py --rsync $(RSYNC_ARGS)
+	./bin/python scripts/config.py --rsync $(RSYNC_ARGS)
 
 minisites: .env var/instance/minisites
-	python scripts/config.py --minisitesfiles
+	./bin/python scripts/config.py --minisitesfiles
 
 develop-up:
 	docker-compose run --rm instance bin/develop up
