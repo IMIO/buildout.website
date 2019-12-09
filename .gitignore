@@ -26,3 +26,4 @@ rsync.sh
 traefik.toml
 .pytest_cache/
 profile.dat
+data/
