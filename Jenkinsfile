@@ -44,34 +44,5 @@ pipeline {
                 sh "mco shell run '/srv/docker_scripts/website-update-all-images.sh' -t 1200 --tail -I /^staging.imio.be/"
             }
         }
-        stage('Deploy to prod ?') {
-            agent none
-            steps {
-                timeout(time: 24, unit: 'HOURS') {
-                    input (
-                        message: 'Should we deploy to prod ?'
-                    )
-                }
-            }
-            post {
-                aborted {
-                    echo 'In post aborted'
-                }
-                success {
-                    echo 'In post success'
-                }
-            }
-        }
-        stage('Deploying to prod') {
-            agent any
-            steps {
-                deployToProd (
-                    env.BUILD_ID,
-                    'iasmartweb/mutual',
-                    'role::docker::sites$',
-                    '/srv/docker_scripts/website-update-all-images.sh',
-                )
-            }
-        }
     }
 }
