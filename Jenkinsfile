@@ -12,17 +12,6 @@ pipeline {
                 sh 'make docker-image'
             }
         }
-        stage('Build dependencies') {
-            agent any
-            steps {
-                parallel (
-                    "ideabox": {
-                        echo "starting ideabox build"
-                        build job: '/IMIO-github-Jenkinsfile/buildout.ideabox/master', wait: false
-                    }
-                )
-            }
-        }
         stage('Push image to registry') {
             agent any
             steps {
