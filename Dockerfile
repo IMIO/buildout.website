@@ -1,10 +1,10 @@
 FROM docker-staging.imio.be/iasmartweb/cache:latest
 RUN mkdir /home/imio/imio-website
-COPY *.cfg Makefile *.py *.txt /home/imio/imio-website/
+COPY *.cfg Makefile *.txt /home/imio/imio-website/
 COPY scripts /home/imio/imio-website/scripts
 RUN chown imio:imio -R /home/imio/imio-website/ \
   && cd /home/imio/imio-website \
-  && su -c "/usr/bin/python bootstrap.py -c prod.cfg" -s /bin/sh imio \
+  && su -c "pip install -r requirements.txt" -s /bin/sh imio \
   && su -c "make buildout-prod" -s /bin/sh imio \
   && runDeps="poppler-utils wv rsync lynx netcat libxml2 libxslt1.1 libjpeg62 libtiff5 libopenjp2-7" \
   && apt-get update \
