@@ -87,6 +87,12 @@ class Environment:
             #    if "lan" not in server:
             #        server = server.replace("imio.be", "lan.imio.be")
                 self.set_env_to_file("servername", server)
+            if "serverip" not in self.env.keys():
+                try:
+                    ip = result[num]["instance_port_urls"][-1].split(":")[1].replace("//", "")
+                    self.set_env_to_file("serverip", ip)
+                except:
+                    pass
             if "minisites" not in self.env.keys():
                 ms = result[num].get("minisites")
                 minisites = [val["path"] for val in ms.values()]
@@ -112,7 +118,7 @@ class Environment:
             "ssh",
             "-oBatchMode=yes",
             "-oStrictHostKeyChecking=no",
-            "{0}@{1}".format(user, self.env["servername"]),
+            "{0}@{1}".format(user, self.env["serverip"]),
             "ls -l",
         ]
         try:
@@ -120,11 +126,11 @@ class Environment:
         except subprocess.CalledProcessError:
             print " ".join(test_cmd)
             print "You have no right to rsync on {0}, ask sysadmin to add your user to imio group.".format(
-                self.env["servername"]
+                self.env["serverip"]
             )  # noqa
             return 0
         rsync_server_path = "{0}@{1}:/srv/instances/{2}".format(
-            user, self.env["servername"], self.env["projectid"]
+            user, self.env["serverip"], self.env["projectid"]
         )
         if self.rsync_option in ["a", "d"]:
             os.system(
