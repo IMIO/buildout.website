@@ -102,7 +102,10 @@ dev:
 rsync: .env var/blobstorage var/filestorage
 	./bin/python scripts/config.py --rsync $(RSYNC_ARGS)
 
-minisites: .env var/instance/minisites
+bin/python:
+	if [ -f /usr/bin/virtualenv-2.7 ] ; then virtualenv-2.7 .;else virtualenv -p python2.7 .;fi
+
+minisites: .env var/instance/minisites bin/python
 	./bin/python scripts/config.py --minisitesfiles
 
 develop-up:
