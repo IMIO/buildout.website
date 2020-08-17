@@ -1,21 +1,18 @@
-version: '3.4'
+version: '2.4'
 services:
   zeo:
     build:
       context: .
-      dockerfile: Dockerfile-dev
-    image: iasmartweb-dev
-    user: imio
+      dockerfile: Dockerfile
+    image: iasmartweb/mutual
     volumes:
       - ./var/blobstorage:/home/imio/imio-website/var/blobstorage
       - ./var/filestorage:/home/imio/imio-website/var/filestorage
-    working_dir: /home/imio/imio-website
+    command: /home/imio/imio-website/bin/zeoserver fg
     healthcheck:
       test: ['CMD', 'nc', '-z', '-w5', '127.0.0.1', '8100']
-    command: /home/imio/imio-website/bin/zeoserver fg
   instance:
-    image: iasmartweb-dev
-    user: imio
+    image: iasmartweb/mutual
     ports:
       - "8081:8081"
     links:
@@ -23,10 +20,7 @@ services:
     depends_on:
       - reverseproxy
     volumes:
-      - ./src:/home/imio/imio-website/src
-      - ./dev.cfg:/home/imio/imio-website/dev.cfg
       - ./var/instance/minisites:/home/imio/imio-website/var/instance/minisites
-    working_dir: /home/imio/imio-website
     environment:
       - MEMCACHE_SERVER=172.17.0.1
       - MEMCACHE_DEFAULT_AGE=10800
@@ -36,6 +30,8 @@ services:
       - ZEO_HOST=db
       - ZEO_PORT=8100
     command: /home/imio/imio-website/bin/instance fg
+    healthcheck:
+      test: ['CMD', 'nc', '-z', '-w5', '127.0.0.1', '8081']
   reverseproxy:
     image: traefik:1.7 # The official Traefik docker image
     command: --api --docker # Enables the web UI and tells Træfik to listen to docker

@@ -1,8 +1,0 @@
-FROM docker-staging.imio.be/iasmartweb/test:1000
-RUN mkdir /home/imio/imio-website/
-ENV PATH="/home/imio/.local/bin:${PATH}"
-COPY *.cfg *.txt /home/imio/imio-website/
-RUN chown imio:imio -R /home/imio/imio-website/
-WORKDIR /home/imio/imio-website
-USER imio
-RUN pip install --user -r requirements.txt && buildout -c docker-dev.cfg

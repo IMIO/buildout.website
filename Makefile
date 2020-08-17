@@ -1,11 +1,11 @@
+#!/usr/bin/make
 # @Author: bsuttor
 # @Date:   2018-06-11T16:29:42+02:00
 # @Last modified by:   bsuttor
 # @Last modified time: 2018-06-11T16:49:39+02:00
 
+IMAGE_NAME="docker-staging.imio.be/iasmartweb/mutual:latest"
 
-
-#!/usr/bin/make
 ifeq (rsync,$(firstword $(MAKECMDGOALS)))
   # use the rest as arguments for "rsync"
   RSYNC_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
@@ -25,33 +25,23 @@ buildout.cfg:
 	ln -fs dev.cfg buildout.cfg
 	#ln -fs prod.cfg buildout.cfg
 
+bin/pip:
+	if [ -f /usr/bin/virtualenv-2.7 ] ; then virtualenv-2.7 .;else virtualenv -p python2.7 .;fi
+
 bin/buildout: buildout.cfg
-	python bootstrap.py --buildout-version=2.11.3 --setuptools-version=38.7.0
+	./bin/pip install -r requirements.txt
+
+dev: buildout.cfg bin/pip bin/buildout
+	./bin/buildout -Nt 30
 
 .PHONY: robot-server
 robot-server:
 	bin/robot-server -v cpskin.policy.testing.CPSKIN_POLICY_ROBOT_TESTING
 
-stop-old:
-	docker stop $$(docker ps -q)
-	docker rm $$(docker ps -a -q)
-
-.PHONY: run
-run: build
-	make up
-
 .PHONY: cleanall
 cleanall:
 	rm -fr develop-eggs downloads eggs parts .installed.cfg lib include bin .mr.developer.cfg .env traefik.toml local/ var/instance/minisites/* __pycache__
 	docker-compose down
-
-docker-image:
-	docker build --pull -t iasmartweb/mutual:latest .
-
-buildout-prod:
-    # used in docker build
-	pip install --user -I -r requirements.txt
-	~/.local/bin/buildout -t 30 -c prod.cfg
 
 var/instance/minisites:
 	mkdir -p var/instance/minisites
@@ -62,16 +52,21 @@ var/instance/minisites:
 
 env: .env
 
+### DOCKER ###
+.PHONY: run
+run: build
+	$(MAKE) up
+
+docker-image:
+	docker build --pull -t iasmartweb/mutual:latest .
+
 var/blobstorage:
 	mkdir -p var/blobstorage
 
 var/filestorage:
 	mkdir -p var/filestorage
 
-src:
-	mkdir src
-
-build: .env buildout.cfg minisites var/blobstorage var/filestorage src
+build:
 	# rm -rf local/ bin/
 	docker-compose build --pull zeo # <--no-cache
 	make buildout
@@ -83,34 +78,28 @@ buildout:
 upgrade: .env var/instance/minisites
 	docker-compose run --rm instance bin/upgrade-portals
 
-up: .env var/instance/minisites
+docker-permissions:
+	docker-compose run --rm -u root zeo chown -R imio:imio /home/imio/imio-website/var
+
+up: minisites var/instance/minisites docker-permissions
 	# docker-compose run --rm --service-ports instance
 	docker-compose up
 
 bash: .env var/instance/minisites
 	docker-compose run --rm -p 8081:8081 --name instance instance bash
 
-restart-instance-only:
-	docker-compose up -d --force-recreate --no-deps instance
-
-dev:
-	ln -fs dev.cfg buildout.cfg
-	if [ -f /usr/bin/virtualenv-2.7 ] ; then virtualenv-2.7 .;else virtualenv -p python2.7 .;fi
-	./bin/pip install -r requirements.txt
-	./bin/buildout -t 30
-
-rsync: .env var/blobstorage var/filestorage
+rsync: bin/pip .env var/blobstorage var/filestorage
 	./bin/python scripts/config.py --rsync $(RSYNC_ARGS)
-
-bin/python:
-	if [ -f /usr/bin/virtualenv-2.7 ] ; then virtualenv-2.7 .;else virtualenv -p python2.7 .;fi
 
 minisites: .env var/instance/minisites bin/python
 	./bin/python scripts/config.py --minisitesfiles
 
-develop-up:
-	docker-compose run --rm instance bin/develop up
+eggs:  ## Copy eggs from docker image to speed up docker build
+	##-docker run --entrypoint='' $(IMAGE_NAME) tar -c -C /home/imio/imio-website eggs | tar x
+	-docker run --entrypoint='' $(IMAGE_NAME) tar -c -C /home/imio/.buildout eggs | tar x
+	mkdir -p eggs
 
+### Locust testing ###
 p3:
 	virtualenv -p python3 p3
 
