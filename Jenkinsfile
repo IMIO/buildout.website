@@ -9,7 +9,7 @@ pipeline {
         stage('Build') {
             agent any
             steps {
-                sh 'eggs'
+                sh 'make eggs'
                 sh 'make docker-image'
             }
         }
