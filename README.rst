@@ -1,55 +1,44 @@
 Introduction
 ------------
 
-This buildout relates the configuration of the application zope instance of the IMIO central server.
+This buildout assemble all related configuration of the application zope instance of the iMio iA.Smartweb app.
 
-The main config file is buildout.cfg. But this file doesn't exists.
-It's necessary to create a symlink to dev.cfg or prod.cfg.
-
-The install process is described in the file : INSTALL.rst
-
+.. contents:: Table of contents
 
 Update cpskin
 -------------
-
-To update cpskin, you have to make a new release of your package you would like to update and change version of this package on buildout.
-
-
 Make new release of a single package
-===================================
+====================================
 
-To make release of a package you of to use zest.releaser and you have to have you .pypirc update
+To make release of a package:
 
-Configure your .pypirc file :
-http://www.imio.be/support/documentation/manual/release-locale-imio/uploader-nos-oeufs-sur-notre-serveur-doeufs
+- Configure your .pypirc file (see iMio internal documentation)
+- Install zest.releaser
 
+After that, you can make a release with zest.releaser
 
-Then you have to install zest.releaser :
-http://www.imio.be/support/documentation/how-to/publier-un-oeuf-egg-release-avec-zest.releaser
-
-After that, you can make a release as explain in that link above.
-
-**But first check if you have already update changelog (often CHANGES.rst file).**
+**But first check if you have already update changelog (usually on CHANGES.rst file).**
 
 Update version of your package
 ==============================
 
 Go to buildout-website (https://github.com/IMIO/buildout.website) and in versions-base.cfg file, change version of package you just release.
 
-
-Monitoring
-----------
-telnet 127.0.0.1 8888
-stats
-
-echo 'uptime' | nc -i 1 localhost 8888
-
-Get Data
+Data
 --------
-
-make rsync will data. You can add blobs or data args (b for blobstorage, d for Data.fs)
+make rsync will data. You can add blobs or data args (b for blobstorage, d for Data.fs)::
 
     make rsync d
+
+Dev
+---
+Start developping::
+
+  make dev
+
+and start instance::
+
+  ./bin/instance fg
 
 Dev with docker
 ---------------
@@ -57,11 +46,18 @@ First you have to install docker and docker-compose
 
 After that, you have to build local image and up container::
 
-    $ make build
-    $ make up
+    make build
+    make up
 
-Complete .env file
-------------------
+or you can build and go to container, add some pdb and start instance like this::
+
+    make build
+    make bash
+    # *change what you want*
+    bin/instance-debug fg
+
+.env file
+----------
 .env file is used to get some information about project you are working on
 
 list of keys :
@@ -81,6 +77,22 @@ You can generate .env file with `make env` command
 
 Minisites
 ---------
-`make minisites` command create minisites ini files (in var/instance/minisites folder) and generate traefik.toml file
+::
 
-http://portal.localhost/minisites_panel
+  make minisites
+
+Create minisites ini files (in var/instance/minisites folder) and generate traefik.toml file
+You can see minisite urls on http://portal.localhost/minisites_panel when instance is up.
+
+Monitoring
+----------
+You can monitor your instance with these command::
+
+  echo 'uptime' | nc -i 1 localhost 8888
+  echo 'stats' | nc -i 1 localhost 8888
+
+Or connect to port 8888 with telnet
+
+All available monitoring command can get with this command::
+
+  echo 'help' | nc -i 1 localhost 8888
