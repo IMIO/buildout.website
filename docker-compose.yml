@@ -1,22 +1,11 @@
 version: '2.4'
 services:
-  zeo:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: iasmartweb/mutual
-    volumes:
-      - ./var/blobstorage:/home/imio/imio-website/var/blobstorage
-      - ./var/filestorage:/home/imio/imio-website/var/filestorage
-    command: /home/imio/imio-website/bin/zeoserver fg
-    healthcheck:
-      test: ['CMD', 'nc', '-z', '-w5', '127.0.0.1', '8100']
   instance:
     image: iasmartweb/mutual
     ports:
       - "8081:8081"
     links:
-      - zeo:db
+      - postgres:db
     depends_on:
       - reverseproxy
     volumes:
@@ -28,11 +17,18 @@ services:
       - ENV=dev
       - CACHING_SERVERS=http://frontend1.interne.imio.be:5000 http://frontend2.lan.imio.be:5000 http://frontend3.lan.imio.be:5000
       - DOMAINS=localhost
-      - ZEO_HOST=db
-      - ZEO_PORT=8100
-    command: /home/imio/imio-website/bin/instance fg
-    healthcheck:
-      test: ['CMD', 'nc', '-z', '-w5', '127.0.0.1', '8081']
+      - S3_BUCKET=test1
+      - aws_access_key_id=<REDACTED>
+      - aws_secret_access_key=<REDACTED>
+      - endpoint_url=https://s3.sbg.cloud.ovh.net
+      - RELSTORAGE_DB=zope
+      - RELSTORAGE_USER=zope
+      - RELSTORAGE_PASSWORD=zope
+    #command: /home/imio/imio-website/bin/instance fg
+    #command: bash
+    tty: true
+    #healthcheck:
+    #  test: ['CMD', 'nc', '-z', '-w5', '127.0.0.1', '8081']
   reverseproxy:
     image: traefik:1.7 # The official Traefik docker image
     command: --api --docker # Enables the web UI and tells Træfik to listen to docker
@@ -42,3 +38,17 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
       - $PWD/traefik.toml:/etc/traefik/traefik.toml
+  postgres:
+    image: postgres:9.6
+    environment:
+      POSTGRES_DB: "zope"
+      POSTGRES_USER: "zope"
+      POSTGRES_PASSWORD: "zope"
+    volumes:
+    - ./postgres:/var/lib/postgresql/data
+
+  memcached:
+    image: memcached:1.5.20
+    command:
+    - "-m"
+    - "1024"

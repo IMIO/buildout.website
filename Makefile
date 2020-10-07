@@ -68,12 +68,12 @@ var/filestorage:
 
 build:
 	# rm -rf local/ bin/
-	docker-compose build --pull zeo # <--no-cache
+	#docker-compose build --pull zeo # <--no-cache
 	make buildout
 
 buildout:
 	# docker-compose run --rm zeo bin/develop checkout .
-	docker-compose run --rm instance bash -c "virtualenv . && bin/pip install -I -r requirements.txt && bin/buildout -c docker-dev.cfg"
+	docker-compose run --rm instance bash -c "virtualenv . && bin/pip install -I -r requirements.txt && bin/buildout -c relstorage.cfg"
 
 upgrade: .env var/instance/minisites
 	docker-compose run --rm instance bin/upgrade-portals
