@@ -1,16 +1,19 @@
 version: '2.4'
 services:
   instance:
-    image: iasmartweb/mutual
+    image: iasmartweb/relstorage
     ports:
       - "8081:8081"
     links:
       - postgres:db
     depends_on:
+      - postgres
       - reverseproxy
     volumes:
-      - ./var/blobstorage:/home/imio/imio-website/var/blobstorage
       - ./var/instance/minisites:/home/imio/imio-website/var/instance/minisites
+      - ./zope.conf:/home/imio/imio-website/parts/instance/etc/zope.conf
+      - ./zodbconvert.cfg:/home/imio/imio-website/zodbconvert.cfg
+    command: /home/imio/imio-website/bin/instance fg
     environment:
       - MEMCACHE_SERVER=172.17.0.1
       - MEMCACHE_DEFAULT_AGE=10800
@@ -18,17 +21,15 @@ services:
       - CACHING_SERVERS=http://frontend1.interne.imio.be:5000 http://frontend2.lan.imio.be:5000 http://frontend3.lan.imio.be:5000
       - DOMAINS=localhost
       - S3_BUCKET=test1
-      - aws_access_key_id=<REDACTED>
-      - aws_secret_access_key=<REDACTED>
-      - endpoint_url=https://s3.sbg.cloud.ovh.net
+      - S3_ENDPOINT_URL=https://s3.gra.cloud.ovh.net
+      - S3_REGION=gra
+      - aws_access_key_id
+      - aws_secret_access_key
       - RELSTORAGE_DB=zope
       - RELSTORAGE_USER=zope
       - RELSTORAGE_PASSWORD=zope
-    #command: /home/imio/imio-website/bin/instance fg
-    #command: bash
-    tty: true
-    #healthcheck:
-    #  test: ['CMD', 'nc', '-z', '-w5', '127.0.0.1', '8081']
+    healthcheck:
+      test: ['CMD', 'nc', '-z', '-w5', '127.0.0.1', '8081']
   reverseproxy:
     image: traefik:1.7 # The official Traefik docker image
     command: --api --docker # Enables the web UI and tells Træfik to listen to docker
@@ -39,7 +40,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
       - $PWD/traefik.toml:/etc/traefik/traefik.toml
   postgres:
-    image: postgres:9.6
+    image: postgres:11.6
     environment:
       POSTGRES_DB: "zope"
       POSTGRES_USER: "zope"

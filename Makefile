@@ -4,7 +4,7 @@
 # @Last modified by:   bsuttor
 # @Last modified time: 2018-06-11T16:49:39+02:00
 
-IMAGE_NAME="docker-staging.imio.be/iasmartweb/mutual:latest"
+IMAGE_NAME="docker-staging.imio.be/iasmartweb/relstorage:latest"
 
 ifeq (rsync,$(firstword $(MAKECMDGOALS)))
   # use the rest as arguments for "rsync"
@@ -58,7 +58,7 @@ run: build
 	$(MAKE) up
 
 docker-image:
-	docker build --pull -t iasmartweb/mutual:latest .
+	docker build --pull -t iasmartweb/relstorage:latest .
 
 var/blobstorage:
 	mkdir -p var/blobstorage
@@ -111,3 +111,9 @@ p3/bin/pytest: p3
 
 test-starting: p3/bin/pytest
 	./p3/bin/pytest -s tests
+
+move-blobs-to-s3:
+	docker exec -ti buildoutwebsite_instance_1 bash -c '/home/imio/imio-website/bin/archive-blobs -e $$S3_ENDPOINT_URL -a 0 -d -b -r $$S3_REGION /home/imio/imio-website/var/blobstorage/ test1'
+
+convert-relstorage:
+	docker exec -ti buildoutwebsite_instance_1 /home/imio/imio-website/bin/zodbconvert /home/imio/imio-website/zodbconvert.cfg --clear
