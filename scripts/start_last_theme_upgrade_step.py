@@ -72,4 +72,4 @@ def start_last_upgrade_step(portal, themes):
 if __name__ == '__main__':
     portal = get_site(app)  # noqa
     themes = get_themes(portal)
-    start_last_upgrade_step(portal, themes) # noqa
+    start_last_upgrade_step(portal, themes)

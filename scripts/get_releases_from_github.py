@@ -18,36 +18,137 @@ login = sys.argv[2]
 pwd = sys.argv[3]
 
 lst_products = [
-    {"remote": "imio", "label": "plone.app.stagingbehavior", "check_tags": False},
-    {"remote": "imio", "label": "collective.directory", "check_tags": True},
+    {
+        "remote": "imio",
+        "label": "plone.app.stagingbehavior",
+        "check_tags": False
+    },
+    {
+        "remote": "imio",
+        "label": "collective.directory",
+        "check_tags": True
+    },
     {
         "remote": "imio",
         "label": "collective.faceted.taxonomywidget",
         "check_tags": False,
     },
-    {"remote": "imio", "label": "collective.schedulefield", "check_tags": False},
-    {"remote": "imio", "label": "collective.captchacontactinfo", "check_tags": True, "branch":"1.x"},
-    {"remote": "imio", "label": "collective.printrss", "check_tags": True},
-    {"remote": "imio", "label": "collective.sticky", "check_tags": False},
-    {"remote": "imio", "label": "cpskin.cirkwi", "check_tags": True},
-    {"remote": "imio", "label": "cpskin.caching", "check_tags": True},
-    {"remote": "imio", "label": "cpskin.contenttypes", "check_tags": True},
-    {"remote": "imio", "label": "cpskin.core", "check_tags": True},
-    {"remote": "imio", "label": "cpskin.demo", "check_tags": True},
-    {"remote": "imio", "label": "cpskin.agenda", "check_tags": True},
-    {"remote": "imio", "label": "cpskin.locales", "check_tags": True},
-    {"remote": "imio", "label": "cpskin.menu", "check_tags": True},
-    {"remote": "imio", "label": "cpskin.migration", "check_tags": True},
-    {"remote": "imio", "label": "cpskin.minisite", "check_tags": True},
-    {"remote": "imio", "label": "cpskin.policy", "check_tags": True},
-    {"remote": "imio", "label": "cpskin.citizen", "check_tags": True},
-    {"remote": "imio", "label": "cpskin.localfood", "check_tags": True},
-    {"remote": "imio", "label": "collective.preventactions", "check_tags": True},
-    {"remote": "imio", "label": "cpskin.slider", "check_tags": True},
-    {"remote": "imio", "label": "cpskin.theme", "check_tags": True},
-    {"remote": "imio", "label": "cpskin.diazotheme.classic", "check_tags": True},
-    {"remote": "imio", "label": "cpskin.diazotheme.dream", "check_tags": True},
-    {"remote": "imio", "label": "cpskin.diazotheme.dreambasic", "check_tags": True},
+    {
+        "remote": "imio",
+        "label": "collective.schedulefield",
+        "check_tags": False
+    },
+    {
+        "remote": "imio",
+        "label": "collective.captchacontactinfo",
+        "check_tags": True,
+        "branch": "1.x"
+    },
+    {
+        "remote": "imio",
+        "label": "collective.printrss",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "collective.sticky",
+        "check_tags": False
+    },
+    {
+        "remote": "imio",
+        "label": "cpskin.cirkwi",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "cpskin.caching",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "cpskin.contenttypes",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "cpskin.core",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "cpskin.demo",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "cpskin.agenda",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "cpskin.locales",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "cpskin.menu",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "cpskin.migration",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "cpskin.minisite",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "cpskin.policy",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "cpskin.citizen",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "cpskin.localfood",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "collective.preventactions",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "cpskin.slider",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "cpskin.theme",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "cpskin.diazotheme.classic",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "cpskin.diazotheme.dream",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "cpskin.diazotheme.dreambasic",
+        "check_tags": True
+    },
     {
         "remote": "imio",
         "label": "cpskin.diazotheme.dreamRightPortlet",
@@ -58,30 +159,106 @@ lst_products = [
         "label": "cpskin.diazotheme.dreamRightPortletBasic",
         "check_tags": True,
     },
-    {"remote": "imio", "label": "cpskin.diazotheme.newDream", "check_tags": True},
-    {"remote": "imio", "label": "cpskin.diazotheme.memory", "check_tags": True},
-    {"remote": "imio", "label": "cpskin.diazotheme.modern", "check_tags": True},
-    {"remote": "imio", "label": "cpskin.diazotheme.retro", "check_tags": True},
-    {"remote": "imio", "label": "cpskin.diazotheme.slab", "check_tags": True},
-    {"remote": "imio", "label": "cpskin.diazotheme.smart", "check_tags": True},
-    {"remote": "imio", "label": "cpskin.diazotheme.spirit", "check_tags": True},
-    {"remote": "imio", "label": "cpskin.diazotheme.trendy", "check_tags": True},
+    {
+        "remote": "imio",
+        "label": "cpskin.diazotheme.newDream",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "cpskin.diazotheme.memory",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "cpskin.diazotheme.modern",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "cpskin.diazotheme.retro",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "cpskin.diazotheme.slab",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "cpskin.diazotheme.smart",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "cpskin.diazotheme.spirit",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "cpskin.diazotheme.trendy",
+        "check_tags": True
+    },
     {
         "remote": "imio",
         "label": "cpskin.diazotheme.trendybasic",
         "check_tags": True,
     },
-    {"remote": "imio", "label": "cpskin.diazotheme.vicinity", "check_tags": True},
-    {"remote": "imio", "label": "cpskin.workflow", "check_tags": True},
-    {"remote": "imio", "label": "diazotheme.frameworks", "check_tags": True},
-    {"remote": "4teamwork", "label": "ftw.blueprints", "check_tags": False},
-    {"remote": "imio", "label": "imio.ATContentTypes.link", "check_tags": False},
-    {"remote": "imio", "label": "imio.behavior.teleservices", "check_tags": False},
-    {"remote": "imio", "label": "imio.ckeditortemplates", "check_tags": False},
-    {"remote": "imio", "label": "imio.helpers", "check_tags": False},
-    {"remote": "imio", "label": "imio.dashboard", "check_tags": False},
-    {"remote": "imio", "label": "imio.media", "check_tags": False},
-    {"remote": "imio", "label": "imio.gdpr", "check_tags": True},
+    {
+        "remote": "imio",
+        "label": "cpskin.diazotheme.vicinity",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "cpskin.workflow",
+        "check_tags": True
+    },
+    {
+        "remote": "imio",
+        "label": "diazotheme.frameworks",
+        "check_tags": True
+    },
+    {
+        "remote": "4teamwork",
+        "label": "ftw.blueprints",
+        "check_tags": False
+    },
+    {
+        "remote": "imio",
+        "label": "imio.ATContentTypes.link",
+        "check_tags": False
+    },
+    {
+        "remote": "imio",
+        "label": "imio.behavior.teleservices",
+        "check_tags": False
+    },
+    {
+        "remote": "imio",
+        "label": "imio.ckeditortemplates",
+        "check_tags": False
+    },
+    {
+        "remote": "imio",
+        "label": "imio.helpers",
+        "check_tags": False
+    },
+    {
+        "remote": "imio",
+        "label": "imio.dashboard",
+        "check_tags": False
+    },
+    {
+        "remote": "imio",
+        "label": "imio.media",
+        "check_tags": False
+    },
+    {
+        "remote": "imio",
+        "label": "imio.gdpr",
+        "check_tags": True
+    },
     {
         "remote": "imio",
         "label": "imio.transmogrifier.blueprints",
@@ -97,26 +274,66 @@ lst_products = [
         "label": "imio.transmogrifier.PloneFormGen",
         "check_tags": False,
     },
-    {"remote": "imio", "label": "Products.CPUtils", "check_tags": False},
-    {"remote": "imio", "label": "Products.directory", "check_tags": False},
-    {"remote": "imio", "label": "collective.jsonmigrator", "check_tags": False},
-    {"remote": "imio", "label": "pas.plugins.imio", "check_tags": False},
+    {
+        "remote": "imio",
+        "label": "Products.CPUtils",
+        "check_tags": False
+    },
+    {
+        "remote": "imio",
+        "label": "Products.directory",
+        "check_tags": False
+    },
+    {
+        "remote": "imio",
+        "label": "collective.jsonmigrator",
+        "check_tags": False
+    },
+    {
+        "remote": "imio",
+        "label": "pas.plugins.imio",
+        "check_tags": False
+    },
     {
         "remote": "redturtle",
         "label": "collective.limitfilesizepanel",
         "check_tags": False,
     },
-    {"remote": "imio", "label": "pas.plugins.authomatic", "check_tags": False},
-    {"remote": "imio", "label": "Products.PloneGazette", "check_tags": False},
-    {"remote": "affinitic", "label": "affinitic.caching", "check_tags": False},
-    {"remote": "imio", "label": "archetypes.multilingual", "check_tags": False},
+    {
+        "remote": "imio",
+        "label": "pas.plugins.authomatic",
+        "check_tags": False
+    },
+    {
+        "remote": "imio",
+        "label": "Products.PloneGazette",
+        "check_tags": False
+    },
+    {
+        "remote": "affinitic",
+        "label": "affinitic.caching",
+        "check_tags": False
+    },
+    {
+        "remote": "imio",
+        "label": "archetypes.multilingual",
+        "check_tags": False
+    },
     {
         "remote": "imio",
         "label": "collective.behavior.richdescription",
         "check_tags": False,
     },
-    {"remote": "collective", "label": "collective.atomrss", "check_tags": False},
-    {"remote": "collective", "label": "collective.ckeditor", "check_tags": False},
+    {
+        "remote": "collective",
+        "label": "collective.atomrss",
+        "check_tags": False
+    },
+    {
+        "remote": "collective",
+        "label": "collective.ckeditor",
+        "check_tags": False
+    },
     {
         "remote": "collective",
         "label": "collective.ckeditortemplates",
@@ -177,26 +394,46 @@ lst_products = [
         "label": "collective.geo.geographer",
         "check_tags": False,
     },
-    {"remote": "collective", "label": "collective.geo.json", "check_tags": False},
+    {
+        "remote": "collective",
+        "label": "collective.geo.json",
+        "check_tags": False
+    },
     {
         "remote": "collective",
         "label": "collective.geo.leaflet",
         "check_tags": False,
     },
-    {"remote": "collective", "label": "collective.js.leaflet", "check_tags": False},
+    {
+        "remote": "collective",
+        "label": "collective.js.leaflet",
+        "check_tags": False
+    },
     {
         "remote": "collective",
         "label": "collective.geo.mapwidget",
         "check_tags": False,
     },
-    {"remote": "collective", "label": "collective.jekyll", "check_tags": False},
-    {"remote": "collective", "label": "collective.lesscss", "check_tags": False},
+    {
+        "remote": "collective",
+        "label": "collective.jekyll",
+        "check_tags": False
+    },
+    {
+        "remote": "collective",
+        "label": "collective.lesscss",
+        "check_tags": False
+    },
     {
         "remote": "collective",
         "label": "collective.messagesviewlet",
         "check_tags": False,
     },
-    {"remote": "collective", "label": "collective.monitor", "check_tags": False},
+    {
+        "remote": "collective",
+        "label": "collective.monitor",
+        "check_tags": False
+    },
     {
         "remote": "collective",
         "label": "collective.plonefinder",
@@ -217,13 +454,21 @@ lst_products = [
         "label": "collective.recipe.buildoutcache",
         "check_tags": False,
     },
-    {"remote": "collective", "label": "collective.taxonomy", "check_tags": False},
+    {
+        "remote": "collective",
+        "label": "collective.taxonomy",
+        "check_tags": False
+    },
     {
         "remote": "collective",
         "label": "collective.transmogrifier",
         "check_tags": False,
     },
-    {"remote": "collective", "label": "collective.upgrade", "check_tags": False},
+    {
+        "remote": "collective",
+        "label": "collective.upgrade",
+        "check_tags": False
+    },
     {
         "remote": "collective",
         "label": "wildcard.fixpersistentutilities",
@@ -234,7 +479,11 @@ lst_products = [
         "label": "collective.z3cform.select2",
         "check_tags": False,
     },
-    {"remote": "collective", "label": "eea.facetednavigation", "check_tags": False},
+    {
+        "remote": "collective",
+        "label": "eea.facetednavigation",
+        "check_tags": False
+    },
     {
         "remote": "collective",
         "label": "transmogrify.dexterity",
@@ -250,26 +499,86 @@ lst_products = [
         "label": "wildcard.foldercontents",
         "check_tags": False,
     },
-    {"remote": "collective", "label": "ploneorg.migration", "check_tags": False},
-    {"remote": "collective", "label": "sc.social.like", "check_tags": False},
-    {"remote": "plone", "label": "plone.app.linkintegrity", "check_tags": False},
-    {"remote": "plone", "label": "plone.app.contenttypes", "check_tags": False},
-    {"remote": "plone", "label": "plone.app.event", "check_tags": False},
-    {"remote": "plone", "label": "plone.app.multilingual", "check_tags": False},
-    {"remote": "plone", "label": "plone.app.collection", "check_tags": False},
-    {"remote": "plone", "label": "plone.app.querystring", "check_tags": False},
-    {"remote": "plone", "label": "plone.app.theming", "check_tags": False},
-    {"remote": "zopefoundation", "label": "Products.ZNagios", "check_tags": False},
-    {"remote": "collective", "label": "Solgema.fullcalendar", "check_tags": False},
+    {
+        "remote": "collective",
+        "label": "ploneorg.migration",
+        "check_tags": False
+    },
+    {
+        "remote": "collective",
+        "label": "sc.social.like",
+        "check_tags": False
+    },
+    {
+        "remote": "plone",
+        "label": "plone.app.linkintegrity",
+        "check_tags": False
+    },
+    {
+        "remote": "plone",
+        "label": "plone.app.contenttypes",
+        "check_tags": False
+    },
+    {
+        "remote": "plone",
+        "label": "plone.app.event",
+        "check_tags": False
+    },
+    {
+        "remote": "plone",
+        "label": "plone.app.multilingual",
+        "check_tags": False
+    },
+    {
+        "remote": "plone",
+        "label": "plone.app.collection",
+        "check_tags": False
+    },
+    {
+        "remote": "plone",
+        "label": "plone.app.querystring",
+        "check_tags": False
+    },
+    {
+        "remote": "plone",
+        "label": "plone.app.theming",
+        "check_tags": False
+    },
+    {
+        "remote": "zopefoundation",
+        "label": "Products.ZNagios",
+        "check_tags": False
+    },
+    {
+        "remote": "collective",
+        "label": "Solgema.fullcalendar",
+        "check_tags": False
+    },
     {
         "remote": "plone",
         "label": "plone.formwidget.querystring",
         "check_tags": False,
     },
-    {"remote": "plone", "label": "plone.protect", "check_tags": False},
-    {"remote": "plone", "label": "plone.outputfilters", "check_tags": False},
-    {"remote": "plone", "label": "plone.app.textfield", "check_tags": False},
-    {"remote": "plone", "label": "plone.i18n", "check_tags": False},
+    {
+        "remote": "plone",
+        "label": "plone.protect",
+        "check_tags": False
+    },
+    {
+        "remote": "plone",
+        "label": "plone.outputfilters",
+        "check_tags": False
+    },
+    {
+        "remote": "plone",
+        "label": "plone.app.textfield",
+        "check_tags": False
+    },
+    {
+        "remote": "plone",
+        "label": "plone.i18n",
+        "check_tags": False
+    },
 ]
 
 for product in lst_products:
@@ -277,13 +586,12 @@ for product in lst_products:
     if "captcha" in product.get("label"):
         continue
     github_commits_url = "https://api.github.com/repos/{}/{}/commits{}".format(
-        product.get("remote"), product.get("label"),
-        "?sha={}".format(product.get("branch")) if product.has_key("branch") else ""
-    )
+        product.get("remote"), product.get("label"), "?sha={}".format(
+            product.get("branch")) if product.has_key("branch") else "")
     github_tags_url = "https://api.github.com/repos/{}/{}/tags".format(
-        product.get("remote"), product.get("label")
-    )
-    github_url = "https://github.com/{}/{}".format(product.get("remote"), product.get("label"))
+        product.get("remote"), product.get("label"))
+    github_url = "https://github.com/{}/{}".format(product.get("remote"),
+                                                   product.get("label"))
     commits = requests.get(github_commits_url, auth=(login, pwd))
     try:
         last_commit_date_str = str(
@@ -312,12 +620,8 @@ for product in lst_products:
         else:
             last_tag = ""
 
-        msg = ("{} : PAR {} EN DATE DU {} ({}). Tags en ligne : {} | Tags versions-base : {}").format(
-            product.get("label"),
-            last_commit_committer_name,
-            last_commit_date_str,
-            github_url,
-            last_tag,
-            "0.00"
-        )
+        msg = (
+            "{} : PAR {} EN DATE DU {} ({}). Tags en ligne : {} | Tags versions-base : {}"
+        ).format(product.get("label"), last_commit_committer_name,
+                 last_commit_date_str, github_url, last_tag, "0.00")
         print(msg)

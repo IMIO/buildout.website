@@ -1,3 +1,4 @@
+---
 version: '2.4'
 services:
   instance:
@@ -13,6 +14,7 @@ services:
       - ./var/instance/minisites:/home/imio/imio-website/var/instance/minisites
       - ./zope.conf:/home/imio/imio-website/parts/instance/etc/zope.conf
       - ./zodbconvert.cfg:/home/imio/imio-website/zodbconvert.cfg
+      - ./devel/:/home/imio/imio-website/devel
     command: /home/imio/imio-website/bin/instance fg
     environment:
       - MEMCACHE_SERVER=172.17.0.1
@@ -31,13 +33,13 @@ services:
     healthcheck:
       test: ['CMD', 'nc', '-z', '-w5', '127.0.0.1', '8081']
   reverseproxy:
-    image: traefik:1.7 # The official Traefik docker image
-    command: --api --docker # Enables the web UI and tells Træfik to listen to docker
+    image: traefik:1.7       # The official Traefik docker image
+    command: --api --docker  # Enables the web UI and tells Træfik to listen to docker
     ports:
-      - "80:80"     # The HTTP port
-      - "8000:8080" # The Web UI (enabled by --api)
+      - "80:80"      # The HTTP port
+      - "8000:8080"  # The Web UI (enabled by --api)
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock  # So that Traefik can listen to the Docker events
       - $PWD/traefik.toml:/etc/traefik/traefik.toml
   postgres:
     image: postgres:11.6
@@ -46,10 +48,10 @@ services:
       POSTGRES_USER: "zope"
       POSTGRES_PASSWORD: "zope"
     volumes:
-    - ./postgres:/var/lib/postgresql/data
+      - ./postgres:/var/lib/postgresql/data
 
   memcached:
     image: memcached:1.5.20
     command:
-    - "-m"
-    - "1024"
+      - "-m"
+      - "1024"
