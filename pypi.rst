@@ -24,13 +24,15 @@ Migrate on package
 
 1. Go to the package and co latest tag:
 example::
-    cd cpskin.core
+    cd src/cpskin.core
     # see latest tags
     git describe --tags --abbrev=0
     # go to latest tag
     git checkout -b 1.1.3 tags/1.1.3
     # make a release
     release
+    # and return to master branch
+    git co master
     
 2. Go to pypi.org and add user above as owner
 
