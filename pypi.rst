@@ -22,13 +22,20 @@ Your .pypirc file should looks like::
 Migrate on package
 ------------------
 
-Using twine to upload to pypi : 
+1. Go to the package and co latest tag:
+example::
+    cd cpskin.core
+    # see latest tags
+    git describe --tags --abbrev=0
+    # go to latest tag
+    git checkout -b 1.1.3 tags/1.1.3
+    # make a release
+    release
+    
+2. Go to pypi.org and add user above as owner
 
-twine upload -r pypi dist/*
-
-
-
-Account to add to packages:
+Account to add to packages
+--------------------------
 
 - bsuttor
 - cboulanger
@@ -43,5 +50,7 @@ Account to add to packages:
 Packages already migrated
 -------------------------
 
+- cpksin.caching
 - cpskin.core
 - cpskin.citizen
+- cpskin.contenttypes
