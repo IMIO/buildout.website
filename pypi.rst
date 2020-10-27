@@ -37,6 +37,7 @@ Account to add to packages:
 - mpeeters
 - Manu-iMio
 - nballeux
+- tlambert
 
 
 Packages already migrated
