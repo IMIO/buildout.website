@@ -3,8 +3,8 @@
 ## Before migration
 
 1. Create an account on pypi
-2. Add your account on your ~/.pypirc file
-3. Remove old devpi part on ~/.pypirc file
+2. Add your account on your home linux user folder ~/.pypirc file
+3. Remove old devpi part on your home linux user folder ~/.pypirc file
 
 Your .pypirc file should looks like::
 
@@ -25,3 +25,5 @@ Account to add to packages:
 - bsuttor
 - cboulanger
 - imio
+- laz
+- mpeeters
