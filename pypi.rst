@@ -33,7 +33,7 @@ example::
     release
     # and return to master branch
     git co master
-    
+
 2. Go to pypi.org and add user above as owner
 
 Account to add to packages
@@ -57,3 +57,4 @@ Packages already migrated
 - cpskin.citizen
 - cpskin.contenttypes
 - cpskin.demo
+- cpskin.workflow
