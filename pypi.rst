@@ -35,3 +35,10 @@ Account to add to packages:
 - laz
 - mpeeters
 - Manu-iMio
+
+
+Packages already migrated
+-------------------------
+
+- cpskin.core
+- cpskin.citizen
