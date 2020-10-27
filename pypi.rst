@@ -44,3 +44,4 @@ Packages already migrated
 
 - cpskin.core
 - cpskin.citizen
+- cpskin.contenttypes
