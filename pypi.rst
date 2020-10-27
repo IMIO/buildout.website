@@ -36,7 +36,7 @@ Account to add to packages:
 - laz
 - mpeeters
 - Manu-iMio
-- tlambert
+- nballeux
 
 
 Packages already migrated
@@ -44,4 +44,3 @@ Packages already migrated
 
 - cpskin.core
 - cpskin.citizen
-- cpskin.contenttypes
