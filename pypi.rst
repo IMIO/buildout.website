@@ -22,6 +22,11 @@ Your .pypirc file should looks like::
 Migrate on package
 ------------------
 
+Using twine to upload to pypi : 
+
+twine upload -r pypi dist/*
+
+
 
 Account to add to packages:
 - bsuttor
