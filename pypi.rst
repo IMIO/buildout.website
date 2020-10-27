@@ -1,6 +1,8 @@
-# Migrate to Pypi.org
+Migrate to Pypi.org
+===================
 
-## Before migration
+Before migration
+----------------
 
 1. Create an account on pypi
 2. Add your account on your home linux user folder ~/.pypirc file
@@ -17,8 +19,8 @@ Your .pypirc file should looks like::
     password: my-super-password
 
 
-## Migrate on package
-
+Migrate on package
+------------------
 
 
 Account to add to packages:
@@ -27,3 +29,4 @@ Account to add to packages:
 - imio
 - laz
 - mpeeters
+- Manu-iMio
