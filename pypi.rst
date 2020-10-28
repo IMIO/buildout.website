@@ -61,3 +61,5 @@ Packages already migrated
 - cpskin.menu
 - cpskin.policy
 - cpskin.theme
+- cpskin.agenda
+- imio.behavior.teleservices
