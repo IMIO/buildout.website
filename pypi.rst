@@ -60,3 +60,4 @@ Packages already migrated
 - cpskin.workflow
 - cpskin.menu
 - cpskin.policy
+- cpskin.theme
