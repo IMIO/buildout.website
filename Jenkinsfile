@@ -7,31 +7,10 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr:'50'))
     }
     stages {
-        stage('Initialize'){
-            steps {
-                script {
-                    checkout scm
-                    SKIP_PATTERN = ".*?(ci.)?skip(.ci)?.*"
-                    SKIP = false
-                    commitMessage = sh(script: "git log --oneline -1", returnStdout: true)
-                    commitMessage = commitMessage.trim()
-                    commitMessage = commitMessage.toLowerCase()
-                    echo "commitMessage = '${commitMessage}'"
-                    SKIP = BRANCH_NAME == "main" && commitMessage ==~ SKIP_PATTERN
-                    echo "SKIP = ${SKIP}"
-                    if (SKIP == true) {
-                        currentBuild.result = 'NOT_BUILT'
-                    }
-                }
-            }
-        }
         stage('Build') {
             agent any
             when {
-                allOf {
-                    expression {SKIP == false}
-                    branch "main"
-                }
+                branch "main"
             }
             steps {
                 sh 'make eggs'
@@ -40,11 +19,8 @@ pipeline {
         }
         stage('Push image to staging registry') {
             agent any
-                when {
-                allOf {
-                    expression {SKIP == false}
-                    branch "main"
-                }
+            when {
+                branch "main"
             }
             steps {
                 pushImageToRegistry (
@@ -58,7 +34,6 @@ pipeline {
             when {
                 allOf {
                     branch "main"
-                    expression {SKIP == false}
                     expression {
                         currentBuild.result == null || currentBuild.result == 'SUCCESS'
                     }
