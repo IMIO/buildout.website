@@ -63,3 +63,12 @@ Packages already migrated
 - cpskin.theme
 - cpskin.agenda
 - imio.behavior.teleservices
+- imio.gdpr
+- imio.media
+- plone.app.stagingbehavior : Problem with version (+imio1)
+- collective.directory
+- collective.faceted.taxonomywidget
+- collective.schedulefield
+- collective.printrss
+- collective.sticky
+- cpskin.cirkwi
