@@ -58,3 +58,4 @@ Packages already migrated
 - cpskin.contenttypes
 - cpskin.demo
 - cpskin.workflow
+- cpskin.menu
