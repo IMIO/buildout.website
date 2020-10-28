@@ -52,23 +52,25 @@ Account to add to packages
 Packages already migrated
 -------------------------
 
-- cpksin.caching
-- cpskin.core
-- cpskin.citizen
-- cpskin.contenttypes
-- cpskin.demo
-- cpskin.workflow
-- cpskin.menu
-- cpskin.policy
-- cpskin.theme
-- cpskin.agenda
-- imio.behavior.teleservices
-- imio.gdpr
-- imio.media
-- plone.app.stagingbehavior : Problem with version (+imio1)
 - collective.directory
 - collective.faceted.taxonomywidget
 - collective.schedulefield
 - collective.printrss
 - collective.sticky
+- cpskin.agenda
+- cpksin.caching
 - cpskin.cirkwi
+- cpskin.citizen
+- cpskin.core
+- cpskin.contenttypes
+- cpskin.demo
+- cpskin.localfood
+- cpskin.menu
+- cpskin.minisite
+- cpskin.policy
+- cpskin.theme
+- cpskin.workflow
+- imio.behavior.teleservices
+- imio.gdpr
+- imio.media
+- plone.app.stagingbehavior : Problem with version (+imio1)
