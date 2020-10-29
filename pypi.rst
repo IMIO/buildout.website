@@ -54,8 +54,9 @@ Packages already migrated
 
 - collective.directory
 - collective.faceted.taxonomywidget
-- collective.schedulefield
+- collective.preventactions
 - collective.printrss
+- collective.schedulefield
 - collective.sticky
 - cpskin.agenda
 - cpksin.caching
@@ -64,13 +65,28 @@ Packages already migrated
 - cpskin.core
 - cpskin.contenttypes
 - cpskin.demo
+- cpskin.diazotheme.classic
+- cpskin.diazotheme.dream
+- cpskin.diazotheme.dreambasic
+- cpskin.diazotheme.dreamRightPortlet
+- cpskin.diazotheme.dreamRightPortletBasic
+- cpskin.diazotheme.memory
+- cpskin.diazotheme.modern
+- cpskin.diazotheme.retro
+- cpskin.diazotheme.smart
+- cpskin.diazotheme.spirit
+- cpskin.diazotheme.trendy
+- cpskin.diazotheme.trendybasic
+- cpskin.diazotheme.vicinity
 - cpskin.localfood
 - cpskin.menu
 - cpskin.minisite
 - cpskin.policy
+- cpskin.slider
 - cpskin.theme
 - cpskin.workflow
 - imio.behavior.teleservices
+- imio.ckeditortemplates
 - imio.gdpr
 - imio.media
 - plone.app.stagingbehavior : Problem with version (+imio1)
