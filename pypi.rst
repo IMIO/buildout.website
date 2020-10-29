@@ -78,6 +78,7 @@ Packages already migrated
 - cpskin.diazotheme.trendy
 - cpskin.diazotheme.trendybasic
 - cpskin.diazotheme.vicinity
+- cpskin.locales
 - cpskin.localfood
 - cpskin.menu
 - cpskin.minisite
