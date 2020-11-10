@@ -95,8 +95,8 @@ minisites: .env var/instance/minisites bin/python
 	./bin/python scripts/config.py --minisitesfiles
 
 eggs:  ## Copy eggs from docker image to speed up docker build
-	##-docker run --entrypoint='' $(IMAGE_NAME) tar -c -C /home/imio/imio-website eggs | tar x
-	-docker run --entrypoint='' $(IMAGE_NAME) tar -c -C /home/imio/.buildout eggs | tar x
+	-docker run --entrypoint='' $(IMAGE_NAME) tar -c -C /home/imio/imio-website eggs | tar x
+	##-docker run --entrypoint='' $(IMAGE_NAME) tar -c -C /home/imio/.buildout eggs | tar x
 	mkdir -p eggs
 
 ### Locust testing ###
