@@ -52,6 +52,7 @@ Account to add to packages
 Packages already migrated
 -------------------------
 
+- collective.contact.importexport
 - collective.directory
 - collective.faceted.taxonomywidget
 - collective.preventactions
