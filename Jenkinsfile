@@ -7,6 +7,11 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr:'50'))
     }
     stages {
+        stage('Code fetching') {
+            steps {
+                checkout scm
+            }
+        }
         stage('Build') {
             agent any
             when {
