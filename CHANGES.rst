@@ -1,4 +1,4 @@
-release-4.3.20-test2 (unreleased)
+release-4.3.20-test2 (2020-11-19)
 ---------------------------------
 
 - Nothing changed yet.
