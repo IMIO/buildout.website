@@ -45,15 +45,15 @@ pipeline {
             }
         }
         stage('Deploy') {
-            when { tag "release-*" }
+            when {
+                buildingTag()
+            }
             steps {
                 echo 'Deploying only because this commit is tagged...'
                 echo "Branch: $BRANCH_NAME"
                 echo "Tag: $TAG_NAME"
-                moveImageToProdRegistry(
-                    $TAG_NAME,
-                    "iasmartweb/mutual"
-                )
+                echo 'moveImageToProdRegistry($TAG_NAME, "iasmartweb/mutual")'
+                echo 'curl --fail -XPOST --header "Content-Type:application/json" --header "X-Rundeck-Auth-Token:$RUNDECK_TOKEN" https://run.imio.be/api/14/job/dfc15fd1-e07f-43e8-aea2-e34a97cfc65c/run'
                 echo 'You have to start rundeck job now.'
             }
         }
