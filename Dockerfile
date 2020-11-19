@@ -17,7 +17,6 @@ COPY --chown=imio eggs /home/imio/imio-website/eggs/
 COPY --chown=imio *.cfg /home/imio/imio-website/
 COPY --chown=imio scripts /home/imio/imio-website/scripts
 RUN su -c "buildout -c prod.cfg -t 30 -N" -s /bin/sh imio
-RUN ls -lah  /usr/local/lib/python2.7/site-packages
 
 FROM imiobe/base:py2-ubuntu-16.04
 ENV PIP=9.0.3 \
@@ -35,6 +34,8 @@ COPY --from=builder /usr/local/lib/python2.7/site-packages /usr/local/lib/python
 COPY --from=builder /usr/local/lib/python2.7/dist-packages /usr/local/lib/python2.7/dist-packages
 RUN runDeps="poppler-utils wv rsync lynx netcat libxml2 libxslt1.1 libjpeg62 libtiff5 libopenjp2-7" \
   && apt-get update \
-  && apt-get install -y --no-install-recommends $runDeps
+  && apt-get install -y --no-install-recommends $runDeps \
+  && chown imio:imio /home/imio/imio-website
+
 USER imio
 WORKDIR /home/imio/imio-website
