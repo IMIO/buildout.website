@@ -4,8 +4,16 @@ CHANGELOG
 4.3.20-1 (unreleased)
 ---------------------
 
-- cpskin.slider : slick_slider : Print short date format if show_day_and_month is true.
-  [cboulanger]
+- cpskin.core 0.13.44
+
+    - WEB-3476 : Move minisite logo outside banner
+      [laulaz]
+
+- cpskin.slider 1.2.10
+
+    - [WEB-3478] slick_slider : Print short date format if show_day_and_month is true.
+      [boulch]
+
 - Update to Plone 4.3.20.
   [cboulanger]
 
