@@ -61,4 +61,11 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            node(null)  {
+                sh "rm -rf eggs/"
+            }
+        }
+    }
 }
