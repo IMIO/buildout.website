@@ -23,12 +23,10 @@ pipeline {
                 branch "main"
             }
             steps {
-                echo '''
-                  pushImageToRegistry (
+                pushImageToRegistry (
                     env.BUILD_ID,
                     "iasmartweb/mutual"
-                  )
-                '''
+                )
             }
         }
         stage('Deploy to staging') {
@@ -42,8 +40,8 @@ pipeline {
                 }
             }
             steps {
-                echo "mco shell run 'docker pull docker-staging.imio.be/iasmartweb/mutual:$BUILD_ID' -I /^site-staging/ -I /^staging.imio.be/"
-                echo "mco shell run '/srv/docker_scripts/website-update-all-images.sh' -t 1200 --tail -I /^site-staging/ -I /^staging.imio.be/ "
+                sh "mco shell run 'docker pull docker-staging.imio.be/iasmartweb/mutual:$BUILD_ID' -I /^site-staging/ -I /^staging.imio.be/"
+                sh "mco shell run '/srv/docker_scripts/website-update-all-images.sh' -t 1200 --tail -I /^site-staging/ -I /^staging.imio.be/""
             }
         }
         stage('Deploy') {
@@ -54,7 +52,7 @@ pipeline {
                 echo 'Deploying only because this commit is tagged...'
                 echo "Branch: $BRANCH_NAME"
                 echo "Tag: $TAG_NAME"
-                echo 'moveImageToProdRegistry($TAG_NAME, "iasmartweb/mutual")'
+                moveImageToProdRegistry($TAG_NAME, "iasmartweb/mutual")
                 echo 'curl --fail -XPOST --header "Content-Type:application/json" --header "X-Rundeck-Auth-Token:$RUNDECK_TOKEN" https://run.imio.be/api/14/job/dfc15fd1-e07f-43e8-aea2-e34a97cfc65c/run'
                 echo 'You have to start rundeck job now.'
             }
