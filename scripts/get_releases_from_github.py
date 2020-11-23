@@ -276,7 +276,6 @@ for product in lst_products:
     # ??
     if "captcha" in product.get("label"):
         continue
-        # import ipdb; ipdb.set_trace()
     github_commits_url = "https://api.github.com/repos/{}/{}/commits{}".format(
         product.get("remote"), product.get("label"),
         "?sha={}".format(product.get("branch")) if product.has_key("branch") else ""
@@ -300,16 +299,16 @@ for product in lst_products:
             .get("name")
             .encode("utf-8")
         )
-    except Exception:
-        import ipdb;ipdb.set_trace()
+    except Exception as e:
+        print(e)
     if last_commit_date > last_release_date:
         if product.get("check_tags") is True:
             tags = requests.get(github_tags_url, auth=(login, pwd))
             try:
                 dic = json.loads(tags.content)
                 last_tag = dic[0].get("name")
-            except:
-                import ipdb;ipdb.set_trace()
+            except Exception as e:
+                print(e)
         else:
             last_tag = ""
 
