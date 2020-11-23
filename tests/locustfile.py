@@ -15,23 +15,18 @@ class BrowseCpskinMenu(TaskSet):
 
     @task(10)
     def index_page(self):
-        r = self.client.get('/fr')
+        r = self.client.get("/fr")
         pq = PyQuery(r.content)
-        link_elements = pq('#portal-globalnav a.portal-tab-description')
-        # import ipdb; ipdb.set_trace()
-        self.toc_urls = [
-            l.attrib['href'] for l in link_elements
-        ]
+        link_elements = pq("#portal-globalnav a.portal-tab-description")
+        self.toc_urls = [l.attrib["href"] for l in link_elements]
 
     @task(50)
     def load_page(self, url=None):
         url = random.choice(self.toc_urls)
         r = self.client.get(url)
         pq = PyQuery(r.content)
-        link_elements = pq('a.portal-tab-description')
-        self.urls_on_current_page = [
-            l.attrib['href'] for l in link_elements
-        ]
+        link_elements = pq("a.portal-tab-description")
+        self.urls_on_current_page = [l.attrib["href"] for l in link_elements]
 
     @task(30)
     def load_sub_page(self):
@@ -41,6 +36,6 @@ class BrowseCpskinMenu(TaskSet):
 
 class AwesomeUser(HttpLocust):
     task_set = BrowseCpskinMenu
-    host = 'http://portal.localhost'
+    host = "http://portal.localhost"
     min_wait = 2000
     max_wait = 10000
