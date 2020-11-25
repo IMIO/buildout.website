@@ -4,7 +4,10 @@ CHANGELOG
 4.3.20-2 (unreleased)
 ---------------------
 
-- Nothing changed yet.
+- cpskin.theme 0.6.51
+
+  - Keep old minisite-logo behavior intact when there is no banner + avoid error in pypi renderer
+    [laulaz]
 
 
 4.3.20-1 (2020-11-23)
