@@ -4,6 +4,11 @@ CHANGELOG
 4.3.20-2 (unreleased)
 ---------------------
 
+- cpskin.slider 1.2.11
+
+  - slick_slider : Print short date : Print short date format when only one day is select but from an hour to another.
+    [boulch]
+
 - cpskin.theme 0.6.51
 
   - Keep old minisite-logo behavior intact when there is no banner + avoid error in pypi renderer
