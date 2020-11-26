@@ -45,6 +45,7 @@ pipeline {
             }
         }
         stage('Deploy') {
+            agent any
             when {
                 buildingTag()
             }
