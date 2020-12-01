@@ -8,6 +8,7 @@ pipeline {
     }
     stages {
         stage('Build') {
+            scmSkip(deleteBuild: true, skipPattern:'.*\\[ci skip\\].*')
             agent any
             when {
                 branch "main"
