@@ -55,6 +55,7 @@ pipeline {
                 echo "Branch: $BRANCH_NAME"
                 echo "Tag: $TAG_NAME"
                 moveImageToProdRegistry(env.TAG_NAME, "iasmartweb/mutual")
+                echo "Schedule Rundeck job"
                 sh 'curl -XPOST -H "x-Rundeck-Auth-Token:$RUNDECK_TOKEN" -F "runAtTime:`date --date=\"05:00 tomorrow\" +\"%Y-%m-%dT%H:%M:%S%z\"`" -F "option.tags=$TAG_NAME" https://run.imio.be/api/14/job/194bda58-e3d5-4fbe-81d7-3e9fbfd8ebad/run'
                 mail to: 'support-web@imio.be',
                   subject: "New released: ${currentBuild.displayName}",
