@@ -8,12 +8,12 @@ pipeline {
     }
     stages {
         stage('Build') {
-            scmSkip(deleteBuild: true, skipPattern:'.*\\[ci skip\\].*')
             agent any
             when {
                 branch "main"
             }
             steps {
+                scmSkip(deleteBuild: true, skipPattern:'.*\\[ci skip\\].*')
                 sh 'make eggs'
                 sh 'make docker-image'
             }
