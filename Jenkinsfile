@@ -71,7 +71,7 @@ pipeline {
         stage('Deploy now') {
             agent any
             when {
-                tag "*bugfix*" }
+                tag "*bugfix*"
             }
             steps {
                 echo 'Deploying now'
@@ -84,7 +84,6 @@ pipeline {
                 echo 'Upgrade finished.'
             }
         }
-
     }
     post {
         always {
