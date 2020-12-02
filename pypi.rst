@@ -19,8 +19,8 @@ Your .pypirc file should looks like::
     password: my-super-password
 
 
-Migrate on package
-------------------
+Migrate one package
+-------------------
 
 1. Go to the package and co latest tag:
 example::
@@ -43,8 +43,8 @@ Account to add to packages
 - cboulanger
 - imio
 - laz
-- mpeeters
 - Manu-iMio
+- mpeeters
 - nballeux
 - tlambert
 

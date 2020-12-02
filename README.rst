@@ -12,7 +12,7 @@ Make new release of a single package
 
 To make release of a package:
 
-- Configure your .pypirc file (see iMio internal documentation)
+- Configure your .pypirc file (see iMio internal documentation) to be able to push pacakge on pypi.org
 - Install zest.releaser
 
 After that, you can make a release with zest.releaser
@@ -22,11 +22,13 @@ After that, you can make a release with zest.releaser
 Update version of your package
 ==============================
 
-Go to buildout-website (https://github.com/IMIO/buildout.website) and in versions-base.cfg file, change version of package you just release.
+- Update versions-base.cfg file, change version of package you just release
+- Update changelog on CHANGES.rst file.
 
 Data
---------
-make rsync will data. You can add blobs or data args (b for blobstorage, d for Data.fs)::
+----
+You can get data from production instance on our local env with `make rsync` command.
+You can use blobs or data args (b for blobstorage, d for Data.fs)::
 
     make rsync d
 
