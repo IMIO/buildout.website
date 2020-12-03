@@ -14,6 +14,12 @@ pipeline {
           not {
             changelog '.*\\[(ci)?\\-?\\s?skip\\-?\\s?(ci)?\\].*'
           }
+          not {
+            changelog '^Back to development:*'
+          }
+          not {
+            changelog '^Preparing release *'
+          }
         }
       }
       steps {
@@ -28,6 +34,12 @@ pipeline {
           branch "main"
           not {
             changelog '.*\\[(ci)?\\-?\\s?skip\\-?\\s?(ci)?\\].*'
+          }
+          not {
+            changelog '^Back to development:*'
+          }
+          not {
+            changelog '^Preparing release *'
           }
         }
       }
@@ -48,6 +60,12 @@ pipeline {
           }
           not {
             changelog '.*\\[(ci)?\\-?\\s?skip\\-?\\s?(ci)?\\].*'
+          }
+          not {
+            changelog '^Back to development:*'
+          }
+          not {
+            changelog '^Preparing release *'
           }
         }
       }
