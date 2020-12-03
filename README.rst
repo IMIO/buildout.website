@@ -1,33 +1,53 @@
 Introduction
 ------------
-
 This buildout assemble all related configuration of the application zope instance of the iMio iA.Smartweb app.
 
 .. contents:: Table of contents
 
-Update cpskin
+Prerequisite
 -------------
-Make new release of a single package
-====================================
+To make a release you need to:
 
-To make release of a package:
-
-- Configure your .pypirc file (see iMio internal documentation) to be able to push pacakge on pypi.org
 - Install zest.releaser
 
-After that, you can make a release with zest.releaser
+After that, you can make a release with `zest.releaser <https://pypi.org/project/zest.releaser/>`_
 
-**But first check if you have already update changelog (usually on CHANGES.rst file).**
+Deploy on staging
+-----------------
+Each commit on this repository launch a new version of iA.Smartweb app on your staging instances.
 
-Update version of your package
-==============================
+If you want to avoid a new release, you have to add **[ci skip]** on your commit message.
 
-- Update versions-base.cfg file, change version of package you just release
-- Update changelog on CHANGES.rst file.
+To update a package:
 
-Data
-----
-You can get data from production instance on our local env with `make rsync` command.
+- Update version of the package on versions-base.cfg
+- Complete changelog on CHANGES.rst
+
+Deploy on production
+--------------------
+A buildout release is used to deploy all changes on production. Before making a release, you need to check if:
+
+- your repo is up to date (eg. use ``git pull`` command)
+- changelog is filled (see CHANGES.rst file)
+
+Release
+=======
+As explain in `Prerequisite`_ we use `zest.releaser <https://pypi.org/project/zest.releaser/>`_ so you just have to make:
+
+    fullrelease
+
+And that's all. Jenkins will deploy latest docker image on production and restart services next night.
+
+Release a bug fix
+=================
+If you add bugfix on name of the release. Jenkins will restart all instances immediately.
+
+Get data locally
+----------------
+You can get data from production instance on our local env with this command::
+
+    make rsync
+
 You can use blobs or data args (b for blobstorage, d for Data.fs)::
 
     make rsync d
