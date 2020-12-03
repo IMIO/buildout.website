@@ -9,15 +9,14 @@ pipeline {
     stage('Build') {
       agent any
       when {
-        branch "main"
-      }
-      steps {
-        script {
-          if (sh(script: "git log -1 --pretty=%B | fgrep -ie '[skip ci]' -e '[ci skip]'", returnStatus: true) == 0) {
-            currentBuild.result = 'NOT_BUILT'
-            error 'Aborting because commit message contains [skip ci]'
+        allOf{
+          branch "main"
+          not {
+            changelog '.*\\[(ci)?\\-?\\s?skip\\-?\\s?(ci)?\\].*'
           }
         }
+      }
+      steps {
         sh 'make eggs'
         sh 'make docker-image'
       }
@@ -25,7 +24,12 @@ pipeline {
     stage('Push image to staging registry') {
       agent any
       when {
-        branch "main"
+        allOf{
+          branch "main"
+          not {
+            changelog '.*\\[(ci)?\\-?\\s?skip\\-?\\s?(ci)?\\].*'
+          }
+        }
       }
       steps {
         pushImageToRegistry (
@@ -41,6 +45,9 @@ pipeline {
           branch "main"
           expression {
             currentBuild.result == null || currentBuild.result == 'SUCCESS'
+          }
+          not {
+            changelog '.*\\[(ci)?\\-?\\s?skip\\-?\\s?(ci)?\\].*'
           }
         }
       }
@@ -70,7 +77,7 @@ pipeline {
     stage('Deploy now') {
       agent any
       when {
-        tag "*bugfix*"
+        tag ".*bugfix.*"
       }
       steps {
         echo 'Deploying now'
