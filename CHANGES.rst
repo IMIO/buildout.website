@@ -4,7 +4,11 @@ CHANGELOG
 4.3.20-4 (unreleased)
 ---------------------
 
-- Nothing changed yet.
+- python-oembed 0.2.4.imio1
+
+  - Quickfix: Always try to parse JSON (as default) from response
+    Youtube stopped sending correct Content-Type header: text/html instead of JSON
+    [laulaz]
 
 
 4.3.20-bugfix-3 (2020-12-04)
