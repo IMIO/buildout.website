@@ -101,7 +101,7 @@ pipeline {
         echo 'Deploying now'
         echo "Tag: $TAG_NAME"
         echo "Schedule Rundeck job"
-        echo 'curl -XPOST -H "x-Rundeck-Auth-Token:$RUNDECK_TOKEN" -F "option.tags=$TAG_NAME" https://run.imio.be/api/24/job/609802e6-2631-43d2-908f-88822c0f5ea6/run'
+        sh 'curl -XPOST -H "x-Rundeck-Auth-Token:$RUNDECK_TOKEN" -F "option.tags=$TAG_NAME" https://run.imio.be/api/24/job/609802e6-2631-43d2-908f-88822c0f5ea6/run'
         mail to: 'support-web@imio.be',
           subject: "New release is deploying now: ${currentBuild.displayName}",
           body: "The pipeline ${env.JOB_NAME} ${env.BUILD_NUMBER} finished and a new release is starting to update now ${env.fullDisplayName} <br />See <a href='https://github.com/IMIO/buildout.website/blob/main/CHANGES.rst'>Changelog</a>"
