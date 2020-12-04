@@ -111,12 +111,12 @@ pipeline {
   }
   post {
     fixed{
-      mail to: 'support-web@imio.be',
+      mail to: 'support-web+jenkins@imio.be',
         subject: "Fixed Pipeline: ${currentBuild.fullDisplayName}",
         body: "The pipeline ${env.JOB_NAME} ${env.BUILD_NUMBER} is back to normal (${env.BUILD_URL})"
     }
     failure{
-      mail to: 'support-web@imio.be',
+      mail to: 'support-web+jenkins@imio.be',
         subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
         body: "The pipeline${env.JOB_NAME} ${env.BUILD_NUMBER} failed (${env.BUILD_URL})"
     }
