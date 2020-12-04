@@ -4,7 +4,10 @@ CHANGELOG
 4.3.20-3 (unreleased)
 ---------------------
 
-- Nothing changed yet.
+- imio.media 0.2.12
+
+  - Return empty string if no data from provider.
+    [bsuttor]
 
 
 4.3.20-2 (2020-11-26)
