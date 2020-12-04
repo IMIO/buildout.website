@@ -4,7 +4,11 @@ CHANGELOG
 4.3.20-5 (unreleased)
 ---------------------
 
-- Nothing changed yet.
+- collective.pivot 1.0a1
+
+  - initial release  +  added a react and webpack project for the pivot frontend 
+    [thomlamb, boulch]
+
 
 
 4.3.20-bugfix-4 (2020-12-04)
@@ -19,6 +23,7 @@ CHANGELOG
 
 4.3.20-bugfix-3 (2020-12-04)
 ----------------------------
+=======
 
 - imio.media 0.2.12
 
