@@ -4,9 +4,25 @@ CHANGELOG
 4.3.20-5 (unreleased)
 ---------------------
 
+- cpskin.policy 4.3.52
+
+    - Fix setup.py parsing.
+      [bsuttor]
+
+- cpskin.policy 4.3.51
+
+    - WEB-3480: Fix strange error during upgrade step on some of our instance.
+      [bsuttor]
+
+    - WEB-3449: Handle prevent actions in folderish migration
+      [laulaz]
+
+    - WEB-3449: Make folderish migration more robust
+      [laulaz]
+
 - collective.pivot 1.0a1
 
-  - initial release  +  added a react and webpack project for the pivot frontend 
+  - initial release  +  added a react and webpack project for the pivot frontend
     [thomlamb, boulch]
 
 
@@ -23,7 +39,6 @@ CHANGELOG
 
 4.3.20-bugfix-3 (2020-12-04)
 ----------------------------
-=======
 
 - imio.media 0.2.12
 
