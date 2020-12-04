@@ -85,7 +85,7 @@ pipeline {
         echo "Tag: $TAG_NAME"
         moveImageToProdRegistry(env.TAG_NAME, "iasmartweb/mutual")
         echo "Schedule Rundeck job"
-        sh 'curl -XPOST -H "x-Rundeck-Auth-Token:$RUNDECK_TOKEN" -F "runAtTime:`date --date=\"05:00 tomorrow\" +\"%Y-%m-%dT%H:%M:%S%z\"`" -F "option.tags=$TAG_NAME" https://run.imio.be/api/24/job/194bda58-e3d5-4fbe-81d7-3e9fbfd8ebad/run'
+        sh 'curl -XPOST -H "x-Rundeck-Auth-Token:$RUNDECK_TOKEN" -F "runAtTime=`date --date=\"05:00 tomorrow\" +\"%Y-%m-%dT%H:%M:%S%z\"`" -F "option.tag=$TAG_NAME" https://run.imio.be/api/24/job/194bda58-e3d5-4fbe-81d7-3e9fbfd8ebad/run'
         mail to: 'support-web@imio.be',
           subject: "New release will be deploy tomorrow: ${currentBuild.displayName}",
           body: "The pipeline ${env.JOB_NAME} ${env.BUILD_NUMBER} released ${env.fullDisplayName} <br />See <a href='https://github.com/IMIO/buildout.website/blob/main/CHANGES.rst'>Changelog</a><br />Upgrade will start tomorrow at 5am."
@@ -101,7 +101,7 @@ pipeline {
         echo 'Deploying now'
         echo "Tag: $TAG_NAME"
         echo "Schedule Rundeck job"
-        sh 'curl -XPOST -H "x-Rundeck-Auth-Token:$RUNDECK_TOKEN" -F "option.tags=$TAG_NAME" https://run.imio.be/api/24/job/609802e6-2631-43d2-908f-88822c0f5ea6/run'
+        sh 'curl -XPOST -H "x-Rundeck-Auth-Token:$RUNDECK_TOKEN" -F "option.tag=$TAG_NAME" https://run.imio.be/api/24/job/609802e6-2631-43d2-908f-88822c0f5ea6/run'
         mail to: 'support-web@imio.be',
           subject: "New release is deploying now: ${currentBuild.displayName}",
           body: "The pipeline ${env.JOB_NAME} ${env.BUILD_NUMBER} finished and a new release is starting to update now ${env.fullDisplayName} <br />See <a href='https://github.com/IMIO/buildout.website/blob/main/CHANGES.rst'>Changelog</a>"
