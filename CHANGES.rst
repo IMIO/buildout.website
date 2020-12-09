@@ -4,6 +4,24 @@ CHANGELOG
 4.3.20-5 (unreleased)
 ---------------------
 
+- cpskin.diazotheme.newDream 0.1.14
+
+    - WEB-3476: Move minisite logo outside banner
+      We want to keep original behavior for all themes except newdream
+      [laulaz]
+
+- cpskin.theme 0.6.52
+
+    - WEB-3476: Revert Keep old minisite-logo behavior intact when there is no banner
+      We want to keep original behavior for all themes except newdream
+      [laulaz]
+
+- cpskin.core 0.13.45
+
+    - WEB-3476: Revert Move minisite logo outside banner
+      We want to keep original behavior for all themes except newdream
+      [laulaz]
+
 - cpskin.policy 4.3.52
 
     - Fix setup.py parsing.
