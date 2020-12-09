@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-4.3.20-5 (unreleased)
+4.3.20-5 (2020-12-09)
 ---------------------
 
 - cpskin.diazotheme.newDream 0.1.14
