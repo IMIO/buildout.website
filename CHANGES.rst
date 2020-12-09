@@ -4,7 +4,10 @@ CHANGELOG
 4.3.20-6 (unreleased)
 ---------------------
 
-- Nothing changed yet.
+- cpskin.minisite 1.1.8
+
+    - WEB-3377: Fix traversing redirection where there are views / attributes in URL
+      [laulaz]
 
 
 4.3.20-5 (2020-12-09)
