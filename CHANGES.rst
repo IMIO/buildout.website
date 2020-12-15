@@ -4,7 +4,9 @@ CHANGELOG
 4.3.20-7 (unreleased)
 ---------------------
 
-- Nothing changed yet.
+- collective.pivot 1.0a2
+
+  - Change style of pivot view / Split css and js on webpack build
 
 
 4.3.20-6 (2020-12-14)
