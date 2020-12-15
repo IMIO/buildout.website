@@ -95,7 +95,13 @@ pipeline {
     stage('Deploy now') {
       agent any
       when {
-        tag "quick*"
+        allOf {
+          buildingTag()
+          expression {
+            echo "Tag is ${env.TAG_NAME}"
+              return env.TAG_NAME.contains('quick')
+          }
+        }
       }
       steps {
         echo 'Deploying now'
