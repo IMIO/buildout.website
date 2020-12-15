@@ -95,7 +95,7 @@ pipeline {
     stage('Deploy now') {
       agent any
       when {
-        tag "bugfix*"
+        tag "quick*"
       }
       steps {
         echo 'Deploying now'

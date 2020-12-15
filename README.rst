@@ -38,9 +38,9 @@ As explain in `Prerequisite`_ we use `zest.releaser <https://pypi.org/project/ze
 
 And that's all. Jenkins will deploy latest docker image on production and restart services next night.
 
-Release a bug fix
-=================
-If you add bugfix on name of the release. Jenkins will restart all instances immediately.
+Release a immediately
+=====================
+If you add *quick* on name of the release. Jenkins will restart all instances immediately.
 
 Get data locally
 ----------------
