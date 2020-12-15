@@ -4,6 +4,11 @@ CHANGELOG
 4.3.20-7 (unreleased)
 ---------------------
 
+- imio.media 0.2.13
+
+  - Use https to call oembed on youtube.
+    [bsuttor]
+
 - collective.pivot 1.0a2
 
   - Change style of pivot view / Split css and js on webpack build
