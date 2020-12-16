@@ -80,7 +80,7 @@ pipeline {
         buildingTag()
       }
       steps {
-        echo 'Deploying only because this commit is tagged...'
+        echo 'Deploying only because this commit is tagged.'
         echo "Branch: $BRANCH_NAME"
         echo "Tag: $TAG_NAME"
         moveImageToProdRegistry(env.TAG_NAME, "iasmartweb/mutual")
@@ -106,7 +106,7 @@ pipeline {
       steps {
         echo 'Deploying now'
         echo "Tag: $TAG_NAME"
-        echo "Schedule Rundeck job"
+        echo "Start Rundeck job"
         sh 'curl -XPOST -H "x-Rundeck-Auth-Token:$RUNDECK_TOKEN" -F "option.tag=$TAG_NAME" https://run.imio.be/api/24/job/609802e6-2631-43d2-908f-88822c0f5ea6/run'
         mail to: 'support-web@imio.be',
           subject: "New release is deploying now: ${currentBuild.displayName}",
@@ -124,7 +124,7 @@ pipeline {
     failure{
       mail to: 'support-web+jenkins@imio.be',
         subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
-        body: "The pipeline${env.JOB_NAME} ${env.BUILD_NUMBER} failed (${env.BUILD_URL})"
+        body: "The pipeline ${env.JOB_NAME} ${env.BUILD_NUMBER} failed (${env.BUILD_URL})"
     }
     always {
       node(null)  {
