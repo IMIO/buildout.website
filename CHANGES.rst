@@ -4,7 +4,10 @@ CHANGELOG
 4.3.20-8 (unreleased)
 ---------------------
 
-- Nothing changed yet.
+- collective.pivot 1.0a2
+  
+  - improvement of the development environment to react (less, svg), addition of styles.
+    [thomlamb]
 
 
 4.3.20-quick-7 (2020-12-15)
