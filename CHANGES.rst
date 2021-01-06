@@ -4,6 +4,11 @@ CHANGELOG
 4.3.20-8 (unreleased)
 ---------------------
 
+- cpskin.contenttypes 1.0.11
+
+  - Remove lead-image out of procedure template 
+    [boulch]
+
 - collective.pivot 1.0a2
   
   - improvement of the development environment to react (less, svg), addition of styles.
