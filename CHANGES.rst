@@ -6,7 +6,7 @@ CHANGELOG
 
 - cpskin.contenttypes 1.0.11
 
-  - Remove lead-image out of procedure template 
+  - WEBLIE-81 : Remove lead-image out of procedure template 
     [boulch]
 
 - collective.pivot 1.0a2
