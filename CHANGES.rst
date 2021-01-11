@@ -4,6 +4,11 @@ CHANGELOG
 4.3.20-8 (unreleased)
 ---------------------
 
+- collective.anysurfer 1.4.2
+
+  - Breadcrumb is already in a "div" in Plone4, so, we override plone.app.layout.viewlets.path_bar.pt. only for Plone5.
+    [boulch]
+
 - cpskin.contenttypes 1.0.11
 
   - WEBLIE-81 : Remove lead-image out of procedure template 
