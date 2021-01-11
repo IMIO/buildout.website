@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-4.3.20-8 (unreleased)
+4.3.20-8 (2021-01-11)
 ---------------------
 
 - collective.anysurfer 1.4.2
