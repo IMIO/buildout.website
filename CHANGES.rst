@@ -4,7 +4,7 @@ CHANGELOG
 4.3.20-9 (unreleased)
 ---------------------
 
-- cpskin.policy 4.3.53
+- cpskin.policy 4.3.54
 
   - WEB-3487 : Install or update new collective.anysurfer accessibility text.
     [boulch]
