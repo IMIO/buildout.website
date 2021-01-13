@@ -4,6 +4,11 @@ CHANGELOG
 4.3.20-9 (unreleased)
 ---------------------
 
+- cpskin.core 0.13.46
+
+  - WEB-3423 : Add an option to view/hide a link to accessbility text in footer. 
+    [boulch]
+
 - cpskin.policy 4.3.54
 
   - WEB-3487 : Install or update new collective.anysurfer accessibility text.
