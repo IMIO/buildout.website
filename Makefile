@@ -81,6 +81,9 @@ upgrade: .env var/instance/minisites
 docker-permissions:
 	docker-compose run --rm -u root zeo chown -R imio:imio /home/imio/imio-website/var
 
+local-permissions:
+	sudo chown -R $(USER):$(USER) var
+
 up: minisites var/instance/minisites docker-permissions
 	# docker-compose run --rm --service-ports instance
 	docker-compose up
