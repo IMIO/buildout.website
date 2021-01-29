@@ -20,6 +20,7 @@ services:
     depends_on:
       - reverseproxy
     volumes:
+      - ./var/blobstorage:/home/imio/imio-website/var/blobstorage
       - ./var/instance/minisites:/home/imio/imio-website/var/instance/minisites
     environment:
       - MEMCACHE_SERVER=172.17.0.1
