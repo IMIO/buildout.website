@@ -4,6 +4,11 @@ CHANGELOG
 4.3.20-9 (unreleased)
 ---------------------
 
+- collective.pivot 1.0a4
+
+  - Fix offer codeCgt.
+    [boulch]
+
 - cpskin.policy 4.3.55
 
   - Small changes in accessibility text. 
