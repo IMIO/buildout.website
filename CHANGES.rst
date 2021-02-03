@@ -3,6 +3,12 @@ CHANGELOG
 
 4.3.20-9 (unreleased)
 ---------------------
+- collective.pivot 1.0a4
+
+  - Improved UI
+  - Modification react to display the popup from the map to the hover items.
+  - Improved accessibility.
+    [thomlamb]
 
 - collective.pivot 1.0a4
 
