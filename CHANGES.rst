@@ -4,7 +4,10 @@ CHANGELOG
 4.3.20-10 (unreleased)
 ----------------------
 
-- Nothing changed yet.
+- cpskin.core 0.13.47
+
+  - Fix upgrade step that was reinstalling whole cpskin.core
+    [laulaz]
 
 
 4.3.20-9 (2021-02-04)
