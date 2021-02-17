@@ -4,7 +4,10 @@ CHANGELOG
 4.3.20-11 (unreleased)
 ----------------------
 
-- Nothing changed yet.
+- cpskin.core 0.13.48
+
+  - Fix upgrade step that was reinstalling whole cpskin.correct
+    [laulaz]
 
 
 4.3.20-10 (2021-02-16)
@@ -12,8 +15,8 @@ CHANGELOG
 
 - cpskin.core 0.13.47
 
-  - Fix upgrade step that was reinstalling whole cpskin.core
-    [laulaz]
+  - Change of a css property for a better display of the mini-site navigation
+    [thomlamb]
 
 
 4.3.20-9 (2021-02-04)
@@ -32,12 +35,12 @@ CHANGELOG
 
 - cpskin.policy 4.3.55
 
-  - Small changes in accessibility text. 
+  - Small changes in accessibility text.
     [boulch]
 
 - cpskin.core 0.13.46
 
-  - WEB-3423 : Add an option to view/hide a link to accessbility text in footer. 
+  - WEB-3423 : Add an option to view/hide a link to accessbility text in footer.
     [boulch]
 
 - cpskin.policy 4.3.54
@@ -56,11 +59,11 @@ CHANGELOG
 
 - cpskin.contenttypes 1.0.11
 
-  - WEBLIE-81 : Remove lead-image out of procedure template 
+  - WEBLIE-81 : Remove lead-image out of procedure template
     [boulch]
 
 - collective.pivot 1.0a2
-  
+
   - improvement of the development environment to react (less, svg), addition of styles.
     [thomlamb]
 
