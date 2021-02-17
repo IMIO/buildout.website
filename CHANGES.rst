@@ -4,6 +4,11 @@ CHANGELOG
 4.3.20-11 (unreleased)
 ----------------------
 
+- cpskin.locales 0.5.37
+
+  - Update translation files
+    [boulch]
+
 - cpskin.core 0.13.48
 
   - Fix upgrade step that was reinstalling whole cpskin.correct
