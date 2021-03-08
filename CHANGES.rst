@@ -4,7 +4,10 @@ CHANGELOG
 4.3.20-12 (unreleased)
 ----------------------
 
-- Nothing changed yet.
+- imio.prettylink 1.18
+
+  - Improve check for file when adding @@download in url.
+    [laz, boulch]
 
 
 4.3.20-11 (2021-02-17)
