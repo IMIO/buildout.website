@@ -4,6 +4,20 @@ CHANGELOG
 4.3.20-12 (unreleased)
 ----------------------
 
+- cpskin.contenttypes 1.0.12
+
+  - e_guichet field is printing like a link in template
+  [boulch]
+
+  - Add new procedure validator
+  [boulch]
+
+  - e_guichet field always available (even if imio.behavior.teleservice is installed)
+  [boulch]
+
+  - Fix / update buildout & dependencies
+  [laulaz]
+
 - imio.prettylink 1.18
 
   - Improve check for file when adding @@download in url.
