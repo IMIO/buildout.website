@@ -3,7 +3,11 @@ CHANGELOG
 
 4.3.20-12 (unreleased)
 ----------------------
+- cpskin.core 0.13.49
 
+  - Removal of the underline style on the internal page menu and comma removal for contact addresses
+  [thomlamb]
+  
 - cpskin.contenttypes 1.0.12
 
   - e_guichet field is printing like a link in template
