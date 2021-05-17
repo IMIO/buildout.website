@@ -8,6 +8,22 @@ CHANGELOG
   - Removal of the underline style on the internal page menu and comma removal for contact addresses
   [thomlamb]
   
+- imio.behavior.teleservices 1.0.4
+
+  - Remove useless browser view
+  [boulch]
+
+- cpskin.contenttypes 1.0.13
+  
+  - Build more specific procedure interface
+  [boulch]
+
+  - Remove useless index because template si specifying in zcml file
+  [boulch]
+    
+  - Add add_view Procedure expression
+  [boulch]
+
 - cpskin.contenttypes 1.0.12
 
   - e_guichet field is printing like a link in template
