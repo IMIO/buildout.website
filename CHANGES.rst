@@ -3,8 +3,20 @@ CHANGELOG
 
 4.3.20-13 (unreleased)
 ----------------------
+- imio.behavior.teleservices 1.0.5
 
-- Nothing changed yet.
+  - Fix query and authentication to get procedures from ia.teleservices.
+    [boulch]
+
+- cpskin.core 0.13.50
+
+  - Fix : Avoid bug when collection return other brains than events 
+    [boulch]
+
+- collective.contact.core 1.37
+
+  - Add image path when exporting 
+    [boulch]
 
 
 4.3.20-12 (2021-05-18)
