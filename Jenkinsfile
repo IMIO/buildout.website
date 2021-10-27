@@ -3,8 +3,8 @@
 dockerDeliveryPipeline (
   imageName: "iasmartweb/mutual",
   productId: "website",
-  updateStagingRundeckJobId: "a80f9c0f-b25f-46e1-8f07-497614f70d8c",
-  updateRundeckJobId: "194bda58-e3d5-4fbe-81d7-3e9fbfd8ebad",
-  updateNowRundeckJobId: "609802e6-2631-43d2-908f-88822c0f5ea6",
+  updateStagingRundeckJobId: "ab1d41fe-589c-4df1-848e-2678081c3359",
+  updateRundeckJobId: " a09d4b0b-371e-4b97-8d59-afcc63aabce7 ",
+  updateNowRundeckJobId: "db5ba590-1c3a-4a87-b17b-7936c333ca3b",
   suffixEmail: "support-web",
 )
