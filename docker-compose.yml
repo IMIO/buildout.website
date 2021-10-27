@@ -30,6 +30,8 @@ services:
       - DOMAINS=localhost
       - ZEO_HOST=db
       - ZEO_PORT=8100
+      - ZODB_CACHE_SIZE=30000
+      - ZEO_CLIENT_CACHE_SIZE=256MB
     command: /home/imio/imio-website/bin/instance fg
     healthcheck:
       test: ['CMD', 'nc', '-z', '-w5', '127.0.0.1', '8081']
@@ -42,3 +44,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
       - $PWD/traefik.toml:/etc/traefik/traefik.toml
+  varnish:
+    image: varnish:6.5.1
+    volumes:
+      - $PWD/varnish.vcl:/etc/varnish/default.vcl:ro

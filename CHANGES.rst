@@ -3,6 +3,10 @@ CHANGELOG
 
 4.3.20-13 (unreleased)
 ----------------------
+
+- Use environment variables for ZODB_CACHE_SIZE and ZEO_CLIENT_CACHE_SIZE. So we can override it on docker.
+  [bsuttor]
+
 - imio.behavior.teleservices 1.0.5
 
   - Fix query and authentication to get procedures from ia.teleservices.
@@ -10,12 +14,12 @@ CHANGELOG
 
 - cpskin.core 0.13.50
 
-  - Fix : Avoid bug when collection return other brains than events 
+  - Fix : Avoid bug when collection return other brains than events
     [boulch]
 
 - collective.contact.core 1.37
 
-  - Add image path when exporting 
+  - Add image path when exporting
     [boulch]
 
 
@@ -25,20 +29,20 @@ CHANGELOG
 
   - Removal of the underline style on the internal page menu and comma removal for contact addresses
   [thomlamb]
-  
+
 - imio.behavior.teleservices 1.0.4
 
   - Remove useless browser view
   [boulch]
 
 - cpskin.contenttypes 1.0.13
-  
+
   - Build more specific procedure interface
   [boulch]
 
   - Remove useless index because template si specifying in zcml file
   [boulch]
-    
+
   - Add add_view Procedure expression
   [boulch]
 
