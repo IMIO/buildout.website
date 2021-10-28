@@ -4,6 +4,11 @@ CHANGELOG
 4.3.20-13 (unreleased)
 ----------------------
 
+- cpskin.core 0.13.51
+  
+  - Fix : Avoid event_listing can be play on any objects. 
+    [boulch]
+
 - Use environment variables for ZODB_CACHE_SIZE and ZEO_CLIENT_CACHE_SIZE. So we can override it on docker.
   [bsuttor]
 
@@ -25,40 +30,41 @@ CHANGELOG
 
 4.3.20-12 (2021-05-18)
 ----------------------
+
 - cpskin.core 0.13.49
 
   - Removal of the underline style on the internal page menu and comma removal for contact addresses
-  [thomlamb]
+    [thomlamb]
 
 - imio.behavior.teleservices 1.0.4
 
   - Remove useless browser view
-  [boulch]
+    [boulch]
 
 - cpskin.contenttypes 1.0.13
 
   - Build more specific procedure interface
-  [boulch]
+    [boulch]
 
   - Remove useless index because template si specifying in zcml file
-  [boulch]
+    [boulch]
 
   - Add add_view Procedure expression
-  [boulch]
+    [boulch]
 
 - cpskin.contenttypes 1.0.12
 
   - e_guichet field is printing like a link in template
-  [boulch]
+    [boulch]
 
   - Add new procedure validator
-  [boulch]
+    [boulch]
 
   - e_guichet field always available (even if imio.behavior.teleservice is installed)
-  [boulch]
+    [boulch]
 
   - Fix / update buildout & dependencies
-  [laulaz]
+    [laulaz]
 
 - imio.prettylink 1.18
 
