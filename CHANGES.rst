@@ -4,7 +4,12 @@ CHANGELOG
 4.3.20-14 (unreleased)
 ----------------------
 
-- Nothing changed yet.
+- cpskin.policy 4.3.56
+  
+  - Add subscriber (and upgrade step) to remove (duplicated) contact behavior from organization 
+    Behavior may come back with collective.contact.core TypeInfo 
+    [boulch]
+
 
 
 4.3.20-13 (2021-10-28)
