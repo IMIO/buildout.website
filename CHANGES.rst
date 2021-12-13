@@ -4,7 +4,16 @@ CHANGELOG
 4.3.20-15 (unreleased)
 ----------------------
 
-- Nothing changed yet.
+- cpskin.core 0.14
+
+    - WEB-3260: Add new cookies overlay based on collective privcay & iaweb.privacy
+      iframes & language selectors are handled through JS code to avoid caching problems
+      [laulaz]
+
+- imio.gdpr 1.2
+
+    - Add cookies policy default text & logic (same as legal mentions)
+      [laulaz]
 
 
 4.3.20-14 (2021-11-15)
@@ -15,7 +24,6 @@ CHANGELOG
   - Add subscriber (and upgrade step) to remove (duplicated) contact behavior from organization 
     Behavior may come back with collective.contact.core TypeInfo 
     [boulch]
-
 
 
 4.3.20-13 (2021-10-28)
