@@ -4,6 +4,11 @@ CHANGELOG
 4.3.20-15 (unreleased)
 ----------------------
 
+- cpskin.locales 0.5.38
+
+    - WEB-3260: Add translations for privacy overlay
+      [laulaz]
+
 - cpskin.core 0.14
 
     - WEB-3260: Add new cookies overlay based on collective privcay & iaweb.privacy
