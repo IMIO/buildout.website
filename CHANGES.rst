@@ -4,6 +4,17 @@ CHANGELOG
 4.3.20-15 (unreleased)
 ----------------------
 
+- cpskin.theme 0.6.54
+
+    - WEB-3524: Change views permissions that are used in diazo manifest.
+      Fix some recurring unauthorized access to these views.
+      [boulch]
+
+- cpskin.theme 0.6.53
+
+    - Hide the export button for anonymous users
+      [thomlamb]
+
 - cpskin.locales 0.5.38
 
     - WEB-3260: Add translations for privacy overlay
