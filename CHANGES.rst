@@ -4,7 +4,13 @@ CHANGELOG
 4.3.20-16 (unreleased)
 ----------------------
 
-- Nothing changed yet.
+- cpskin.core 0.14.1
+
+    - SUP-21477: Allow consent form display on minisite (they are not INavigationRoot)
+      [laulaz]
+
+    - WEB-3595: Fix traceback when iframes have no width / height attributes
+      [laulaz]
 
 
 4.3.20-15 (2022-01-10)
