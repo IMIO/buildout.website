@@ -4,7 +4,10 @@ CHANGELOG
 4.3.20-17 (unreleased)
 ----------------------
 
-- Nothing changed yet.
+- cpskin.core 0.14.2
+
+    - SUP-21477: Fix consent form override
+      [laulaz]
 
 
 4.3.20-quick-16 (2022-01-11)
