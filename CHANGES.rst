@@ -1,10 +1,11 @@
 CHANGELOG
 =========
 
-4.3.20-18 (unreleased)
-----------------------
+4.3.20-quick-18 (2022-01-12)
+----------------------------
 
-- Nothing changed yet.
+- Empty release to force a quick promote after a failed build
+  [laulaz]
 
 
 4.3.20-quick-17 (2022-01-11)
