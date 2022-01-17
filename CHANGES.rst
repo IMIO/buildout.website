@@ -4,7 +4,14 @@ CHANGELOG
 4.3.20-19 (unreleased)
 ----------------------
 
-- Nothing changed yet.
+- cpskin.core 0.14.3
+
+    - Fix JS transformations on consent form: collective.privacy JS is not included
+      on this form, so we need to move that code in a everywhere-included resource
+      [laulaz]
+
+    - SUP-21477: Use Allow as default value on cookies consent form
+      [laulaz]
 
 
 4.3.20-quick-18 (2022-01-12)
