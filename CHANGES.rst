@@ -4,6 +4,35 @@ CHANGELOG
 4.3.20-19 (unreleased)
 ----------------------
 
+- cpskin.core 0.14.4
+
+    - WEB-3260: Styles for cookies viewlets.
+      [thomlamb]
+
+    - SUP-21625: Fix iframe class removal if specified manually
+      [laulaz]
+
+    - SUP-21477: Change cookies viewlet / overlay logic.
+      We now show overlay only to see detailed options about cookies because viewlet
+      allows to Accept / Refuse all cookies directly.
+      [laulaz]
+
+    - Fix iframe (un)blocking on faceted pages
+      [laulaz]
+
+    - Fix iframe blocked message when there are many iframes on the same page
+      [laulaz]
+
+- cpskin.locales 0.5.39
+
+    - SUP-21477: Override some collective.privacy translations
+      [laulaz]
+
+- iaweb.privacy 1.0a2
+
+    - SUP-21477: Change default cookies texts
+      [laulaz]
+
 - cpskin.core 0.14.3
 
     - Fix JS transformations on consent form: collective.privacy JS is not included
