@@ -4,6 +4,22 @@ CHANGELOG
 4.3.20-19 (unreleased)
 ----------------------
 
+- cpskin.diazotheme.spirit 0.1.47
+
+    - Revert last release to handle cookies consent viewlet in cpskin.core directly
+      [laulaz]
+
+- cpskin.core 0.14.7
+
+    - Fix styles for cookies viewlets
+      [thomlamb]
+
+    - Put cookies viewlet in plone.portaltop (to avoid Diazo manipulations in themes)
+      [laulaz]
+
+    - Add link to cookies preferences in colophon
+      [boulch]
+
 - cpskin.core 0.14.6
 
     - Hide cookies viewlets by default (JS will show it if needed)
