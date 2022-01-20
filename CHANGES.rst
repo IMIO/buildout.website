@@ -4,6 +4,14 @@ CHANGELOG
 4.3.20-19 (unreleased)
 ----------------------
 
+- cpskin.core 0.14.8
+
+    - Move cpskin.privacy_consent viewlet at the top (in portaltop)
+      [laulaz]
+
+    - Fix link to cookies preferences display
+      [laulaz]
+
 - cpskin.locales 0.5.40
 
     - Add a missing translation for cookies preferences in colophon
