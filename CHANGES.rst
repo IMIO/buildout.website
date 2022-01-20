@@ -4,6 +4,46 @@ CHANGELOG
 4.3.20-19 (unreleased)
 ----------------------
 
+- cpskin.locales 0.5.40
+
+    - Add a missing translation for cookies preferences in colophon
+      [boulch]
+
+- cpskin.theme 0.6.56
+
+    - Revert last release to handle cookies viewlet in cpskin.core directly
+      [laulaz]
+
+- cpskin.diazotheme.vicinity 0.6
+
+    - Revert last release to handle cookies viewlet in cpskin.core directly
+      [laulaz]
+
+- cpskin.diazotheme.smart 0.6.29
+
+    - Revert last release to handle cookies viewlet in cpskin.core directly
+      [laulaz]
+
+- cpskin.diazotheme.newDream 0.1.18
+
+    - Revert 0.1.16 release to handle cookies viewlet in cpskin.core directly
+      [laulaz]
+
+- cpskin.diazotheme.memory 0.2.18
+
+    - Revert last release to handle cookies viewlet in cpskin.core directly
+      [laulaz]
+
+- cpskin.diazotheme.dreambasic 0.3.13
+
+    - Revert last release to handle cookies viewlet in cpskin.core directly
+      [laulaz]
+
+- cpskin.diazotheme.dream 0.2.15
+
+    - Revert last release to handle cookies viewlet in cpskin.core directly
+      [laulaz]
+
 - cpskin.diazotheme.spirit 0.1.47
 
     - Revert last release to handle cookies consent viewlet in cpskin.core directly
