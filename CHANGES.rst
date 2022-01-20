@@ -4,6 +4,11 @@ CHANGELOG
 4.3.20-19 (unreleased)
 ----------------------
 
+- cpskin.diazotheme.spirit 0.1.46
+
+    - Add cookies consent viewlet in minisite mode (in Diazo rules)
+      [laulaz]
+
 - cpskin.core 0.14.5
 
     - Fix styles for cookies viewlets
