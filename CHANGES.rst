@@ -4,6 +4,11 @@ CHANGELOG
 4.3.20-19 (unreleased)
 ----------------------
 
+- cpskin.core 0.14.5
+
+    - Fix styles for cookies viewlets
+      [thomlamb]
+
 - cpskin.core 0.14.4
 
     - WEB-3260: Styles for cookies viewlets.
