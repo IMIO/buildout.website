@@ -4,6 +4,67 @@ CHANGELOG
 4.3.20-19 (unreleased)
 ----------------------
 
+- cpskin.core 0.14.6
+
+    - Hide cookies viewlets by default (JS will show it if needed)
+      [laulaz]
+
+    - Fix styles for cookies viewlets
+      [thomlamb]
+
+- cpskin.theme 0.6.55
+
+    - Add cookies consent viewlet in minisite mode (in Diazo rules)
+      [laulaz]
+
+- cpskin.diazotheme.newDream 0.1.17
+
+    - WEB-3210: Revert 0.1.15 changes (that were never put in production)
+      [laulaz, thomlamb]
+
+
+- cpskin.diazotheme.newDream 0.1.16
+
+    - Add cookies consent viewlet in minisite mode (in Diazo rules)
+      [laulaz]
+
+- cpskin.diazotheme.newDream 0.1.15
+
+    - WEB-3210: Addition of a div container for the banner image. 
+      This allows the live search to be able to go beyond the banner
+      [thomlamb]
+
+    - WEB-3210: Modification of the JS parrallax to work with the modifications of the banner.
+      [thomlamb]
+
+    - WEB-3210: Small improvements to the themes
+      [thomlamb]
+
+- cpskin.diazotheme.dream 0.2.14
+
+    - Add cookies consent viewlet in minisite mode (in Diazo rules)
+      [laulaz]
+
+- cpskin.diazotheme.dreambasic 0.3.12
+
+    - Add cookies consent viewlet in minisite mode (in Diazo rules)
+      [laulaz]
+
+- cpskin.diazotheme.memory 0.2.17
+
+    - Add cookies consent viewlet in minisite mode (in Diazo rules)
+      [laulaz]
+
+- cpskin.diazotheme.smart 0.6.28
+
+    - Add cookies consent viewlet in minisite mode (in Diazo rules)
+      [laulaz]
+
+- cpskin.diazotheme.vicinity 0.5
+
+    - Add cookies consent viewlet in minisite mode (in Diazo rules)
+      [laulaz]
+
 - cpskin.diazotheme.spirit 0.1.46
 
     - Add cookies consent viewlet in minisite mode (in Diazo rules)
