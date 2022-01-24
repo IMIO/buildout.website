@@ -4,7 +4,15 @@ CHANGELOG
 4.3.20-20 (unreleased)
 ----------------------
 
-- Nothing changed yet.
+- cpskin.core 0.14.9
+
+    - WEB-3600 : Change permission to fix entering method "allow_iframes on some context.
+      [boulch]
+
+- cpskin.locales 0.5.41
+
+    - Fix translation
+      [laulaz]
 
 
 4.3.20-quick-19 (2022-01-20)
