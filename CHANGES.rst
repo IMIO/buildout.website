@@ -4,6 +4,11 @@ CHANGELOG
 4.3.20-20 (unreleased)
 ----------------------
 
+- cpskin.core 0.14.10
+
+    - Fix styles for cookies viewlets
+      [thomlamb]
+
 - cpskin.core 0.14.9
 
     - WEB-3600 : Change permission to fix entering method "allow_iframes on some context.
