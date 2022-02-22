@@ -4,7 +4,10 @@ CHANGELOG
 4.3.20-21 (unreleased)
 ----------------------
 
-- Nothing changed yet.
+- cpskin.core 0.14.11
+
+  - Add permissions to limit access to vocabulary plone.app.vocabularies.Users + upgrade step.
+    [boulch]
 
 
 4.3.20-20 (2022-01-25)
