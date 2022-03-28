@@ -4,7 +4,13 @@ CHANGELOG
 4.3.20-22 (unreleased)
 ----------------------
 
-- Nothing changed yet.
+- cpskin.citizen 1.4.2
+
+  - SUP-17819: Fix help message for user coordinates
+    [mpeeters]
+
+  - WEB-3411: Color correction for better accessibility
+    [thomlamb]
 
 
 4.3.20-21 (2022-03-09)
