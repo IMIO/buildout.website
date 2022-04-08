@@ -75,6 +75,9 @@ buildout:
 	# docker-compose run --rm zeo bin/develop checkout .
 	docker-compose run --rm instance bash -c "virtualenv . && bin/pip install -I -r requirements.txt && bin/buildout -c docker-dev.cfg"
 
+test-image:
+	echo "to do"
+
 upgrade: .env var/instance/minisites
 	docker-compose run --rm instance bin/upgrade-portals
 
