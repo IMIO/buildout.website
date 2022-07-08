@@ -4,6 +4,9 @@ CHANGELOG
 4.3.20-22 (unreleased)
 ----------------------
 
+- install Hotfix : Products.PloneHotfix20210518 = 1.6, Fixes for remote code execution, cross site scripting,... 
+  [boulch]
+
 - cpskin.citizen 1.4.2
 
   - SUP-17819: Fix help message for user coordinates
