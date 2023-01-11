@@ -4,6 +4,11 @@ CHANGELOG
 4.3.20-22 (unreleased)
 ----------------------
 
+- cpskin.core 0.14.12
+
+  - Add last_login_time, login_time when getting restapi users
+    [boulch]
+
 - install Hotfix : Products.PloneHotfix20210518 = 1.6, Fixes for remote code execution, cross site scripting,... 
   [boulch]
 
