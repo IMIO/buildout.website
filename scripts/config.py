@@ -7,6 +7,7 @@ import json
 import os
 import subprocess
 import urllib
+import requests
 
 
 class Environment:
@@ -74,9 +75,12 @@ class Environment:
             url = "http://infra-api.imio.be/application/{0}/website/production".format(
                 self.env["projectid"]
             )
-            result = json.load(urllib.urlopen(url))
+            url = "http://infra-api.imio.be/application/website"
+            json_result = requests.get(url).json()
+            result = [site for site in json_result if site.get("application_name") == "{0}_website".format(self.env["projectid"]) and site.get("environment") == "production"]
+            # result = json.load(urllib.urlopen(url))
             if len(result) < 0 or isinstance(result, dict):
-                print "Error in {0}".format(url)
+                print("Error in {0}".format(url))
                 return 0
             num = 0
             if len(result) != 1:
@@ -124,10 +128,10 @@ class Environment:
         try:
             subprocess.check_output(test_cmd)
         except subprocess.CalledProcessError:
-            print " ".join(test_cmd)
-            print "You have no right to rsync on {0}, ask sysadmin to add your user to imio group.".format(
+            print(" ".join(test_cmd))
+            print ("You have no right to rsync on {0}, ask sysadmin to add your user to imio group.".format(
                 self.env["serverip"]
-            )  # noqa
+            ))  # noqa
             return 0
         rsync_server_path = "{0}@{1}:/srv/instances/{2}".format(
             user, self.env["serverip"], self.env["projectid"]
