@@ -15,19 +15,19 @@ CHANGELOG
 
 - cpskin.core 0.14.12
 
-  - Add last_login_time, login_time when getting restapi users
-    [boulch]
+    - Add last_login_time, login_time when getting restapi users
+      [boulch]
 
 - install Hotfix : Products.PloneHotfix20210518 = 1.6, Fixes for remote code execution, cross site scripting,... 
   [boulch]
 
 - cpskin.citizen 1.4.2
 
-  - SUP-17819: Fix help message for user coordinates
-    [mpeeters]
+    - SUP-17819: Fix help message for user coordinates
+      [mpeeters]
 
-  - WEB-3411: Color correction for better accessibility
-    [thomlamb]
+    - WEB-3411: Color correction for better accessibility
+      [thomlamb]
 
 
 4.3.20-21 (2022-03-09)
@@ -35,8 +35,8 @@ CHANGELOG
 
 - cpskin.core 0.14.11
 
-  - Add permissions to limit access to vocabulary plone.app.vocabularies.Users + upgrade step.
-    [boulch]
+    - Add permissions to limit access to vocabulary plone.app.vocabularies.Users + upgrade step.
+      [boulch]
 
 
 4.3.20-20 (2022-01-25)
