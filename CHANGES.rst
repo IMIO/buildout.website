@@ -4,7 +4,10 @@ CHANGELOG
 4.3.20-23 (unreleased)
 ----------------------
 
-- Nothing changed yet.
+- cpskin.citizen 1.4.3
+
+    - SUP-21239: Add cache to speed up users searching in citizen vocabulary
+      [laulaz]
 
 
 4.3.20-22 (2023-01-15)
