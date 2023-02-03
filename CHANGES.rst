@@ -4,7 +4,20 @@ CHANGELOG
 4.3.20-24 (unreleased)
 ----------------------
 
-- Nothing changed yet.
+- cpskin.policy 4.3.57
+
+    - WEB-3286: Add upgrade step to improve performances:
+
+      - uninstalls Solgema.fullcalendar and dependencies if possible
+      - removes not found CSS / JS resources
+      - restrict specific CSS / JS resources to authenticated users
+
+    [laulaz]
+
+    - WEB-3260: Remove collective.cookiecuttr installation code
+      Product will be replaced by collective.privacy
+      [laulaz]
+
 
 
 4.3.20-23 (2023-01-17)
