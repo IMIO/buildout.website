@@ -4,7 +4,13 @@ CHANGELOG
 4.3.20-25 (unreleased)
 ----------------------
 
-- Nothing changed yet.
+- cpskin.diazotheme.dreamRightPortletBasic 0.2.9
+
+    - SUP-28893 : Use fragment to get giveADayWidget
+      [boulch]
+
+    - Improve CSS media queries sizes
+      [laulaz]
 
 
 4.3.20-24 (2023-02-06)
@@ -23,7 +29,6 @@ CHANGELOG
     - WEB-3260: Remove collective.cookiecuttr installation code
       Product will be replaced by collective.privacy
       [laulaz]
-
 
 
 4.3.20-23 (2023-01-17)
