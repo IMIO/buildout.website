@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-4.3.20-25 (unreleased)
+4.3.20-25 (2023-03-13)
 ----------------------
 
 - cpskin.diazotheme.dreamRightPortletBasic 0.2.9
