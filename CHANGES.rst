@@ -4,7 +4,10 @@ CHANGELOG
 4.3.20-26 (unreleased)
 ----------------------
 
-- Nothing changed yet.
+- cpskin.policy 4.3.58
+
+    - WEB-3611 : Security fix : Remove image_view_fullscreen from caching
+      [boulch]
 
 
 4.3.20-25 (2023-03-13)
