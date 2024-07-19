@@ -1,5 +1,4 @@
-FROM imiobe/base:py2-ubuntu-20.04 as builder
-MAINTAINER Benoît Suttor <benoit.suttor@imio.be>
+FROM harbor.imio.be/common/base:py2-ubuntu-20.04 as builder
 ENV PIP=9.0.3 \
   HOME=/home/imio \
   ZC_BUILDOUT=2.11.3 \
@@ -21,7 +20,7 @@ COPY --chown=imio *.cfg /home/imio/imio-website/
 COPY --chown=imio scripts /home/imio/imio-website/scripts
 RUN su -c "buildout -c prod.cfg -t 30 -N" -s /bin/sh imio
 
-FROM imiobe/base:py2-ubuntu-20.04
+FROM harbor.imio.be/common/base:py2-ubuntu-20.04
 ENV PIP=9.0.3 \
   HOME=/home/imio \
   ZC_BUILDOUT=2.11.3 \
