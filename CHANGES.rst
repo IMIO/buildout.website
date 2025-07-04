@@ -4,7 +4,8 @@ CHANGELOG
 4.3.20-27 (unreleased)
 ----------------------
 
-- Nothing changed yet.
+- Remove link to old logs server.
+  [bsuttor]
 
 
 4.3.20-26 (2023-11-14)
