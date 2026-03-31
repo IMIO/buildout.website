@@ -18,7 +18,9 @@ WORKDIR /home/imio/imio-website
 # COPY --chown=imio eggs /home/imio/imio-website/eggs/
 COPY --chown=imio *.cfg /home/imio/imio-website/
 COPY --chown=imio scripts /home/imio/imio-website/scripts
+COPY --chown=imio patches /home/imio/imio-website/patches
 RUN su -c "buildout -c prod.cfg -t 30 -N" -s /bin/sh imio
+RUN cp /home/imio/imio-website/patches/ramcache.py /home/imio/imio-website/eggs/plone.app.caching-1.1.12-py2.7.egg/plone/app/caching/operations/ramcache.py
 
 FROM harbor.imio.be/common/base:py2-ubuntu-20.04
 ENV PIP=9.0.3 \
