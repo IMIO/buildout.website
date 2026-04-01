@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-4.3.20-28 (unreleased)
+4.3.20-28 (2026-04-01)
 ----------------------
 
 - Also auto checkout core.
