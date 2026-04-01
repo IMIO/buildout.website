@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-4.3.20-27 (unreleased)
+4.3.20-27 (2026-04-01)
 ----------------------
 
 - Patches ram cache to use it for anon.
