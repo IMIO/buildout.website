@@ -4,7 +4,8 @@ CHANGELOG
 4.3.20-28 (unreleased)
 ----------------------
 
-- Nothing changed yet.
+- Also auto checkout core.
+  [bsuttor]
 
 
 4.3.20-27 (2026-04-01)
