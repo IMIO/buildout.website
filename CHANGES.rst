@@ -4,6 +4,15 @@ CHANGELOG
 4.3.20-27 (unreleased)
 ----------------------
 
+- Patches ram cache to use it for anon.
+  [bsuttor]
+
+- Remove geotransform (replace by cloudflare)
+  [bsuttor]
+
+- Remve old transmo views
+  [bsuttor]
+
 - Remove link to old logs server.
   [bsuttor]
 
@@ -64,7 +73,7 @@ CHANGELOG
     - Add last_login_time, login_time when getting restapi users
       [boulch]
 
-- install Hotfix : Products.PloneHotfix20210518 = 1.6, Fixes for remote code execution, cross site scripting,... 
+- install Hotfix : Products.PloneHotfix20210518 = 1.6, Fixes for remote code execution, cross site scripting,...
   [boulch]
 
 - cpskin.citizen 1.4.2
@@ -197,7 +206,7 @@ CHANGELOG
 
 - cpskin.diazotheme.newDream 0.1.15
 
-    - WEB-3210: Addition of a div container for the banner image. 
+    - WEB-3210: Addition of a div container for the banner image.
       This allows the live search to be able to go beyond the banner
       [thomlamb]
 
@@ -344,9 +353,9 @@ CHANGELOG
 ----------------------
 
 - cpskin.policy 4.3.56
-  
-  - Add subscriber (and upgrade step) to remove (duplicated) contact behavior from organization 
-    Behavior may come back with collective.contact.core TypeInfo 
+
+  - Add subscriber (and upgrade step) to remove (duplicated) contact behavior from organization
+    Behavior may come back with collective.contact.core TypeInfo
     [boulch]
 
 
@@ -354,8 +363,8 @@ CHANGELOG
 ----------------------
 
 - cpskin.core 0.13.51
-  
-  - Fix : Avoid event_listing can be play on any objects. 
+
+  - Fix : Avoid event_listing can be play on any objects.
     [boulch]
 
 - Use environment variables for ZODB_CACHE_SIZE and ZEO_CLIENT_CACHE_SIZE. So we can override it on docker.
