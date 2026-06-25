@@ -4,7 +4,8 @@ CHANGELOG
 4.3.20-29 (unreleased)
 ----------------------
 
-- Nothing changed yet.
+- WEB-4135 : Security fix : runscript to clean cpskin.citizen created accounts
+  [remdub]
 
 
 4.3.20-28 (2026-04-01)
