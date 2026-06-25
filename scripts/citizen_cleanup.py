@@ -32,6 +32,13 @@ Usage (run in-process via the Zope/Plone instance, NOT as a plain script)::
     bin/instance run scripts/citizen_cleanup.py --confirm       # delete + commit
     bin/instance run scripts/citizen_cleanup.py --confirm Plone # pick a site id
 
+The report CSV defaults to a timestamped file in the current directory. Pass
+``--csv-path`` to choose where it goes -- an exact file path, or an existing
+directory to receive the timestamped filename::
+
+    bin/instance run scripts/citizen_cleanup.py --csv-path /tmp/report.csv
+    bin/instance run scripts/citizen_cleanup.py --confirm Plone --csv-path /var/reports/
+
 Dry-run is the default: it reports counts, writes a CSV of the candidate ids and
 aborts the transaction. Nothing is deleted unless ``--confirm`` is passed.
 """
@@ -39,6 +46,7 @@ aborts the transaction. Nothing is deleted unless ``--confirm`` is passed.
 from __future__ import print_function
 
 import csv
+import os
 import sys
 
 import transaction
@@ -71,12 +79,31 @@ def real_args(argv):
 
 
 def parse_args(argv):
-    """Return (confirm, site_id) from the user args passed after the script."""
+    """Return (confirm, site_id, csv_path) from the user args.
+
+    Supports ``--csv-path VALUE`` and ``--csv-path=VALUE``; the consumed value
+    is not mistaken for the positional site id.
+    """
     args = real_args(argv)
     confirm = "--confirm" in args
-    positional = [a for a in args if not a.startswith("-")]
+    csv_path = None
+    positional = []
+    skip = False
+    for index, arg in enumerate(args):
+        if skip:
+            skip = False
+            continue
+        if arg == "--csv-path":
+            csv_path = args[index + 1] if index + 1 < len(args) else None
+            skip = True
+        elif arg.startswith("--csv-path="):
+            csv_path = arg.split("=", 1)[1]
+        elif arg.startswith("-"):
+            continue
+        else:
+            positional.append(arg)
     site_id = positional[0] if positional else None
-    return confirm, site_id
+    return confirm, site_id, csv_path
 
 
 def find_plone_sites(app):
@@ -151,10 +178,20 @@ def get_total_user_count(portal):
     return len(api.user.get_users())
 
 
-def write_csv(site_id, candidates, protected_count, member_count, total_users):
-    """Write a timestamped report of the candidate user ids."""
-    stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = "citizen_cleanup_{0}_{1}.csv".format(site_id, stamp)
+def write_csv(site_id, candidates, protected_count, member_count, total_users,
+              csv_path=None):
+    """Write a report of the candidate user ids.
+
+    ``csv_path`` chooses the destination: an exact file path, or an existing
+    directory to receive the timestamped filename. When omitted, the timestamped
+    name is written to the current directory.
+    """
+    if csv_path and not os.path.isdir(csv_path):
+        filename = csv_path
+    else:
+        stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        base = "citizen_cleanup_{0}_{1}.csv".format(site_id, stamp)
+        filename = os.path.join(csv_path, base) if csv_path else base
     with open(filename, "w") as fh:
         writer = csv.writer(fh)
         writer.writerow(["site", site_id])
@@ -208,7 +245,7 @@ def delete_users(candidates):
 
 
 def main(app):
-    confirm, site_id = parse_args(sys.argv)
+    confirm, site_id, csv_path = parse_args(sys.argv)
 
     app = makerequest(app)
     setup_security(app)
@@ -231,7 +268,8 @@ def main(app):
     print("Candidates to delete    : {0}".format(len(candidates)))
 
     csv_file = write_csv(
-        site_id, candidates, len(protected & members), len(members), total_users)
+        site_id, candidates, len(protected & members), len(members),
+        total_users, csv_path)
     print("Candidate list written to: {0}".format(csv_file))
 
     if not confirm:
