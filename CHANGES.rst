@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-4.3.20-29 (unreleased)
+4.3.20-29 (2026-06-25)
 ----------------------
 
 - WEB-4135 : Security fix : runscript to clean cpskin.citizen created accounts
