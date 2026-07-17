@@ -1,0 +1,24 @@
+name: Publish dev image on registry
+on:
+  push:
+    branches:
+      - dev
+    tags:
+      - '!**'
+  workflow_dispatch:
+jobs:
+  build-push:
+    environment: staging
+    runs-on:
+      group: self-hosted
+    if: contains(github.event.head_commit.message, 'Back to development:') == false && contains(github.event.head_commit.message, 'Preparing release') == false
+    steps:
+      - name: Build push and notify
+        uses: IMIO/gha/build-push-notify@v1.0.1
+        with:
+          IMAGE_NAME: ${{ vars.IMAGE_NAME }}
+          IMAGE_TAG: dev
+          REGISTRY_URL: ${{ secrets.HARBOR_URL }}
+          REGISTRY_USERNAME: ${{ secrets.SMARTWEB_HARBOR_USERNAME }}
+          REGISTRY_PASSWORD: ${{ secrets.SMARTWEB_HARBOR_PASSWORD }}
+          MATTERMOST_WEBHOOK_URL: ${{ secrets.SMARTWEB_MATTERMOST_WEBHOOK_URL }}
