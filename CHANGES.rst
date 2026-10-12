@@ -4,7 +4,8 @@ CHANGELOG
 4.3.20-30 (unreleased)
 ----------------------
 
-- Nothing changed yet.
+- Add collective.exportimport to buildout
+  [remdub]
 
 
 4.3.20-29 (2026-06-25)
