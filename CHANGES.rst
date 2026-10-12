@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-4.3.20-30 (unreleased)
+4.3.20-30 (2026-10-12)
 ----------------------
 
 - Add collective.exportimport to buildout
