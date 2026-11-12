@@ -4,7 +4,8 @@ CHANGELOG
 4.3.20-31 (unreleased)
 ----------------------
 
-- Nothing changed yet.
+- WEB-4531 : Plone Security Fix 20261110
+  [remdub]
 
 
 4.3.20-30 (2026-10-12)
